@@ -1,0 +1,35 @@
+<link rel="stylesheet" href="/public/css/lab10.css">
+<form action="/register" method="post" id="registration-form">
+<h1>New User Registration</h1>
+  <label for="firstNameInput"> First Name:
+    <input type="text" id="firstNameInput" name="firstNameInput"required><br><br>
+  </label>
+  <label for="lastNameInput"> Last Name:
+    <input type="text" id="lastNameInput" name="lastNameInput" required><br><br>
+  </label>
+  <label for="emailAddressInput"> Email:
+    <input type="text" id="emailAddressInput" name="emailAddressInput"required><br><br>
+  </label>
+  <label for="passwordInput"> Password:
+    <input type="password" id="passwordInput" name="passwordInput"required><br><br>
+  </label>
+  <label for="confirmPasswordInput"> Confirm Password:
+    <input type="password" id="confirmPasswordInput" name="confirmPasswordInput"required><br><br>
+  </label>
+  <label for="phoneNumberInput"> Phone Number:
+    <input type="text" id="phoneNumberInput" name="phoneNumberInput"required><br><br>
+  </label>
+  {{!-- {{#if error}}
+    <div id="error-container">{{error}}</div>
+  <br>
+  {{/if}} --}}
+  <div id="error" class="error-div hidden">
+          {{#if error}}
+              <p>{{error}}</p>
+          {{/if}}
+  </div>
+  <button type="submit">Sign up</button><br><br>
+  <div>
+      <a href="/login">Already have an account? Click here to log-in</a>
+  </div>
+</form> 

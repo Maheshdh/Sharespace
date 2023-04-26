@@ -1,0 +1,24 @@
+<form action="/login" method="POST" id="login-form">
+<h1>Login Page</h1> 
+    <label for="emailAddressInput"> Email:
+        <input type="email" id="emailAddressInput" name="emailAddressInput"><br><br>
+    </label>
+    <label for="passwordInput"> Password:
+        <input type="password" id="passwordInput" name="passwordInput"><br><br>
+    </label><br><br>
+    {{!-- {{#if error}}
+    <label for="error-container"></label>
+        <div id="error-container" class="error hidden">{{error}}</div>
+    </label>
+    {{/if}} --}}
+    <div id="error" class="error-div hidden">
+          {{#if error}}
+              <p>{{error}}</p>
+          {{/if}}
+    </div>
+    <br>
+    <button type="submit">Login</button><br><br>
+    <div>
+        <a href="/register">Click here to register!</a>
+    </div>    
+</form>
