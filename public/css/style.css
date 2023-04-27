@@ -7,3 +7,31 @@
     color: maroon;
     text-align: center;
 }
+
+h1 {
+    text-align: center;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    font-family: Arial, sans-serif;
+}
+
+p {
+    margin: 0;
+    font-size: 18px;
+    line-height: 24px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+  a {
+    color: #0072C6;
+    text-decoration: none;
+    font-weight: bold;
+}
+
