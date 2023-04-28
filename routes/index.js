@@ -7,6 +7,8 @@ import authRoutes from './authRoutes.js'
 
 const constructMethod = (app) => {
     app.use('/', authRoutes)
+    app.use('/homepage', listingRoutes)
+
 
     app.use('*', (req, res) => {
         res.status(404).json({error: 'Route Not found'});
