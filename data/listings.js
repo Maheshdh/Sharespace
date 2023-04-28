@@ -2,7 +2,7 @@ import { ObjectId } from "mongodb"
 import {listings} from '../config/mongoCollections.js'
 
 
-export const createListing = aynsc (
+export const createListing = async (
     address,
     description,
     price,
@@ -13,7 +13,7 @@ export const createListing = aynsc (
     latitude,
     longitute,
     availability
-)
+) 
 
 export const deleteListing = async (
     listingID
@@ -22,4 +22,9 @@ export const deleteListing = async (
 export const modifyListing = async (
     listingID
 )
+
+export const  getAllListings = async() => {
+    const listingsCollection = await listings();
+    return await listingsCollection.find({}).toArray();
+  };
 
