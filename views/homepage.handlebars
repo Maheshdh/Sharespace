@@ -1,2 +1,11 @@
 <h1>This is the Homepage where we show all listings</h1>
+<ul>
+  {{#each listings}}
+    <li>
+      <h2>{{this.title}}</h2>
+      <p>{{this.description}}</p>
+      <p>Price: ${{this.price}}</p>
+    </li>
+  {{/each}}
+</ul>
 <a href="/profile">My Profile</a>
