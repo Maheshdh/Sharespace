@@ -1,6 +1,6 @@
 import {Router} from 'express'
 const router = Router()
-import {getListing} from '../data/listings.js';
+import {createListing, getListing} from '../data/listings.js';
 import {getUser} from '../data/users.js';
 import helpers from '../helpers.js';
 
@@ -10,7 +10,34 @@ router
     res.render('addListing')
 })
 .post(async(req,res)=>{
-    const body = req.body;
+    try {
+      let userInput = req.body
+      if (!userInput.listing_AddressInput) throw 'Error: Address not provided'
+      if (!userInput.listing_DescriptionInput) throw 'Error: Description not provided'
+      if (!userInput.listing_PriceInput) throw 'Error: Price not provided'
+      if (!userInput.listing_LengthInput) throw 'Error: Length not provided'
+      if (!userInput.listing_WidthInput) throw 'Error: Width not provided'
+      if (!userInput.listing_HeightInput) throw 'Error: Height not provided'
+      if (!userInput.listing_AvailableStartInput) throw 'Error: Start Date not provided'
+      if (!userInput.listing_AvailableEndInput) throw 'Error: End Date not provided'
+
+      let addressInput = helpers.checkString(userInput.listing_DescriptionInput, 'Listing Address')
+      let descriptionInput = helpers.checkString(userInput.listing_DescriptionInput, 'Listing Description')
+      let priceInput = helpers.checkString(userInput.listing_DescriptionInput, 'Listing Price')
+      let lenghtInput = helpers.checkString(userInput.listing_DescriptionInput, 'Listing Length')
+      let widthInput = helpers.checkString(userInput.listing_DescriptionInput, 'Listing Width')
+      let heightInput = helpers.checkString(userInput.listing_HeightInput, 'Listing Height')
+      let longitudeInput = 'LONGITUDE GOES HERE'
+      let latitudeInput = 'LATITUDE GOES HERE'
+      let availableStartInput = helpers.checkString(userInput.listing_DescriptionInput, 'Listing Start Date')
+      let availableEndInput = helpers.checkString(userInput.listing_DescriptionInput, 'Listing End Date')
+
+      let creatingListing = await createListing(addressInput, descriptionInput, priceInput, lenghtInput, widthInput, heightInput, longitudeInput, latitudeInput, availableStartInput, availableEndInput)
+      if (!creatingListing) throw 'Error: Unable to create Listing'
+      res.render('listingAdded', {listingID: creatingListing})
+    } catch (e) {
+      res.status(400).render('addListing', {error:e})
+    }
 })
 
 router
