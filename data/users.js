@@ -54,16 +54,17 @@ export const checkUser = async (emailAddress, password) => {
     password = helpers.checkPassword(password, 'Password')
    
     let currentUser = await userCollection.findOne({emailAddress: emailAddress}) 
-    let currentUserInfo = {
-      firstName: currentUser.firstName, 
-      lastName: currentUser.lastName,
-      emailAddress: currentUser.emailAddress,
-      phoneNumber: currentUser.phoneNumber,
-      rating: currentUser.rating,
-      role: currentUser.role
-    }
+
     if (!currentUser) throw 'Error: Either the email address or password is invalid'
     else {
+      let currentUserInfo = {
+        firstName: currentUser.firstName, 
+        lastName: currentUser.lastName,
+        emailAddress: currentUser.emailAddress,
+        phoneNumber: currentUser.phoneNumber,
+        rating: currentUser.rating,
+        role: currentUser.role
+      }
       if (await bcrypt.compare(password, currentUser.password)) return (currentUserInfo)
       else throw `Error: Either the email address or password is invalid`
     }
