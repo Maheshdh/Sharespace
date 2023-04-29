@@ -1,5 +1,5 @@
 import {Router} from 'express'
-import {getAllListings} from '../data/listings';
+import {getAllListings} from '../data/listings.js';
 const router = Router()
 router.get('/', async (req, res) => {
     try {
