@@ -53,8 +53,56 @@ const exportedMethods = {
         if (phone_no.match(phoneRegEx)) {
           return phone_no 
         } else throw `Error: ${varName} entered is not valid`
-      }
+      },
 
+
+      checkDate(date,varName){
+        // First check for the pattern
+        if(!/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(date))
+        throw `Error: You must enter a valid ${varName}!`;
+        // Parse the date parts to integers
+        var parts = date.split("/");
+        var day = parseInt(parts[1], 10);
+        var month = parseInt(parts[0], 10);
+        var year = parseInt(parts[2], 10);
+
+        // Check the ranges of month and year
+        if(year < 1000 || year > 3000 || month == 0 || month > 12)
+        throw `Error: You must enter a valid ${varName}!`;
+
+        var monthLength = [ 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 ];
+
+        // Adjust for leap years
+        if(year % 400 == 0 || (year % 100 != 0 && year % 4 == 0))
+            monthLength[1] = 29;
+
+        // Check the range of the day
+        if(!(day > 0 && day <= monthLength[month - 1])){
+          throw `Error: You must enter a valid ${varName}!`;
+        }
+        return date
+      },
+        
+
+      checkPrice(price, varName) {
+        if (!price) throw `Error: You must provide a ${varName}`
+        if (price.trim() == '') throw `Error: You must provide a ${varName}`
+        price = Number(price)
+        if (isNaN(price) == true) throw `Error: ${varName} must be a number`
+        if (price <= 0) throw `Error: ${varName} should be greater than 0`
+        if (price > 1000000000) throw `Error: ${varName} should be lesser than 1,000,000,000`
+        return price
+      },
+
+      checkDimension(dimension, varName) {
+        if (!dimension) throw `Error: You must provide a ${varName}`
+        if (dimension.trim() == '') throw `Error: You must provide a ${varName}`
+        dimension = Number(dimension)
+        if (isNaN(dimension) == true) throw `Error: ${varName} must be a number`
+        if (dimension <= 0) throw `Error: ${varName} should be greater than 0`
+        if (dimension > 100) throw `Error: ${varName} should be lesser than 100`
+        return dimension
+      }
 
 }
 

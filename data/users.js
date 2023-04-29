@@ -68,7 +68,8 @@ export const checkUser = async (emailAddress, password) => {
       else throw `Error: Either the email address or password is invalid`
     }
   };
-  export const getUser = async (id) => {
+
+export const getUser = async (id) => {
     id = helpers.checkId(id);
     const userCollection = await users();
     const user = await userCollection.findOne({_id: new ObjectId(id)});

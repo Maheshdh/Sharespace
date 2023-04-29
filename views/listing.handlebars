@@ -1,12 +1,45 @@
-<h1>Individual Listings Page</h1>
-<p>Author name: {{user.firstName}}</p>
-<p>Address: {{listing.address}}</p>
-<p>{{listing.description}}</p>
-<p>Price: {{listing.price}}</p>
-<p>Available Space:</p>
-<ul>
-    <p >Length: {{listing.length}}</p>
-    <p>Width: {{listing.width}}</p>
-    <p>Height: {{listing.height}}</p>
-    <p>Volume: {{listing.volume}}</p>
-</ul>
+<h1>{{listing.title}}</h1> 
+<hr>
+<br><br>
+
+<table id="listingTable">
+    <tr>
+        <td>Author</td>
+        <td>{{user.firstName}}</td>
+    </tr>
+    <tr>
+        <td>Address</td>
+        <td>{{listing.address}}</td>
+    </tr>
+    <tr>
+        <td>Price</td>
+        <td>{{listing.price}}</td>
+    </tr>
+    <tr>
+        <td>Available Space</td>
+        <td>
+            <ul>
+                <li>Length: {{listing.length}}</li>
+                <li>Width: {{listing.width}}</li>
+                <li>Height: {{listing.height}}</li>
+                <li>Volume: {{listing.volume}}</li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>Listing Start Date</td>
+        <td>{{listing.listing_AvailableStartInput}}</td>
+    </tr>
+    <tr>
+        <td>Listing End Date</td>
+        <td>{{listing.listing_AvailableEndInput}}</td>
+    </tr>
+    <tr>
+        <td>Description</td>
+        <td>{{listing.description}}</td>
+    </tr>
+</table>
+
+
+
+
