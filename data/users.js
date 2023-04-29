@@ -54,21 +54,23 @@ export const checkUser = async (emailAddress, password) => {
     password = helpers.checkPassword(password, 'Password')
    
     let currentUser = await userCollection.findOne({emailAddress: emailAddress}) 
-    let currentUserInfo = {
-      firstName: currentUser.firstName, 
-      lastName: currentUser.lastName,
-      emailAddress: currentUser.emailAddress,
-      phoneNumber: currentUser.phoneNumber,
-      rating: currentUser.rating,
-      role: currentUser.role
-    }
+
     if (!currentUser) throw 'Error: Either the email address or password is invalid'
     else {
+      let currentUserInfo = {
+        firstName: currentUser.firstName, 
+        lastName: currentUser.lastName,
+        emailAddress: currentUser.emailAddress,
+        phoneNumber: currentUser.phoneNumber,
+        rating: currentUser.rating,
+        role: currentUser.role
+      }
       if (await bcrypt.compare(password, currentUser.password)) return (currentUserInfo)
       else throw `Error: Either the email address or password is invalid`
     }
   };
-  export const getUser = async (id) => {
+
+export const getUser = async (id) => {
     id = helpers.checkId(id);
     const userCollection = await users();
     const user = await userCollection.findOne({_id: new ObjectId(id)});

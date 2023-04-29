@@ -12,7 +12,7 @@ import helpers from '../helpers.js'
 router 
     .route('/login')
     .get(async (req, res) => {
-        res.render('login')
+        return res.render('login')
     })
     .post(async (req,res) => {
         try {
@@ -29,7 +29,7 @@ router
             res.redirect('homepage')            
 
           } catch (e) {
-            res.status(400).render('login', {error:e})
+            return res.status(400).render('login', {error:e})
           }
     })
 
@@ -37,7 +37,7 @@ router
 router
     .route('/register')
     .get(async (req, res) => {
-        res.render('register')
+        return res.render('register')
     })
     .post(async (req, res) => {
         try {
@@ -63,7 +63,7 @@ router
                 res.status(500).json({error: 'Internal Server Error'})
             }
         } catch (e) {
-            res.status(400).render('register', {error:e})
+            return res.status(400).render('register', {error:e})
         }
     }) 
 
@@ -73,7 +73,7 @@ router
     .get(async (req, res) => {
     //code here for GET
     req.session.destroy();
-    res.render("logout");
+    return res.render("logout");
     });
 
 export default router;

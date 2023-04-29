@@ -82,14 +82,14 @@ const exportedMethods = {
           throw `Error: You must enter a valid ${varName}!`;
         }
         return date
-        },
+      },
         
 
       checkPrice(price, varName) {
         if (!price) throw `Error: You must provide a ${varName}`
         if (price.trim() == '') throw `Error: You must provide a ${varName}`
-        if (isNaN(price) == true) throw `Error: ${varName} must be a number`
         price = Number(price)
+        if (isNaN(price) == true) throw `Error: ${varName} must be a number`
         if (price <= 0) throw `Error: ${varName} should be greater than 0`
         if (price > 1000000000) throw `Error: ${varName} should be lesser than 1,000,000,000`
         return price
@@ -98,8 +98,8 @@ const exportedMethods = {
       checkDimension(dimension, varName) {
         if (!dimension) throw `Error: You must provide a ${varName}`
         if (dimension.trim() == '') throw `Error: You must provide a ${varName}`
-        if (isNaN(dimension) == true) throw `Error: ${varName} must be a number`
         dimension = Number(dimension)
+        if (isNaN(dimension) == true) throw `Error: ${varName} must be a number`
         if (dimension <= 0) throw `Error: ${varName} should be greater than 0`
         if (dimension > 100) throw `Error: ${varName} should be lesser than 100`
         return dimension

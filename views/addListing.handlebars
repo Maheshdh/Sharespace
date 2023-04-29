@@ -1,25 +1,43 @@
 <h1>Add Listings Page</h1>
-<form action="/add" method="POST" id="add_listing_form">
-<label for="listing_DescriptionInput">Description<input type="text" id="listing_DescriptionInput" name="listing_DescriptionInput"></label>
+<hr>
+
+<div class=" addListing-form">
+<form action="/listing/add" method="POST" id="add_listing_form">
+<label for="listing_TitleInput">Title<br><input type="text" id="listing_TitleInput" name="listing_TitleInput"></label>
 <br><br>
-<label for="listing_AddressInput">Address<input type="address" id="listing_AddressInput" name="listing_AddressInput"></label>
+<label for="listing_DescriptionInput">Description<br><input type="text" id="listing_DescriptionInput" name="listing_DescriptionInput"></label>
 <br><br>
-<label for="listing_PriceInput">Price<input type="text" id="listing_PriceInput" name="listing_PriceInput"></label>
+<label for="listing_AddressInput">Address<br><input type="address" id="listing_AddressInput" name="listing_AddressInput"></label>
 <br><br>
-<label for="listing_LengthInput">Length<input type="text" id="listing_LengthInput" name="listing_LengthInput"></label>
+<label for="listing_PriceInput">Price<br><input type="text" id="listing_PriceInput" name="listing_PriceInput"></label>
 <br><br>
-<label for="listing_WidthInput">Width<input type="text" id="listing_WidthInput" name="listing_WidthInput"></label>
+<label for="listing_LengthInput">Length<br><input type="text" id="listing_LengthInput" name="listing_LengthInput"></label>
 <br><br>
-<label for="listing_HeightInput">Height<input type="text" id="listing_HeightInput" name="listing_HeightInput"></label>
+<label for="listing_WidthInput">Width<br><input type="text" id="listing_WidthInput" name="listing_WidthInput"></label>
 <br><br>
-<label for="listing_AreaInput">Area<input type="text" id="listing_AreaInput" name="listing_AreaInput"></label>
+<label for="listing_HeightInput">Height<br><input type="text" id="listing_HeightInput" name="listing_HeightInput"></label>
 <br><br>
-<label for="listing_LongitudeInput">Longitude<input type="text" id="listing_LongitudeInput" name="listing_LongitudeInput"></label>
+<label for="listing_LongitudeInput">Longitude<br><input type="text" id="listing_LongitudeInput" name="listing_LongitudeInput"></label>
 <br><br>
-<label for="listing_LatitudeInput">Latitude<input type="text" id="listing_LatitudeInput" name="listing_LatitudeInput"></label>
+<label for="listing_LatitudeInput">Latitude<br><input type="text" id="listing_LatitudeInput" name="listing_LatitudeInput"></label>
 <br><br>
-<label for="listing_AvailableStartInput">Available<input type="text" id="listing_AvailableStartInput" name="listing_AvailableStartInput"></label>
+<label for="listing_AvailableStartInput">Available Start Date<br><input type="text" id="listing_AvailableStartInput" name="listing_AvailableStartInput"></label>
 <br><br>
-<label for="listing_AvailableEndInput">Available<input type="text" id="listing_AvailableEndInput" name="listing_AvailableEndInput"></label>
-<input type="submit">
+<label for="listing_AvailableEndInput">Available End Date<br><input type="text" id="listing_AvailableEndInput" name="listing_AvailableEndInput"></label>
+<br><br>
+
+<div id="error" class="error-div hidden">
+          {{#if error}}
+              <p>{{error}}</p>
+          {{/if}}
+</div>
+<div>
+    <p id="error_js"></p>
+</div>
+<br><br>
+<input type="submit" class="submit-button">
+<br><br>
+
 </form>
+</div>
+<hr>

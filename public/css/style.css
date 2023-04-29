@@ -3,35 +3,83 @@
     left: 0;
     bottom: 0;
     width: 100%;
-    background-color: lightskyblue;
-    color: maroon;
+    background-color: lightgrey;
+    color: black;
+    font-family: Arial, Helvetica, sans-serif;
     text-align: center;
 }
 
 h1 {
     text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
-.container {
+.landing-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 100vh;
-    font-family: Arial, sans-serif;
+    font-family: Arial, Helvetica, sans-serif
 }
 
-p {
+/* p {
     margin: 0;
     font-size: 18px;
     line-height: 24px;
-    text-align: center;
+    text-align: left;
     margin-bottom: 20px;
-}
+} */
 
-  a {
+a {
+    font-family: Arial, Helvetica, sans-serif;
     color: #0072C6;
     text-decoration: none;
     font-weight: bold;
 }
 
+.individual-listings {
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: left;
+    font-size: 20px;
+}
+
+.addListing-form {
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    font-size: 20px;
+    background-color: rgb(240, 241, 241);
+}
+
+.submit-button {
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    font-size: 20px;
+}
+
+.error-div {
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    border: 2px red;
+    background-color: rgb(226, 186, 186);
+}
+
+#listingTable {
+    table-layout: fixed;
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 75%;
+} 
+#listingTable td, #listingTable th {
+    table-layout: fixed;
+    width: 180px;
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+#listingTable tr:nth-child(even){background-color: #f1f1f1;}
+#listingTable td:nth-child(odd){font-weight: bold;}
+#listingTable tr:hover {background-color: #dae3f3;}
+  

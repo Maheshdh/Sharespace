@@ -55,18 +55,22 @@ app.use('/register', async (req, res, next) => {
 
 app.use('/profile', async (req, res, next) => {
   if (!req.session.user) {
-    res.redirect('/login')
+    res.redirect('/login', {})
   } else {
-    res.render('profile')
+    return res.render('profile')
   }
 })
 
-app.use('/homepage', async (req, res, next) => {
-  res.render('homepage')
+app.use('/landing', async (req, res, next) => {
+  return res.render('landing')
 })
 
-app.use('/landing', async (req, res, next) => {
-  res.render('landing')
+app.use('/listing/add', async (req, res, next) => {
+  if (!req.session.user) {
+    return res.render('login', {error: 'You need to be logged in to add a new listing!'})
+  } else {
+    next()
+  }
 })
 
 app.use(async (req, res, next) => {
