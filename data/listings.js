@@ -3,8 +3,9 @@ import {listings} from '../config/mongoCollections.js'
 import helpers from '../helpers.js'
 
 export const createListing = async (
-    address,
+    title,
     description,
+    address,
     price,
     length,
     width,
@@ -15,9 +16,10 @@ export const createListing = async (
     listing_AvailableEndInput
 ) => {
 
-    if (!address || !description || !price || !length || !width || !height|| !pictures|| !latitude|| !longitute|| !availability) throw 'Error: Invalid number of parameters entered (Expected 5)'
-    if (!address) throw 'Error: "address" parameter not entered'
+    if (!title || !address || !description || !price || !length || !width || !height || !latitude|| !longitute|| !listing_AvailableStartInput || !listing_AvailableEndInput) throw 'Error: Invalid number of parameters entered (Expected 10)'
+    if (!title) throw 'Error: "title" parameter not entered'
     if (!description) throw 'Error: "description" parameter not entered'
+    if (!address) throw 'Error: "address" parameter not entered'
     if (!price) throw 'Error: "price" parameter not entered'
     if (!length) throw 'Error: "length" parameter not entered'
     if (!width) throw 'Error: "width" parameter not entered'
@@ -29,18 +31,20 @@ export const createListing = async (
    
     let listingsCollection = await listings()
   
-    address = helpers.checkString(address, 'address')
+    title = helpers.checkString(title, 'title')
     description = helpers.checkString(description, 'description')
-    price = helpers.checkPrice(price, 'price')
-    length = helpers.checkDimensions(length, 'length')
-    width = helpers.checkDimensions(width, 'width')
-    height = helpers.checkDimensions(height, 'height')
+    address = helpers.checkString(address, 'address')
+    price = helpers.checkPrice(price.toString(), 'price')
+    length = helpers.checkDimension(length.toString(), 'length')
+    width = helpers.checkDimension(width.toString(), 'width')
+    height = helpers.checkDimension(height.toString(), 'height')
     listing_AvailableStartInput = helpers.checkDate(listing_AvailableStartInput,"Start Date")
     listing_AvailableEndInput = helpers.checkDate(listing_AvailableEndInput,"End Date")
 
     let volume = length * width * height;
     
     let listing = {
+        title: title,
         address : address,
         description : description,
         price : price,

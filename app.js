@@ -61,10 +61,6 @@ app.use('/profile', async (req, res, next) => {
   }
 })
 
-app.use('/homepage', async (req, res, next) => {
-  res.render('homepage')
-})
-
 app.use('/landing', async (req, res, next) => {
   res.render('landing')
 })
