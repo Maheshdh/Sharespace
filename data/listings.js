@@ -80,9 +80,7 @@ export const getAllListings = async() => {
 
 export const getListing = async(id) => {
     id = helpers.checkId(id,"Listing ID");
-    console.log("getListing Data")
     const listingsCollection = await listings();
     const listing = await listingsCollection.findOne({_id: new ObjectId(id)});
-    console.log(listing);
     return listing;
 };
