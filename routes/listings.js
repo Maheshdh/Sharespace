@@ -21,6 +21,7 @@ router
       if (!userInput.listing_AvailableStartInput) throw 'Error: Start Date not provided'
       if (!userInput.listing_AvailableEndInput) throw 'Error: End Date not provided'
 
+      let userID = helpers.checkId(req.session.user.userID.toString())
       let titleInput = helpers.checkString(userInput.listing_TitleInput, 'Listing Title')
       let descriptionInput = helpers.checkString(userInput.listing_DescriptionInput, 'Listing Description')
       let addressInput = helpers.checkString(userInput.listing_AddressInput, 'Listing Address')
@@ -33,7 +34,7 @@ router
       let availableStartInput = helpers.checkDate(userInput.listing_AvailableStartInput, 'Listing Start Date')
       let availableEndInput = helpers.checkDate(userInput.listing_AvailableEndInput, 'Listing End Date')
 
-      let creatingListing = await createListing(titleInput, descriptionInput, addressInput, priceInput, lenghtInput, widthInput, heightInput, longitudeInput, latitudeInput, availableStartInput, availableEndInput)
+      let creatingListing = await createListing(userID, titleInput, descriptionInput, addressInput, priceInput, lenghtInput, widthInput, heightInput, longitudeInput, latitudeInput, availableStartInput, availableEndInput)
       if (!creatingListing) throw 'Error: Unable to create Listing'
       return res.render('listingAdded', {listingID: creatingListing})
     } catch (e) {
@@ -47,6 +48,7 @@ router
   .route('/:id')
   .get(async (req,res) => {
       var id;
+      console.log(req.session.user)
       console.log("Listing ID get")
       try {
           id = helpers.checkId(req.params.id);
@@ -71,7 +73,7 @@ router
       }
       try {
         const user = await getListing(user_id);
-        return res.status(200).render('listing',{"listing": listing,"user": user});
+        return res.status(200).render('listing',{"listing": listing,"user": listing.userID});
       } catch (error) {
           console.log(error)
           return res.status(404).render('errors',{"error":error});

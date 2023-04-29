@@ -58,6 +58,7 @@ export const checkUser = async (emailAddress, password) => {
     if (!currentUser) throw 'Error: Either the email address or password is invalid'
     else {
       let currentUserInfo = {
+        userID: currentUser._id,
         firstName: currentUser.firstName, 
         lastName: currentUser.lastName,
         emailAddress: currentUser.emailAddress,

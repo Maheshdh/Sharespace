@@ -3,6 +3,7 @@ import {listings} from '../config/mongoCollections.js'
 import helpers from '../helpers.js'
 
 export const createListing = async (
+    userID,
     title,
     description,
     address,
@@ -17,8 +18,9 @@ export const createListing = async (
 ) => {
 
 
-    if (!title || !address || !description || !price || !length || !width || !height || !latitude|| !longitute|| !listing_AvailableStartInput || !listing_AvailableEndInput) throw 'Error: Invalid number of parameters entered (Expected 10)'
+    if (!userID || !title || !address || !description || !price || !length || !width || !height || !latitude|| !longitute|| !listing_AvailableStartInput || !listing_AvailableEndInput) throw 'Error: Invalid number of parameters entered (Expected 10)'
     
+    if (!userID) throw 'Error: "userID" parameter not entered'
     if (!title) throw 'Error: "title" parameter not entered'
     if (!description) throw 'Error: "description" parameter not entered'
     if (!address) throw 'Error: "address" parameter not entered'
@@ -33,6 +35,7 @@ export const createListing = async (
    
     let listingsCollection = await listings()
   
+    userID = helpers.checkId(userID, 'User ID')
     title = helpers.checkString(title, 'title')
     description = helpers.checkString(description, 'description')
     address = helpers.checkString(address, 'address')
@@ -46,6 +49,7 @@ export const createListing = async (
     let volume = length * width * height;
     
     let listing = {
+        userID: userID,
         title: title,
         address : address,
         description : description,
