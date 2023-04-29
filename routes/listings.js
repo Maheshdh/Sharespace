@@ -6,7 +6,7 @@ import helpers from '../helpers.js';
 router
 .route('/add')
 .get(async(req,res) => {
-    res.render('addListing')
+    return res.render('addListing')
 })
 .post(async(req,res)=>{
     try {
@@ -41,6 +41,8 @@ router
     }
 })
 
+
+// TODO: FIX THIS -> make appropiate errors
 router
   .route('/:id')
   .get(async (req,res) => {
@@ -50,7 +52,7 @@ router
           id = helpers.checkId(req.params.id);
       } catch (e) {
           console.log(e);
-          res.status(400).render('error',{"error":e});
+          return res.status(400).render('errors',{"error":e});
       }
       console.log(id);
       var listing;
@@ -58,22 +60,22 @@ router
           listing = await getListing(id);
         } catch (e) {
             console.log(e);
-            res.status(404).render('error',{"error":e});
+            return res.status(404).render('errors',{"error":e});
         }
         var user_id;
-          try {
-              user_id = helpers.checkId(listing._id.toString());
-          } catch (error) {
-            console.log(error);
-            res.status(400).render('errors',{"error":error});
-          }
-          try {
-            const user = await getListing(user_id);
-            res.status(200).render('listing',{"listing": listing,"user": user});
-          } catch (error) {
-              console.log(error)
-              res.status(404).render('errors',{"error":error});
-          }
+      try {
+        user_id = helpers.checkId(listing._id.toString());
+      } catch (error) {
+          console.log(error);
+          return res.status(400).render('errors',{"error":error});
+      }
+      try {
+        const user = await getListing(user_id);
+        return res.status(200).render('listing',{"listing": listing,"user": user});
+      } catch (error) {
+          console.log(error)
+          return res.status(404).render('errors',{"error":error});
+      }
   })
 
 
