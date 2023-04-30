@@ -33,6 +33,7 @@ export const createUser = async (
       emailAddress: emailAddress,
       password: hashedPassword,
       phoneNumber: phoneNumber,
+      listings: [],
       rating: 0,
       role: role
     }
@@ -63,6 +64,7 @@ export const checkUser = async (emailAddress, password) => {
         lastName: currentUser.lastName,
         emailAddress: currentUser.emailAddress,
         phoneNumber: currentUser.phoneNumber,
+        listings: currentUser.listings,
         rating: currentUser.rating,
         role: currentUser.role
       }

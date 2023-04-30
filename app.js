@@ -57,7 +57,7 @@ app.use('/profile', async (req, res, next) => {
   if (!req.session.user) {
     res.redirect('/login', {})
   } else {
-    return res.render('profile')
+    next()
   }
 })
 

@@ -1,5 +1,6 @@
 import { ObjectId } from "mongodb"
-import {listings} from '../config/mongoCollections.js'
+import { listings } from '../config/mongoCollections.js'
+import { users } from "../config/mongoCollections.js"
 import helpers from '../helpers.js'
 
 export const createListing = async (
@@ -34,6 +35,7 @@ export const createListing = async (
     if (!listing_AvailableEndInput) throw 'Error: "listing_AvailableEndInput" parameter not entered'
    
     let listingsCollection = await listings()
+    let userCollection = await users()
   
     userID = helpers.checkId(userID, 'User ID')
     title = helpers.checkString(title, 'title')
@@ -64,9 +66,14 @@ export const createListing = async (
         listing_AvailableEndInput : listing_AvailableEndInput
     }
     
+
     let insertedListing = await listingsCollection.insertOne(listing)
     if (!insertedListing.acknowledged || !insertedListing.insertedId) throw 'Error: Could not add listing' 
     let lisitngID =  insertedListing.insertedId.toString();
+    let updatingUser = await userCollection.findOneAndUpdate(
+      {_id: new ObjectId(userID)},
+      {$push: {listings: lisitngID}}
+    )
     return lisitngID;
 
 }
