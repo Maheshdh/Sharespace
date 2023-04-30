@@ -1,17 +1,40 @@
-<h1>This is the Profile Page</h1>
+<h1>Profile Page</h1>
 <hr>
 <br><br>
 
-<p>Your Listings:</p>
+<h2>Your Information:</h2>
+<table id="userInformationTable">
+  <tr>
+    <td>Name</td>
+    <td>{{user.firstName}} {{user.lastName}}</td>
+  </tr>
+  <tr>
+    <td>Email Address</td>
+    <td>{{user.emailAddress}}</td>
+  </tr>
+  <tr>
+    <td>Phone Number</td>
+    <td>{{user.phoneNumber}}</td>
+  </tr>
+</table>
+
+<br><br>
+
+<h2>Your Listings:</h2>
 <ul>
   {{#each listings}}
     <li>
-      <h2>{{this.title}}</h2>
+      <h3>{{this.title}}</h3>
       <p>{{this.description}}</p>
       <p>{{this.price}}</p>
     </li>
   {{/each}}
 </ul>
+<br><br>
 
+<a href="listing/add">Make new listing</a>
+<br>
+<a href="homepage">Homepage</a>
+<br>
+<a href="logout">Logout</a> 
 
-<a href="logout">Logout</a>
