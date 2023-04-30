@@ -66,10 +66,10 @@ export const createListing = async (
         listing_AvailableEndInput : listing_AvailableEndInput
     }
     
-
     let insertedListing = await listingsCollection.insertOne(listing)
     if (!insertedListing.acknowledged || !insertedListing.insertedId) throw 'Error: Could not add listing' 
     let lisitngID =  insertedListing.insertedId.toString();
+    
     let updatingUser = await userCollection.findOneAndUpdate(
       {_id: new ObjectId(userID)},
       {$push: {listings: lisitngID}}

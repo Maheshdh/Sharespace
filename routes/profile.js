@@ -13,7 +13,7 @@ router
     try {
         if (currentUserListings.length == 0){
             let noListings = 'You have no listings!'
-            return res.render('profile', {listings: noListings})
+            return res.render('profile', {user:currentUser, listings: noListings})
         }
         
         let allListings = []
@@ -21,7 +21,7 @@ router
             let listingToBeAdded = await getListing(listing)
             allListings.push(listingToBeAdded)
         }
-        return res.render('profile', {listings: allListings})
+        return res.render('profile', {user:currentUser, listings: allListings})
     } catch (e) {
         res.status(500).send(e)
     }

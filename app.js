@@ -55,7 +55,7 @@ app.use('/register', async (req, res, next) => {
 
 app.use('/profile', async (req, res, next) => {
   if (!req.session.user) {
-    res.redirect('/login', {})
+    res.redirect('/login')
   } else {
     next()
   }
