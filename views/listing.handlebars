@@ -40,10 +40,11 @@
     </tr>
 </table>
 <br><br>
+
 <div>
-    <form id="comment_input_form">
-    <label for="listing_comment_input">Comments:<textarea name="listing_comment_input" id="listing_comment_input" cols="30" rows="10"></textarea></label>
-    <label for="rating_select">Ratings<select name="rating_select" id="rating_select">
+    <form id="review_input_form">
+    <input type="hidden" value={{listing._id}} id="listing_id_input">
+    <label for="rating_select">Add Your Rating: <select name="rating_select" id="rating_select">
         <option value="0">0</option>
         <option value="1">1</option>
         <option value="2">2</option>
@@ -52,18 +53,22 @@
         <option value="5">5</option>
     </select>
     </label>
-    <input type="hidden" value=${{listing._id}} id="listing_id_input">
+    <br><br>
+    <label for="listing_comment_input">Add Your Comment: <br> <textarea name="listing_comment_input" id="listing_comment_input"></textarea></label>
+    <br>
     <input type="submit">
     </form>
 </div>
-<div id="listing_comments">
-<p>Comments:</p>
+
+<br><br>
+<h2>Current Reviews:</h2>
 <ol>
-            {{#each comments}}
-            <li><a>{{comments.comment}}</a></li>
-            {{/each}}
-        </ol>
-</div>
+  {{#each reviews}}
+    <li>Rating: {{this.rating}}<br>Comment: {{this.comment}}</p>
+    </li>
+  {{/each}}
+</ol>
+<br><br>
 
 <h3><a href="/homepage">Back to Homepage</a></h2>
 

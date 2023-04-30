@@ -1,5 +1,5 @@
 import { ObjectId } from "mongodb"
-import { listings, comments } from '../config/mongoCollections.js'
+import { listings } from '../config/mongoCollections.js'
 import { users } from "../config/mongoCollections.js"
 import helpers from '../helpers.js'
 
@@ -63,7 +63,8 @@ export const createListing = async (
         latitude : latitude,
         longitute : longitute,
         listing_AvailableStartInput : listing_AvailableStartInput,
-        listing_AvailableEndInput : listing_AvailableEndInput
+        listing_AvailableEndInput : listing_AvailableEndInput,
+        reviews: []
     }
     
     let insertedListing = await listingsCollection.insertOne(listing)
@@ -164,27 +165,3 @@ export const getListing = async(id) => {
     const listing = await listingsCollection.findOne({_id: new ObjectId(id)});
     return listing;
 };
-
-export const addComment = async(comment,rating,listingId) => {
-    const commentsCollection = await comments();
-    let commentObject = {
-        "comment": comment,
-        "rating": rating,
-        "listingId": listingId
-    }
-    const addComment = await commentsCollection.insertOne(commentObject);
-    if(!addComment.acknowledged || !addComment.insertedId){
-        throw "Error in adding comment";
-    }
-    else {
-        return comment;
-    }
-}
-
-export const getListingComments = async(id) => {
-    const commentsCollection = await comments();
-    const listing_comments = commentsCollection.find({_id: new ObjectId(id)})
-    console.log(listing_comments);
-    if(!listing_comments) throw "Error in getting comments";
-    return listing_comments;
-}

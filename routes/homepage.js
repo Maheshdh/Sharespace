@@ -4,7 +4,6 @@ const router = Router()
 router.get('/', async (req, res) => {
     try {
         const listings = await getAllListings();
-        console.log(`listing == ${listings}`)
         return res.render('homepage', { listings });
     } catch (e) {
         res.status(500).send(e);

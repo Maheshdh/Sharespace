@@ -1,6 +1,7 @@
 import {Router} from 'express'
 const router = Router()
-import {createListing, getListing, addComment, getListingComments} from '../data/listings.js';
+import {createListing, getListing} from '../data/listings.js';
+import { addReview, getReview } from '../data/reviews.js';
 import helpers from '../helpers.js';
 import {getUser} from '../data/users.js';
 
@@ -52,53 +53,63 @@ router
       try {
           id = helpers.checkId(req.params.id);
       } catch (e) {
-          console.log(e);
           return res.status(400).render('errors',{"error":e});
       }
       var listing;
       try {
           listing = await getListing(id);
         } catch (e) {
-            console.log(e);
             return res.status(404).render('errors',{"error":e});
         }
         var user_id;
       try {
         user_id = helpers.checkId(listing._id.toString());
       } catch (error) {
-          console.log(error);
           return res.status(400).render('errors',{"error":error});
       }
-      var comments;
+      let reviews = []
       try {
-          comments = await getListingComments(id);
+        for (let review of listing.reviews) {
+          let reviewToBeAdded = await getReview(review)
+          reviews.push(reviewToBeAdded)
+        }
       } catch (e) {
-        console.log(e);
-        return res.status(400).render('errors',{"error":e});
+        if (e === 'No Reviews Found!') {
+          reviews = e
+        } else {
+          return res.status(400).render('errors',{"error":e});
+        }
       }
       try {
         const user = await getListing(user_id);
-        return res.status(200).render('listing',{"listing": listing,"user": listing.userID,"comments": comments});
+        return res.status(200).render('listing',{"listing": listing,"user": listing.userID,"reviews": reviews});
       } catch (error) {
-          console.log(error)
           return res.status(404).render('errors',{"error":error});
       }
   })
 
 router
-    .route('/addComment')
+    .route('/addReview')
     .post(async(req,res)=>{
-        let comment = req.body.comment;
-        let rating = req.body.rating;
-        let listingId = req.body.listingId;
+        let userInput = req.body
+
+        if (!userInput.listingID) throw 'Error: listingID not provided'
+        if (!userInput.rating) throw 'Error: Rating not provided'
+        if (!userInput.comment) throw 'Error: Comment not provided'
+
+        let userID = helpers.checkId(req.session.user.userID.toString())
+        let listingID = helpers.checkId(userInput.listingID)
+        let rating = helpers.checkRating(userInput.rating, 'Rating')
+        let comment = helpers.checkString(userInput.comment, 'Comment////')
+
         try {
-            const myComment = await addComment(comment,rating,listingId);
-            return res.json(myComment);
+            let myReview = await addReview(listingID, userID, rating, comment);
+            if (!myReview) throw 'Error: Unable to create review'
+            myReview = await getReview(myReview)
+            return res.json(myReview);
         } catch (error) {
-            console.log(error);
             return error;
         }
-
     })
 
 export default router;

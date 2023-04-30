@@ -7,7 +7,6 @@ import { getListing } from '../data/listings.js';
 router
 .route('/')
 .get(async (req, res) => {
-    console.log('In routes/profile')
     let currentUser = req.session.user
     let currentUserListings = currentUser.listings
     try {

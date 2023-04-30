@@ -104,6 +104,15 @@ const exportedMethods = {
         if (dimension <= 0) throw `Error: ${varName} should be greater than 0`
         if (dimension > 100) throw `Error: ${varName} should be lesser than 100`
         return dimension
+      },
+
+      checkRating(rating, varName) {
+        if (!rating) throw `Error: You must provide a ${varName}`
+        if (rating.toString().trim() == '') throw `Error: You must provide a ${varName}`
+        rating = Number(rating)
+        if (isNaN(rating) == true) throw `Error: ${varName} must be a number`
+        if (rating > 5 || rating < 0) throw `Error: ${varName} must be between 0 and 5`
+        return rating
       }
 
 }
