@@ -39,6 +39,31 @@
         <td>{{listing.description}}</td>
     </tr>
 </table>
+<br><br>
+<div>
+    <form id="comment_input_form">
+    <label for="listing_comment_input">Comments:<textarea name="listing_comment_input" id="listing_comment_input" cols="30" rows="10"></textarea></label>
+    <label for="rating_select">Ratings<select name="rating_select" id="rating_select">
+        <option value="0">0</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+    </select>
+    </label>
+    <input type="hidden" value=${{listing._id}} id="listing_id_input">
+    <input type="submit">
+    </form>
+</div>
+<div id="listing_comments">
+<p>Comments:</p>
+<ol>
+            {{#each comments}}
+            <li><a>{{comments.comment}}</a></li>
+            {{/each}}
+        </ol>
+</div>
 
 
 

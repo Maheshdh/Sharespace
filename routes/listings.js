@@ -1,6 +1,6 @@
 import {Router} from 'express'
 const router = Router()
-import {createListing, getListing} from '../data/listings.js';
+import {createListing, getListing, addComment, getListingComments} from '../data/listings.js';
 import helpers from '../helpers.js';
 import {getUser} from '../data/users.js';
 
@@ -49,8 +49,6 @@ router
   .route('/:id')
   .get(async (req,res) => {
       var id;
-      console.log(req.session.user)
-      console.log("Listing ID get")
       try {
           id = helpers.checkId(req.params.id);
       } catch (e) {
@@ -71,14 +69,36 @@ router
           console.log(error);
           return res.status(400).render('errors',{"error":error});
       }
+      var comments;
+      try {
+          comments = await getListingComments(id);
+      } catch (e) {
+        console.log(e);
+        return res.status(400).render('errors',{"error":e});
+      }
       try {
         const user = await getListing(user_id);
-        return res.status(200).render('listing',{"listing": listing,"user": listing.userID});
+        return res.status(200).render('listing',{"listing": listing,"user": listing.userID,"comments": comments});
       } catch (error) {
           console.log(error)
           return res.status(404).render('errors',{"error":error});
       }
   })
 
+router
+    .route('/addComment')
+    .post(async(req,res)=>{
+        let comment = req.body.comment;
+        let rating = req.body.rating;
+        let listingId = req.body.listingId;
+        try {
+            const myComment = await addComment(comment,rating,listingId);
+            return res.json(myComment);
+        } catch (error) {
+            console.log(error);
+            return error;
+        }
+
+    })
 
 export default router;
