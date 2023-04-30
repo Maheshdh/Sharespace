@@ -1,2 +1,17 @@
 <h1>This is the Profile Page</h1>
+<hr>
+<br><br>
+
+<p>Your Listings:</p>
+<ul>
+  {{#each listings}}
+    <li>
+      <h2>{{this.title}}</h2>
+      <p>{{this.description}}</p>
+      <p>{{this.price}}</p>
+    </li>
+  {{/each}}
+</ul>
+
+
 <a href="logout">Logout</a>

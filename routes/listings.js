@@ -7,7 +7,7 @@ import {getUser} from '../data/users.js';
 router
 .route('/add')
 .get(async(req,res) => {
-    res.render('addListing')
+    return res.render('addListing')
 })
 .post(async(req,res)=>{
     try {
@@ -22,6 +22,7 @@ router
       if (!userInput.listing_AvailableStartInput) throw 'Error: Start Date not provided'
       if (!userInput.listing_AvailableEndInput) throw 'Error: End Date not provided'
 
+      let userID = helpers.checkId(req.session.user.userID.toString())
       let titleInput = helpers.checkString(userInput.listing_TitleInput, 'Listing Title')
       let descriptionInput = helpers.checkString(userInput.listing_DescriptionInput, 'Listing Description')
       let addressInput = helpers.checkString(userInput.listing_AddressInput, 'Listing Address')
@@ -34,7 +35,7 @@ router
       let availableStartInput = helpers.checkDate(userInput.listing_AvailableStartInput, 'Listing Start Date')
       let availableEndInput = helpers.checkDate(userInput.listing_AvailableEndInput, 'Listing End Date')
 
-      let creatingListing = await createListing(titleInput, descriptionInput, addressInput, priceInput, lenghtInput, widthInput, heightInput, longitudeInput, latitudeInput, availableStartInput, availableEndInput)
+      let creatingListing = await createListing(userID, titleInput, descriptionInput, addressInput, priceInput, lenghtInput, widthInput, heightInput, longitudeInput, latitudeInput, availableStartInput, availableEndInput)
       if (!creatingListing) throw 'Error: Unable to create Listing'
       return res.render('listingAdded', {listingID: creatingListing})
     } catch (e) {
@@ -42,32 +43,41 @@ router
     }
 })
 
+
+// TODO: FIX THIS -> make appropiate errors
 router
   .route('/:id')
   .get(async (req,res) => {
       var id;
+      console.log(req.session.user)
       console.log("Listing ID get")
       try {
           id = helpers.checkId(req.params.id);
       } catch (e) {
           console.log(e);
-          res.status(400).render('error',{"error":e});
+          return res.status(400).render('errors',{"error":e});
       }
       var listing;
       try {
           listing = await getListing(id);
         } catch (e) {
             console.log(e);
-            res.status(404).render('error',{"error":e});
+            return res.status(404).render('errors',{"error":e});
         }
         var user_id;
-          try {
-            //const user = await getUser(user_id);
-            res.status(200).render('listing',{"listing": listing});
-          } catch (error) {
-              console.log(error)
-              res.status(404).render('errors',{"error":error});
-          }
+      try {
+        user_id = helpers.checkId(listing._id.toString());
+      } catch (error) {
+          console.log(error);
+          return res.status(400).render('errors',{"error":error});
+      }
+      try {
+        const user = await getListing(user_id);
+        return res.status(200).render('listing',{"listing": listing,"user": listing.userID});
+      } catch (error) {
+          console.log(error)
+          return res.status(404).render('errors',{"error":error});
+      }
   })
 
 
