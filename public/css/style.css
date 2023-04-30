@@ -98,4 +98,17 @@ a {
 #userInformationTable tr:nth-child(even){background-color: #f1f1f1;}
 #userInformationTable td:nth-child(odd){font-weight: bold;}
 #userInformationTable tr:hover {background-color: #dae3f3;}
+
+
+ul {
+    display: flex;
+    flex-wrap: wrap;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  li {
+    flex: 1 0 20%; /* Change this to adjust the number of columns */
+    padding: 1em;
+  }
   

@@ -2,9 +2,11 @@
 <ul>
   {{#each listings}}
     <li>
-      <h2>{{this.title}}</h2>
+      <h2><a href="/listing/{{this._id}}">{{this.title}}</a></h2>
       <p>{{this.description}}</p>
       <p>Price: ${{this.price}}</p>
+      <p>Start Date: ${{this.listing_AvailableStartInput}}</p>
+      <p>End Date: ${{this.listing_AvailableEndInput}}</p>
     </li>
   {{/each}}
 </ul>
