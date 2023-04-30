@@ -2,6 +2,7 @@ import {Router} from 'express'
 const router = Router()
 import {createListing, getListing} from '../data/listings.js';
 import helpers from '../helpers.js';
+import {getUser} from '../data/users.js';
 
 router
 .route('/add')
@@ -52,7 +53,6 @@ router
           console.log(e);
           res.status(400).render('error',{"error":e});
       }
-      console.log(id);
       var listing;
       try {
           listing = await getListing(id);
@@ -62,14 +62,8 @@ router
         }
         var user_id;
           try {
-              user_id = helpers.checkId(listing._id.toString());
-          } catch (error) {
-            console.log(error);
-            res.status(400).render('errors',{"error":error});
-          }
-          try {
-            const user = await getListing(user_id);
-            res.status(200).render('listing',{"listing": listing,"user": user});
+            //const user = await getUser(user_id);
+            res.status(200).render('listing',{"listing": listing});
           } catch (error) {
               console.log(error)
               res.status(404).render('errors',{"error":error});
