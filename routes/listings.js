@@ -4,13 +4,15 @@ import {createListing, getListing} from '../data/listings.js';
 import { addReview, getReview } from '../data/reviews.js';
 import helpers from '../helpers.js';
 import {getUser} from '../data/users.js';
+import multer from 'multer';
+const upload = multer({ dest: './public/data/uploads/' });
 
 router
 .route('/add')
 .get(async(req,res) => {
     return res.render('addListing')
 })
-.post(async(req,res)=>{
+.post(upload.single('uploadFile'), async(req,res,next)=>{
     try {
       let userInput = req.body
       if (!userInput.listing_TitleInput) throw 'Error: Title not provided'
@@ -35,8 +37,13 @@ router
       let latitudeInput = 'LATITUDE GOES HERE'
       let availableStartInput = helpers.checkDate(userInput.listing_AvailableStartInput, 'Listing Start Date')
       let availableEndInput = helpers.checkDate(userInput.listing_AvailableEndInput, 'Listing End Date')
+      let imageInput = null;
+      if(req.file){
+          imageInput = req.file.filename; 
+        }
 
-      let creatingListing = await createListing(userID, titleInput, descriptionInput, addressInput, priceInput, lenghtInput, widthInput, heightInput, longitudeInput, latitudeInput, availableStartInput, availableEndInput)
+
+      let creatingListing = await createListing(userID, titleInput, descriptionInput, addressInput, priceInput, lenghtInput, widthInput, heightInput, longitudeInput, latitudeInput, availableStartInput, availableEndInput, imageInput)
       if (!creatingListing) throw 'Error: Unable to create Listing'
       return res.render('listingAdded', {listingID: creatingListing})
     } catch (e) {

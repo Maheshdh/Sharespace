@@ -15,7 +15,8 @@ export const createListing = async (
     latitude,
     longitute,
     listing_AvailableStartInput,
-    listing_AvailableEndInput
+    listing_AvailableEndInput,
+    imageInput
 ) => {
 
 
@@ -64,7 +65,8 @@ export const createListing = async (
         longitute : longitute,
         listing_AvailableStartInput : listing_AvailableStartInput,
         listing_AvailableEndInput : listing_AvailableEndInput,
-        reviews: []
+        reviews: [],
+        image: imageInput
     }
     
     let insertedListing = await listingsCollection.insertOne(listing)

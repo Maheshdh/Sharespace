@@ -1,5 +1,5 @@
 <link rel="stylesheet" href="/public/css/style.css">
-<form action="/register" method="post" id="registration-form">
+<form action="/register" method="post" id="registration-form" enctype="multipart/form-data">
 <h1>New User Registration</h1>
   <label for="firstNameInput"> First Name:
     <input type="text" id="firstNameInput" name="firstNameInput"required><br><br>
@@ -19,6 +19,11 @@
   <label for="phoneNumberInput"> Phone Number:
     <input type="text" id="phoneNumberInput" name="phoneNumberInput"required><br><br>
   </label>
+  <br><br>
+  <label for='uploadFile'> Select a file: </label>
+<br>
+<input type='file' name="uploadFile" id='uploadFile' accept="image/*">
+<br><br>
   {{!-- {{#if error}}
     <div id="error-container">{{error}}</div>
   <br>

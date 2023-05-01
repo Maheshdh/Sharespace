@@ -87,7 +87,6 @@ a {
     table-layout: fixed;
     font-family: Arial, Helvetica, sans-serif;
     border-collapse: collapse;
-    width: 75%;
 } 
 #userInformationTable td, #userInformationTable th {
     table-layout: fixed;
@@ -111,4 +110,16 @@ ul {
     flex: 1 0 20%; /* Change this to adjust the number of columns */
     padding: 1em;
   }
-  
+  img {
+        max-width: 350px;
+  }
+  #profilePic{
+      align-content: right;
+  }
+  #userInformationTableDiv {
+      float: left;
+      width: 70%;
+  }
+  .share-button-container a i{
+      font-size: 32px;
+  }
