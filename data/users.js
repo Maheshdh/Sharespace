@@ -8,7 +8,8 @@ export const createUser = async (
     lastName,
     emailAddress,
     password,
-    phoneNumber
+    phoneNumber,
+    imageInput
   ) => {
     if (!firstName || !lastName || !emailAddress || !password || !phoneNumber) throw 'Error: Invalid number of parameters entered (Expected 5)'
     if (!firstName) throw 'Error: "firstName" parameter not entered'
@@ -37,7 +38,8 @@ export const createUser = async (
       phoneNumber: phoneNumber,
       listings: [],
       rating: 0,
-      role: role
+      role: role,
+      image: imageInput
     }
     
     let insertInfo = await userCollection.insertOne(newUser)
@@ -68,7 +70,8 @@ export const checkUser = async (emailAddress, password) => {
         phoneNumber: currentUser.phoneNumber,
         listings: currentUser.listings,
         rating: currentUser.rating,
-        role: currentUser.role
+        role: currentUser.role,
+        image: currentUser.image
       }
       if (await bcrypt.compare(password, currentUser.password)) return (currentUserInfo)
       else throw `Error: Either the email address or password is invalid`

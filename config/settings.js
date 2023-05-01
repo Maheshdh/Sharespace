@@ -7,5 +7,6 @@
 
 export const mongoConfig = {
   serverUrl: 'mongodb://127.0.0.1:27017/',
-  database: 'CS546-Project'
+  database: 'CS546-Project',
+  imgBucket: 'photos'
 };

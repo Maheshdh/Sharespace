@@ -2,7 +2,7 @@
 <hr>
 
 <div class=" addListing-form">
-<form action="/listing/add" method="POST" id="add_listing_form">
+<form action="/listing/add" method="POST" id="add_listing_form" enctype="multipart/form-data">
 <label for="listing_TitleInput">Title<br><input type="text" id="listing_TitleInput" name="listing_TitleInput"></label>
 <br><br>
 <label for="listing_DescriptionInput">Description<br><input type="text" id="listing_DescriptionInput" name="listing_DescriptionInput"></label>
@@ -25,6 +25,13 @@
 <br><br>
 <label for="listing_AvailableEndInput">Available End Date<br><input type="text" id="listing_AvailableEndInput" name="listing_AvailableEndInput"></label>
 <br><br>
+<label for='uploadFile'> Select a file: </label>
+<br>
+<input type='file' name="uploadFile" id='uploadFile' accept="image/*">
+<br><br>
+<button id="add_file_button">
+Add another file
+</button>
 
 <div id="error" class="error-div hidden">
           {{#if error}}
