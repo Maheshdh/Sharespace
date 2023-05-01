@@ -22,6 +22,8 @@ export const createUser = async (
     firstName = helpers.checkString(firstName, 'First Name')
     lastName = helpers.checkString(lastName, 'Last Name')
     emailAddress = helpers.checkEmail(emailAddress, 'Email Address')
+    let checkForDuplicateEmailAddress = await userCollection.findOne({emailAddress: emailAddress})
+    if (checkForDuplicateEmailAddress) throw `Error: An account already exists for ${emailAddress}`
     password = helpers.checkPassword(password, 'Password')
     phoneNumber = helpers.checkPhoneNumber(phoneNumber, 'Phone Number')
     let role = 'user'

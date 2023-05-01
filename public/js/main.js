@@ -92,7 +92,8 @@ if(review_form) {
 
       //AJAX Call. Gets the returned HTML data, binds the click event to the link and appends the new todo to the page
       $.ajax(requestConfig).then(function (responseMessage) {
-        document.getElementById("listing_reviews").innerHTML += `<p>${comment}</p>`;
+        document.getElementById("review_added").innerHTML += `<p> Your review has been added! </p>`
+        document.getElementById("current_added_reviews").innerHTML += `<li>Rating: ${rating}<br>Comment: ${comment}</li>`;
       });
     }
 })

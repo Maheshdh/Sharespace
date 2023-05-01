@@ -60,15 +60,18 @@
     </form>
 </div>
 
+<div id="review_added"></div>
+
 <br><br>
 <h2>Current Reviews:</h2>
-<ol>
+<ol id="current_added_reviews">
   {{#each reviews}}
     <li>Rating: {{this.rating}}<br>Comment: {{this.comment}}</p>
     </li>
   {{/each}}
 </ol>
 <br><br>
+
 
 <h3><a href="/homepage">Back to Homepage</a></h2>
 

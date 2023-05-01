@@ -26,7 +26,21 @@ export const addReview = async (listingID, userID, rating, comment) => {
         rating: rating,
         comment: comment
     }
+
+    let listingReviewed = await listingCollection.findOne({_id: new ObjectId(listingID)})
+    let listingUploadedBy = listingReviewed.userID
+    if (userID == listingUploadedBy) throw 'Error: You cannot leave a review for your own listing!'
     
+    let previousReviewsOnListing = listingReviewed.reviews
+    let previousUsersWhoReviewedListing = []
+    for (let reviewID of previousReviewsOnListing) {
+        let review = await reviewCollection.findOne({_id: new ObjectId(reviewID)})
+        let userID = review.userID
+        previousUsersWhoReviewedListing.push(userID)
+    }
+    if (previousUsersWhoReviewedListing.includes(userID)) throw 'Error: You cannot review this listing again!'
+    
+
     let addingReview = await reviewCollection.insertOne(reviewObject);
     if (!addingReview.acknowledged || !addingReview.insertedId) throw 'Error: Could not add listing'
     let reviewID =  addingReview.insertedId.toString()
