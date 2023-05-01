@@ -120,3 +120,6 @@ ul {
       float: left;
       width: 70%;
   }
+  .share-button-container a i{
+      font-size: 32px;
+  }
