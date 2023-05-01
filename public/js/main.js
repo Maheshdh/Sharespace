@@ -97,8 +97,12 @@ if(review_form) {
     }
 })
 }
-
-
+const add_file_button = document.getElementById("add_file_button");
+if(add_file_button){
+add_file_button.addEventListener("click",(event)=>{
+    event.preventDefault();
+    $("#uploadFile").after(`<br><br><input type='file' id='uploadFile' name='uploadFile' accept="image/*">`)
+}) }
 
 // ***********************************************************
 // ***************  HELPER FUNCTIONS  ************************

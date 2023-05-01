@@ -3,6 +3,8 @@
 <br><br>
 
 <h2>Your Information:</h2>
+<div>
+<div id="userInformationTableDiv">
 <table id="userInformationTable">
   <tr>
     <td>Name</td>
@@ -17,7 +19,13 @@
     <td>{{user.phoneNumber}}</td>
   </tr>
 </table>
-
+</div>
+<div>
+{{#if user.image}}
+<img src="http://localhost:3000/data/uploads/{{user.image}}" alt="">
+{{/if}}
+</div>
+</div>
 <br><br>
 
 <h2>Your Listings:</h2>

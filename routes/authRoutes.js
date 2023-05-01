@@ -7,6 +7,8 @@ import {createUser} from '../data/users.js'
 import {checkUser} from '../data/users.js'
 
 import helpers from '../helpers.js'
+import multer from 'multer';
+const upload = multer({ dest: './public/data/uploads/' });
 
 
 router 
@@ -39,7 +41,7 @@ router
     .get(async (req, res) => {
         return res.render('register')
     })
-    .post(async (req, res) => {
+    .post(upload.single('uploadFile'), async (req, res) => {
         try {
             let userInput = req.body
             if (!userInput.firstNameInput) throw `Error: First Name not provided`
@@ -55,8 +57,11 @@ router
             let passwordInput = helpers.checkPassword(userInput.passwordInput, 'Password')
             if (userInput.confirmPasswordInput != passwordInput) throw 'Error: Passwords do not match'
             let phoneNumberInput = helpers.checkPhoneNumber(userInput.phoneNumberInput, 'Phone Number')
+            let imageInput = null;
+            if(req.file){
+            imageInput = req.file.filename; }
 
-            let insertingUserInfo = await createUser(firstNameInput, lastNameInput, emailAddressInput, passwordInput, phoneNumberInput)
+            let insertingUserInfo = await createUser(firstNameInput, lastNameInput, emailAddressInput, passwordInput, phoneNumberInput,imageInput)
             if (insertingUserInfo.insertedUser == true) {
                 res.redirect('/login')
             } else {
