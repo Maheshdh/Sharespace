@@ -143,22 +143,31 @@ router
     .route('/addReview')
     .post(async(req,res)=>{
         let userInput = req.body
-
-        if (!userInput.listingID) throw 'Error: listingID not provided'
-        if (!userInput.rating) throw 'Error: Rating not provided'
-        if (!userInput.comment) throw 'Error: Comment not provided'
-
-        let userID = helpers.checkId(req.session.user.userID.toString())
-        let listingID = helpers.checkId(userInput.listingID)
-        let rating = helpers.checkRating(userInput.rating, 'Rating')
-        let comment = helpers.checkString(userInput.comment, 'Comment////')
+        let userID;
+        let listingID;
+        let rating;
+        let comment;
+        try {
+            if (!userInput.listingID) throw 'Error: listingID not provided'
+            if (userInput.rating === undefined) throw 'Error: Rating not provided'
+            if (!userInput.comment) throw 'Error: Comment not provided'
+    
+            userID = helpers.checkId(req.session.user.userID.toString())
+            listingID = helpers.checkId(userInput.listingID)
+            rating = helpers.checkRating(userInput.rating, 'Rating')
+            comment = helpers.checkString(userInput.comment, 'Comment////')   
+        } catch (e) {
+            console.log(e);
+            return res.json(e);
+        }
 
         try {
             let myReview = await addReview(listingID, userID, rating, comment);
             if (!myReview) throw 'Error: Unable to create review'
-            res.redirect(`/listing/${listingID}`);
+            return res.json({success: true});
         } catch (e) {
-            return res.render('errors', {error:e});
+            console.log(e);
+            return res.json(e);
         }
     })
 
