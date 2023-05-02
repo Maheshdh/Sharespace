@@ -107,7 +107,7 @@ const exportedMethods = {
       },
 
       checkRating(rating, varName) {
-        if (!rating) throw `Error: You must provide a ${varName}`
+        if (rating === undefined) throw `Error: You must provide a ${varName}`
         if (rating.toString().trim() == '') throw `Error: You must provide a ${varName}`
         rating = Number(rating)
         if (isNaN(rating) == true) throw `Error: ${varName} must be a number`

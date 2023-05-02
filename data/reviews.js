@@ -6,12 +6,12 @@ import { updateUserRatingAndComments } from "./users.js"
 
 
 export const addReview = async (listingID, userID, rating, comment) => {
-    if (!listingID || !userID || !rating || !comment) throw 'Error: Invalid number of parameters entered (Expected 4)'
+    if (!listingID || !userID || rating === undefined || !comment) throw 'Error: Invalid number of parameters entered (Expected 4)'
 
-    if (!listingID) throw 'Error: "userID" parameter not entered'
+    if (!listingID) throw 'Error: "listingID" parameter not entered'
     if (!userID) throw 'Error: "userID" parameter not entered'
-    if (!rating) throw 'Error: "title" parameter not entered'
-    if (!comment) throw 'Error: "description" parameter not entered'
+    if (rating === undefined) throw 'Error: "rating" parameter not entered'
+    if (!comment) throw 'Error: "comment" parameter not entered'
 
     listingID = helpers.checkId(listingID, 'User ID')
     userID = helpers.checkId(userID, 'User ID')

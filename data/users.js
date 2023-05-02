@@ -40,7 +40,7 @@ export const createUser = async (
       phoneNumber: phoneNumber,
       listings: [],
       rating: 0,
-      reviews: []
+      reviews: [],
       role: role,
       image: imageInput
     }
