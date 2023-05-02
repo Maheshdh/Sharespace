@@ -92,6 +92,7 @@ if(review_form) {
 
       //AJAX Call. Gets the returned HTML data, binds the click event to the link and appends the new todo to the page
       $.ajax(requestConfig).then(function (responseMessage) {
+          console.log(responseMessage);
         document.getElementById("review_added").innerHTML += `<p> Your review has been added! </p>`
         document.getElementById("current_added_reviews").innerHTML += `<li>Rating: ${rating}<br>Comment: ${comment}</li>`;
       });
@@ -104,6 +105,16 @@ add_file_button.addEventListener("click",(event)=>{
     event.preventDefault();
     $("#uploadFile").after(`<br><br><input type='file' id='uploadFile' name='uploadFile' accept="image/*">`)
 }) }
+
+const whatsappBtn = document.querySelector(".whatsapp-btn");
+let postUrl = encodeURI(document.location.href);
+let postTitle = encodeURI("Check out this listing");
+whatsappBtn.setAttribute("href",`https://api.whatsapp.com/send?text=${postTitle} ${postUrl}`)
+//linkedinBtn.setAttribute("href",`https://www.linkedin.com/shareArticle?url=${postUrl}&title=${postTitle}`)
+//POST https://api.linkedin.com/v2/ugcPosts
+//linkedinBtn.setAttribute("href",`https://www.linkedin.com/shareArticle?mini=true&url=${postUrl}&title=${postTitle}`)
+//linkedinBtn.setAttribute("href",`$email = 'mailto:?subject=' . ${postTitle} . '&body=Check out this site: '. ${postUrl} .'" title="Share by Email';
+//`)
 
 // ***********************************************************
 // ***************  HELPER FUNCTIONS  ************************

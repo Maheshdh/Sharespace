@@ -43,6 +43,12 @@
 {{#if listing.image}}
 <img src="http://localhost:3000/data/uploads/{{listing.image}}" alt="">
 {{/if}}
+<div class="share-btn-container">
+    <p>Share on Whatsapp:</p>
+    <a href="#" class="whatsapp-btn">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+</div>
 <div>
     <form id="review_input_form">
     <input type="hidden" value={{listing._id}} id="listing_id_input">
