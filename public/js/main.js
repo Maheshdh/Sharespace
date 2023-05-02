@@ -116,11 +116,89 @@ if(whatsappBtn){
 let postUrl = encodeURI(document.location.href);
 let postTitle = encodeURI("Check out this listing");
 whatsappBtn.setAttribute("href",`https://api.whatsapp.com/send?text=${postTitle} ${postUrl}`) }
-//linkedinBtn.setAttribute("href",`https://www.linkedin.com/shareArticle?url=${postUrl}&title=${postTitle}`)
-//POST https://api.linkedin.com/v2/ugcPosts
-//linkedinBtn.setAttribute("href",`https://www.linkedin.com/shareArticle?mini=true&url=${postUrl}&title=${postTitle}`)
-//linkedinBtn.setAttribute("href",`$email = 'mailto:?subject=' . ${postTitle} . '&body=Check out this site: '. ${postUrl} .'" title="Share by Email';
-//`)
+
+function searchListingPage(){
+    let input = document.getElementById("searchListing").value;
+    input = input.toLowerCase();
+    let x = document.getElementsByClassName("homepageListings");
+    
+    for (let i = 0; i < x.length; i++) {
+        if(!x[i].innerHTML.toLowerCase().includes(input)){
+            x[i].style.display = "none";
+        }
+        else{
+            x[i].style.display = "list-item";
+        }
+    }
+}
+
+function filter(){
+    var filterSelect = document.getElementById('filterSelect').value;
+    var filterError = document.getElementById('filterError');
+    filterError.innerHTML = "";
+    var from = document.getElementById('filterFrom').value;
+    var to = document.getElementById('filterTo').value;
+    let x = document.getElementsByClassName("homepageListings");
+    try {
+        if(filterSelect === "price"){
+            from = checkPrice(from,"Price from");
+            to = checkPrice(to,"Price to");
+            if(from > to) throw "Price range selected is not correct";
+            var listingPrice = document.getElementsByClassName("listingPrice");
+            for (let i = 0; i < x.length; i++) {
+                if(listingPrice[i].innerHTML > to || listingPrice[i].innerHTML < from){
+                    x[i].style.display = "none";
+                }
+                else{
+                    x[i].style.display = "list-item";
+                }
+            }
+        }
+        else if(filterSelect === "volume"){
+            from = checkVolume(from,"Volume from");
+            to = checkVolume(to,"Volume to");
+            if(from > to) throw "Volume range selected is not correct";
+            var listingVolume = document.getElementsByClassName("listingVolume");
+            for (let i = 0; i < x.length; i++) {
+                if(listingVolume[i].innerHTML > to || listingVolume[i].innerHTML < from){
+                    x[i].style.display = "none";
+                }
+                else{
+                    x[i].style.display = "list-item";
+                }
+            }
+        }
+        else if (filterSelect === "availability") {
+            from = new Date(checkDate(from,"Available from date"));
+            to = new Date(checkDate(to,"Available to date"));
+            if(from > to) throw "available range selected is not correct";
+            var listingAvailableStartDate = document.getElementsByClassName("listingAvailableStartInput");
+            var listingAvailableEndDate = document.getElementsByClassName("listingAvailableEndInput");
+            for (let i = 0; i < x.length; i++) {
+                let listingTo = new Date(listingAvailableEndDate[i].innerHTML)
+                let listingFrom = new Date(listingAvailableStartDate[i].innerHTML)
+                if(listingTo < to || listingFrom > from){
+                    x[i].style.display = "none";
+                }
+                else{
+                    x[i].style.display = "list-item";
+                }
+            }
+        } else {
+            filterError.innerHTML = "Please select a field";
+        }
+    } catch (error) {
+        filterError.innerHTML = error;
+    }
+}
+
+function resetFilter(){
+    let x = document.getElementsByClassName("homepageListings");
+    for (let i = 0; i < x.length; i++) {
+        x[i].style.display = "list-item";
+    }
+    filterError.innerHTML = "";
+}
 
 // ***********************************************************
 // ***************  HELPER FUNCTIONS  ************************
@@ -226,6 +304,16 @@ function checkDimension(dimension, varName) {
     if (dimension <= 0) throw `Error: ${varName} should be greater than 0`
     if (dimension > 100) throw `Error: ${varName} should be lesser than 100`
     return dimension
+  }
+
+  function checkVolume(volume, varName) {
+    if (!volume) throw `Error: You must provide a ${varName}`
+    if (volume.trim() == '') throw `Error: You must provide a ${varName}`
+    volume = Number(volume)
+    if (isNaN(volume) == true) throw `Error: ${varName} must be a number`
+    if (volume <= 0) throw `Error: ${varName} should be greater than 0`
+    if (volume > 1000000) throw `Error: ${varName} should be lesser than 100`
+    return volume
   }
 
 function checkRating(rating, varName) {
