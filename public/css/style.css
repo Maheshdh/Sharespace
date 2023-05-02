@@ -123,3 +123,7 @@ ul {
   .share-button-container a i{
       font-size: 32px;
   }
+
+.userResponseForm{
+    font-family: Arial, Helvetica, sans-serif;
+}

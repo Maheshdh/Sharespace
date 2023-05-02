@@ -75,6 +75,14 @@ app.use('/listing/add', async (req, res, next) => {
   }
 })
 
+app.use('/bookings', async (req, res, next) => {
+  if (!req.session.user) {
+    res.redirect('/login')
+  } else {
+    next()
+  }
+})
+
 app.use(async (req, res, next) => {
   let currentTimestamp = new Date().toUTCString()
   let requestMethod = req.method

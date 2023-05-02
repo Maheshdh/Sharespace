@@ -4,6 +4,7 @@ import {createListing, getListing} from '../data/listings.js';
 import { addReview, getReview } from '../data/reviews.js';
 import helpers from '../helpers.js';
 import {getUser} from '../data/users.js';
+import { getBookingRequestsReceived, getBookingRequestsSent, createBookingRequest } from '../data/bookings.js';
 import multer from 'multer';
 const upload = multer({ dest: './public/data/uploads/' });
 
@@ -93,6 +94,49 @@ router
       } catch (error) {
           return res.status(404).render('errors',{"error":error});
       }
+  })
+  .post(async (req, res) => {
+    if (req.session.user) {
+      let user = req.session.user
+      let userInput = req.body
+      
+      var listingID;
+      try {
+        listingID = helpers.checkId(req.params.id);
+      } catch (e) {
+          return res.status(400).render('errors',{"error":e});
+      }
+      var listingInfo;
+      try {
+        listingInfo = await getListing(listingID);
+        } catch (e) {
+            return res.status(404).render('errors',{"error":e});
+        }
+      var listingUploadedByID;
+      try {
+        listingUploadedByID = helpers.checkId(listingInfo.userID.toString());
+      } catch (error) {
+          return res.status(400).render('errors',{"error":error});
+      }
+
+      // Add if form() line
+      if (userInput.requestBooking) {
+        let userRequestingBookingID = helpers.checkId(user.userID)
+        try {
+          let creatingBooking = await createBookingRequest(listingID, userRequestingBookingID, listingUploadedByID)
+          if (creatingBooking.insertedBookingRequestAndMyBooking == true) {
+            let bookingsRequested = await getBookingRequestsSent(user.userID)
+            let bookingsReceived = await getBookingRequestsReceived(user.userID)
+            return res.render('bookings', {bookingsRequested: bookingsRequested, bookingsReceived: bookingsReceived})
+          } else throw 'Could not make booking'
+        } catch (e) {
+          return res.status(400).render('errors',{"error":e})
+        }
+      }
+
+    } else {
+      res.render('login', {error: 'You need to be logged in to request booking!'})
+    }
   })
 
 router
