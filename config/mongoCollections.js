@@ -17,3 +17,7 @@ const getCollectionFn = (collection) => {
 export const users = getCollectionFn('users')
 export const listings = getCollectionFn('listings');
 export const reviews = getCollectionFn('reviews');
+export const bookingRequests = getCollectionFn('bookingRequests')
+export const myBookings = getCollectionFn('myBookings')
+
+

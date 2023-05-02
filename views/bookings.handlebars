@@ -1,0 +1,63 @@
+<h1>Bookings Page</h1>
+<hr>
+<br><br>
+
+<div id="OutgoingRequests">
+    <h2>Outgoing Requests</h2>
+    <ol>
+        {{#each bookingsRequested}}
+        <li>
+            <table id="userInformationTable">
+                <tr>
+                    <td>Listing</td>
+                    <td> <a href="/listing/{{this.listingID}}">Link to Listing</a></td>
+                </tr>
+                <tr>
+                    <td>Status</td>
+                    <td>{{this.requestStatus}}</td>
+                </tr>
+            </table>
+        </li>
+        {{/each}}
+    </ol>
+</div>
+
+<div id="IncomingRequests">
+    <h2>Incoming Requests</h2>
+    <ol>
+        {{#each bookingsReceived}}
+        <li>
+            <table id="userInformationTable">
+                <tr>
+                    <td>Listing</td>
+                    <td> <a href="/listing/{{this.listingID}}">Link to Listing</a></td>
+                </tr>
+                <tr>
+                    <td>Requested From User</td>
+                    <td> <a href="/users/{{this.userRequestingBookingID}}">Link to User</a></td>
+                </tr>
+                <tr>
+                    <td>Status</td>
+                    <td>{{this.requestStatus}}</td>
+                </tr>
+            </table>
+            <div id="userResponseForm" class="userResponseForm hidden">
+                {{#if this.requestStatus}}
+                    <form action="/bookings" method="POST" id="bookingRequestResponse">
+                        <input type="radio" id="bookingStatusResponse" name="bookingStatusResponse" value="Accept">
+                        <label for="bookingStatusResponse">Accept</label>
+                        <input type="radio" id="bookingStatusResponse" name="bookingStatusResponse" value="Deny">
+                        <label for="bookingStatusResponse">Deny</label>
+                        <input type = "hidden" id="bookingID" name="bookingID" value={{this.bookingRequestID}} />
+                        <br><br>
+                        <input type="submit">
+                    </form>
+                {{/if}}
+
+            </div>
+        </li>
+        {{/each}}
+    </ol>
+
+
+</div>
