@@ -2,6 +2,7 @@ import { ObjectId } from "mongodb"
 import { reviews } from '../config/mongoCollections.js'
 import { listings } from "../config/mongoCollections.js"
 import helpers from '../helpers.js'
+import { updateUserRatingAndComments } from "./users.js"
 
 
 export const addReview = async (listingID, userID, rating, comment) => {
@@ -50,6 +51,8 @@ export const addReview = async (listingID, userID, rating, comment) => {
         {$push: {reviews: reviewID}}
     )
 
+    let updatingUserWhoUploadedTheListing = await updateUserRatingAndComments(listingUploadedBy)
+
     return reviewID
 }
 
@@ -67,4 +70,15 @@ export const getReview = async(id) => {
     let review = await reviewsCollection.findOne({_id: new ObjectId(id)})
     if (!review) throw 'No Reviews Found!'
     return review
+}
+
+// This Function may not work as expected
+// IT IS NOT USED ANYWHERE AS OF YET!
+export const getAllReviewsBasedOnListingID = async(id) => {
+    id = helpers.checkId(id, 'Listing ID')
+    let reviewsCollection = await reviews()
+    // Check if this works or no for multiple reviews. It should return an array
+    let reviewsOnListing = await reviewsCollection.find({}, {projection: {listingID: id}}).toArray()
+    return reviewsOnListing
+
 }

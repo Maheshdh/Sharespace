@@ -28,6 +28,31 @@
 </div>
 <br><br>
 
+<h2>Your Reviews:</h2>
+<p>Cumulative Rating: {{user.rating}} from {{reviews.length}} reviews</p>
+<ol>
+  {{#each reviews}}
+  <li>
+  <table id="userInformationTable">
+    <tr>
+      <td>Reviewer Name</td>
+      <td>{{this.reviewMadeBy}}</td>
+    </tr>
+    <tr>
+      <td>Rating Given</td>
+      <td>{{this.rating}}</td>
+    </tr>
+    <tr>
+      <td>Comment</td>
+      <td>{{this.comment}}</td>
+    </tr>
+  </table>
+  </li>
+  {{/each}}
+</ol>
+
+<br><br>
+
 <h2>Your Listings:</h2>
 <ul>
   {{#each listings}}

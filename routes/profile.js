@@ -9,6 +9,7 @@ router
 .get(async (req, res) => {
     let currentUser = req.session.user
     let currentUserListings = currentUser.listings
+    let reviews = currentUser.reviews
     try {
         if (currentUserListings.length == 0){
             let noListings = 'You have no listings!'
@@ -20,7 +21,7 @@ router
             let listingToBeAdded = await getListing(listing)
             allListings.push(listingToBeAdded)
         }
-        return res.render('profile', {user:currentUser, listings: allListings})
+        return res.render('profile', {user:currentUser, listings: allListings, reviews: reviews})
     } catch (e) {
         res.status(500).send(e)
     }
