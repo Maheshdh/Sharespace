@@ -72,12 +72,12 @@ if(review_form) {
   review_form.addEventListener("submit",(event) => {
     event.preventDefault();
     
-    const listingID = document.getElementById("listing_id_input").value;
-    const rating = document.getElementById("rating_select").value;
-    const comment = document.getElementById("listing_comment_input").value;
+    const listingID = checkId(document.getElementById("listing_id_input").value,"Listing Id");
+    const rating = checkRating(document.getElementById("rating_select").value);
+    const comment = checkString(document.getElementById("listing_comment_input").value);
     
-
-    if (comment && rating && listingID) {
+    console.log(rating)
+    if (comment && rating !== undefined && listingID) {
       //set up AJAX request config
       let requestConfig = {
         method: 'POST',
@@ -93,8 +93,13 @@ if(review_form) {
       //AJAX Call. Gets the returned HTML data, binds the click event to the link and appends the new todo to the page
       $.ajax(requestConfig).then(function (responseMessage) {
           console.log(responseMessage);
-        document.getElementById("review_added").innerHTML += `<p> Your review has been added! </p>`
-        document.getElementById("current_added_reviews").innerHTML += `<li>Rating: ${rating}<br>Comment: ${comment}</li>`;
+          if(responseMessage.success === true){
+            document.getElementById("review_added").innerHTML += `<p> Review succesfully added </p>`
+            document.getElementById("current_added_reviews").innerHTML += `<li>Rating: ${rating}<br>Comment: ${comment}</li>`;
+        }
+        else{
+        document.getElementById("review_added").innerHTML = `<p> ${responseMessage} </p>` }
+        //document.getElementById("current_added_reviews").innerHTML += `<li>Rating: ${rating}<br>Comment: ${comment}</li>`;
       });
     }
 })
@@ -107,9 +112,10 @@ add_file_button.addEventListener("click",(event)=>{
 }) }
 
 const whatsappBtn = document.querySelector(".whatsapp-btn");
+if(whatsappBtn){
 let postUrl = encodeURI(document.location.href);
 let postTitle = encodeURI("Check out this listing");
-whatsappBtn.setAttribute("href",`https://api.whatsapp.com/send?text=${postTitle} ${postUrl}`)
+whatsappBtn.setAttribute("href",`https://api.whatsapp.com/send?text=${postTitle} ${postUrl}`) }
 //linkedinBtn.setAttribute("href",`https://www.linkedin.com/shareArticle?url=${postUrl}&title=${postTitle}`)
 //POST https://api.linkedin.com/v2/ugcPosts
 //linkedinBtn.setAttribute("href",`https://www.linkedin.com/shareArticle?mini=true&url=${postUrl}&title=${postTitle}`)
@@ -230,4 +236,11 @@ function checkRating(rating, varName) {
     if (rating > 5 || rating < 0) throw `Error: ${varName} must be between 0 and 5`
     return rating
   }
-
+  function checkRating(rating, varName) {
+    if (rating === undefined) throw `Error: You must provide a ${varName}`
+    if (rating.toString().trim() == '') throw `Error: You must provide a ${varName}`
+    rating = Number(rating)
+    if (isNaN(rating) == true) throw `Error: ${varName} must be a number`
+    if (rating > 5 || rating < 0) throw `Error: ${varName} must be between 0 and 5`
+    return rating
+  }
