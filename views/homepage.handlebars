@@ -1,12 +1,34 @@
 <h1>This is the Homepage where we show all listings</h1>
+<label for="searchListing">Search Listing:</label>
+<input type="text" placeholder="Search Listings..." onkeyup="searchListingPage()" name="searchLisitng" id="searchListing">
+<br><br>
+<label for="filterSelect">Filter</label>
+<select name="filterSelect" id="filterSelect">
+  <option value="price">Price</option>
+  <option value="volume">Volume</option>
+  <option value="availability">Avalability</option>
+</select>
+<label for="filterFrom">From</label>
+<input type="text" id="filterFrom" placeholder="Filter from">
+<label for="filterTo">To</label>
+<input type="text" id="filterTo" placeholder="Filter to">
+<button id="filterButton" onclick="filter()">Filter</button>
+<button onclick="resetFilter()">Reset filters</button>
+<div>
+  <p id="filterError"></p>
+</div>
 <ul>
   {{#each listings}}
-    <li>
+    <li class="homepageListings">
       <h2><a href="/listing/{{this._id}}">{{this.title}}</a></h2>
       <p>{{this.description}}</p>
-      <p>Price: ${{this.price}}</p>
-      <p>Start Date: ${{this.listing_AvailableStartInput}}</p>
-      <p>End Date: ${{this.listing_AvailableEndInput}}</p>
+      <p>Price: {{this.price}}</p>
+      <p class="listingPrice" hidden>{{this.price}}</p>
+      <p>Start Date: {{this.listing_AvailableStartInput}}</p>
+      <p>End Date: {{this.listing_AvailableEndInput}}</p>
+      <p class="listingVolume" hidden>{{this.volume}}</p>
+      <p class="listingAvailableStartInput" hidden>{{this.listing_AvailableStartInput}}</p>
+      <p class="listingAvailableEndInput" hidden>{{this.listing_AvailableEndInput}}</p>
     </li>
   {{/each}}
 </ul>
