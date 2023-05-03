@@ -30,6 +30,11 @@
 
 <h2>Reviews on your listings:</h2>
 <p>Cumulative Rating: {{user.rating}} from {{reviews.length}} reviews</p>
+</div>
+<div>
+  <button style="font-size:24px" onclick="window.location.href='/profile/update';">Edit Profile <i class="fa fa-edit"></i></button>
+</div>
+<div>
 <ol>
   {{#each reviews}}
   <li>
@@ -50,7 +55,7 @@
   </li>
   {{/each}}
 </ol>
-
+</div>
 <br><br>
 
 <h2>Your Listings:</h2>

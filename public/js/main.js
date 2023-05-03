@@ -98,6 +98,7 @@ if(review_form) {
             document.getElementById("current_added_reviews").innerHTML += `<li>Rating: ${rating}<br>Comment: ${comment}</li>`;
         }
         else{
+            console.log(responseMessage);
         document.getElementById("review_added").innerHTML = `<p> ${responseMessage} </p>` }
         //document.getElementById("current_added_reviews").innerHTML += `<li>Rating: ${rating}<br>Comment: ${comment}</li>`;
       });
