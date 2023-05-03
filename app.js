@@ -43,7 +43,7 @@ app.use('/login', async (req, res, next) => {
   if (!req.session.user) {
     next()
   } else {
-      return res.redirect('/profile')
+      return res.render('errors', {authenticated:'You are already logged in!'})
     }
 })
 
@@ -51,7 +51,7 @@ app.use('/register', async (req, res, next) => {
   if (!req.session.user) {
     next()
   } else {
-    return res.redirect('/login')
+    return res.render('errors', {authenticated:'You are already registered!'})
   }
 })
 

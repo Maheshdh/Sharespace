@@ -1,3 +1,15 @@
-<h1>This is the Error Page</h1>
-<p>Error: {{error}}</p>
-<a href="/homepage">Go back to homepage</a>
+<h1>Oops!</h1>
+
+<div id="alreadyAuthenticated" class="authenticated-div hidden">
+    {{#if authenticated}}
+        <p>{{authenticated}}</p>
+    {{/if}}
+</div>
+
+<div class="error-div hidden">
+    {{#if error}}
+        <p>{{error}}</p>
+    {{/if}}
+</div>
+<br><br>
+<h1><a href="/homepage">Go To Homepage</a></h1>

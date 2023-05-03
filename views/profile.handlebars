@@ -28,7 +28,7 @@
 </div>
 <br><br>
 
-<h2>Your Reviews:</h2>
+<h2>Reviews on your listings:</h2>
 <p>Cumulative Rating: {{user.rating}} from {{reviews.length}} reviews</p>
 <ol>
   {{#each reviews}}
@@ -54,12 +54,14 @@
 <br><br>
 
 <h2>Your Listings:</h2>
+{{#if noListings}}
+<p>You have no listings!</p>
+{{/if}}
 <ul>
   {{#each listings}}
     <li>
-      <h3>{{this.title}}</h3>
+      <h3><a href="/listing/{{this._id}}">{{this.title}}</a></h3>
       <p>{{this.description}}</p>
-      <p>{{this.price}}</p>
     </li>
   {{/each}}
 </ul>
