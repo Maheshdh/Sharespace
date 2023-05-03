@@ -94,12 +94,12 @@ if(review_form) {
       $.ajax(requestConfig).then(function (responseMessage) {
           console.log(responseMessage);
           if(responseMessage.success === true){
-            document.getElementById("review_added").innerHTML += `<p> Review succesfully added </p>`
+            document.getElementById("review_added").innerHTML += `<p class="reviewAdded-success"> Review succesfully added! </p>`
             document.getElementById("current_added_reviews").innerHTML += `<li>Rating: ${rating}<br>Comment: ${comment}</li>`;
         }
         else{
             console.log(responseMessage);
-        document.getElementById("review_added").innerHTML = `<p> ${responseMessage} </p>` }
+        document.getElementById("review_added").innerHTML = `<p class="reviewAdded-fail"> ${responseMessage} </p>` }
         //document.getElementById("current_added_reviews").innerHTML += `<li>Rating: ${rating}<br>Comment: ${comment}</li>`;
       });
     }

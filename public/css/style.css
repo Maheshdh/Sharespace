@@ -172,7 +172,7 @@ ul {
 }
 .fa-edit {
     font-size: 20px;
-
+}
 
 
 .links {
@@ -181,4 +181,24 @@ ul {
 
 .login-form{
     text-align: center;
+}
+
+.reviewAdded-fail {
+    display:inline;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: left;
+    font-size: 20px;
+    font-weight: bold;
+    border: 2px red;
+    background-color: rgb(226, 186, 186);
+}
+
+.reviewAdded-success {
+    display:inline;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: left;
+    font-size: 20px;
+    font-weight: bold;
+    border: 2px green;
+    background-color: rgb(186, 226, 198);
 }

@@ -60,6 +60,8 @@ router
         let listingID;
         let rating;
         let comment;
+        if (!req.session.user) return res.json('Error: You must be logged in to add a review!')
+
         try {
             if (!userInput.listingID) throw 'Error: listingID not provided'
             if (userInput.rating === undefined) throw 'Error: Rating not provided'
@@ -181,7 +183,7 @@ router
       }
 
     } else {
-      res.redirect('/login', {error: 'You need to be logged in to request booking!'})
+      res.render('login', {error: 'You need to be logged in to request booking!'})
     }
   })
 
