@@ -14,6 +14,11 @@ router
     try {
         let bookingsRequested = await getBookingRequestsSent(currentUser.userID)
         let bookingsReceived = await getBookingRequestsReceived(currentUser.userID)
+        for (let booking of bookingsReceived) {
+            if (booking.requestStatus == 'Requested') {
+                booking.respondRequired = 'Yes'
+            }
+        }
         return res.render('bookings', {bookingsRequested: bookingsRequested, bookingsReceived: bookingsReceived})
     } catch (e) {
         res.render('errors', {errors: e})

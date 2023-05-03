@@ -167,3 +167,9 @@ export const getListing = async(id) => {
     const listing = await listingsCollection.findOne({_id: new ObjectId(id)});
     return listing;
 };
+
+
+export const countListings = async() => {
+    let listingsCollection = await listings()
+    return listingsCollection.countDocuments()
+}

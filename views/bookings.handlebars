@@ -42,11 +42,11 @@
                 </tr>
             </table>
             <div id="userResponseForm" class="userResponseForm hidden">
-                {{#if this.requestStatus}}
+                {{#if this.respondRequired}}
                     <form action="/bookings" method="POST" id="bookingRequestResponse">
-                        <input type="radio" id="bookingStatusResponse" name="bookingStatusResponse" value="Accept">
+                        <input type="radio" id="bookingStatusResponse" name="bookingStatusResponse" value="Accept" required>
                         <label for="bookingStatusResponse">Accept</label>
-                        <input type="radio" id="bookingStatusResponse" name="bookingStatusResponse" value="Deny">
+                        <input type="radio" id="bookingStatusResponse" name="bookingStatusResponse" value="Deny" required>
                         <label for="bookingStatusResponse">Deny</label>
                         <input type = "hidden" id="bookingID" name="bookingID" value={{this.bookingRequestID}} />
                         <br><br>

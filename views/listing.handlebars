@@ -2,10 +2,11 @@
 <hr>
 <br><br>
 
+<h2>Listing Description:</h2>
 <table id="listingTable">
     <tr>
         <td>Author</td>
-        <td>{{user}}</td>
+        <td><a href = "/users/{{user}}">Link to user</a></td>
     </tr>
     <tr>
         <td>Address</td>
@@ -39,16 +40,26 @@
         <td>{{listing.description}}</td>
     </tr>
 </table>
-<br><br>
+<br>
+<form action="/listing/{{listing._id}}" method="POST" id="requesting-booking">
+  <input type="submit" id="requestBooking" name="requestBooking" value="Request a Booking!">
+</form>
+<br>
 {{#if listing.image}}
+<h2>Pictures:</h2>
 <img src="http://localhost:3000/data/uploads/{{listing.image}}" alt="">
 {{/if}}
+<br><br>
+
+<h2>Share this Listing!</h2>
 <div class="share-btn-container">
     <p>Share on Whatsapp:</p>
     <a href="#" class="whatsapp-btn" target="_blank" rel="noopener noreferrer">
         <i class="fab fa-whatsapp"></i>
     </a>
 </div>
+<br><br>
+<h2>Leave your Review:</h2>
 <div>
     <form id="review_input_form">
     <input type="hidden" value={{listing._id}} id="listing_id_input">
@@ -71,20 +82,21 @@
 <div id="review_added"></div>
 
 <br><br>
-<h2>Current Reviews:</h2>
+
+<h2>Rating:</h2>
+<p>{{cumulativeListingReviewStats.totalRating}} from {{cumulativeListingReviewStats.totalReviews}} Reviews</p>
+<br>
+<h2>Reviews:</h2>
+{{#if noReviewsFound}}
+<p>No Reviews Yet!</p>
+{{/if}}
 <ol id="current_added_reviews">
   {{#each reviews}}
-    <li>Rating: {{this.rating}}<br>Comment: {{this.comment}}</p>
+    <li>Rating: {{this.rating}}<br>Comment: {{this.comment}}<br>Reviewed By: <a href = "/users/{{this.userID}}">Link to user</a></p>
     </li>
   {{/each}}
 </ol>
 <br><br>
-
-<form action="/listing/{{listing._id}}" method="POST" id="requesting-booking">
-  <input type="submit" id="requestBooking" name="requestBooking" value="Request a Booking!">
-</form>
-
-<h3><a href="/homepage">Back to Homepage</a></h2>
 
 
 

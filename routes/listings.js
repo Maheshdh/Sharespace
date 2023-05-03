@@ -107,21 +107,35 @@ router
           return res.status(400).render('errors',{"error":error});
       }
       let reviews = []
+      let noReviewsFound = false
       try {
+        if (listing.reviews.length == 0) throw 'No Reviews Found!'
         for (let review of listing.reviews) {
           let reviewToBeAdded = await getReview(review)
           reviews.push(reviewToBeAdded)
         }
       } catch (e) {
         if (e === 'No Reviews Found!') {
-          reviews = e
+          noReviewsFound = true 
         } else {
           return res.status(400).render('errors',{"error":e});
         }
       }
       try {
         const user = await getListing(user_id);
-        return res.status(200).render('listing',{"listing": listing,"user": listing.userID,"reviews": reviews});
+        let cumulativeListingReviewStats = {
+          totalRating: 0,
+          totalReviews: 0
+        }
+        if (reviews.length>0) {
+          for (let review of reviews) {
+            cumulativeListingReviewStats.totalRating += review.rating
+          }
+          cumulativeListingReviewStats.totalRating = cumulativeListingReviewStats.totalRating/reviews.length
+          cumulativeListingReviewStats.totalRating = Math.round(cumulativeListingReviewStats.totalRating*100)/100
+          cumulativeListingReviewStats.totalReviews = reviews.length
+        }
+        return res.status(200).render('listing',{"listing": listing,"user": listing.userID,"reviews": reviews, "noReviewsFound":noReviewsFound, "cumulativeListingReviewStats": cumulativeListingReviewStats });
       } catch (error) {
           return res.status(404).render('errors',{"error":error});
       }
@@ -158,7 +172,8 @@ router
           if (creatingBooking.insertedBookingRequestAndMyBooking == true) {
             let bookingsRequested = await getBookingRequestsSent(user.userID)
             let bookingsReceived = await getBookingRequestsReceived(user.userID)
-            return res.render('bookings', {bookingsRequested: bookingsRequested, bookingsReceived: bookingsReceived})
+            // return res.render('bookings', {bookingsRequested: bookingsRequested, bookingsReceived: bookingsReceived})
+            res.redirect('/bookings')
           } else throw 'Could not make booking'
         } catch (e) {
           return res.status(400).render('errors',{"error":e})
@@ -166,7 +181,7 @@ router
       }
 
     } else {
-      res.render('login', {error: 'You need to be logged in to request booking!'})
+      res.redirect('/login', {error: 'You need to be logged in to request booking!'})
     }
   })
 

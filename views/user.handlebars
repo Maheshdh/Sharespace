@@ -1,0 +1,69 @@
+<h1>User Page</h1>
+<hr>
+<br><br>
+<h2>User Information:</h2>
+<div>
+<div id="userInformationTableDiv">
+<table id="userInformationTable">
+  <tr>
+    <td>Name</td>
+    <td>{{user.firstName}} {{user.lastName}}</td>
+  </tr>
+  <tr>
+    <td>Email Address</td>
+    <td>{{user.emailAddress}}</td>
+  </tr>
+  <tr>
+    <td>Phone Number</td>
+    <td>{{user.phoneNumber}}</td>
+  </tr>
+</table>
+</div>
+<div>
+{{#if user.image}}
+<img src="http://localhost:3000/data/uploads/{{user.image}}" alt="User Image">
+{{/if}}
+</div>
+</div>
+<br><br>
+
+<h2>Reviews on this User's Listings</h2>
+<p>Cumulative Rating: {{user.rating}} from {{reviews.length}} reviews</p>
+<ol>
+  {{#each reviews}}
+  <li>
+  <table id="userInformationTable">
+    <tr>
+      <td>Reviewed By</td>
+      <td><a href = "/users/{{this.reviewMadeBy}}">Link to user</a></td>
+    </tr>
+    <tr>
+      <td>Rating Given</td>
+      <td>{{this.rating}}</td>
+    </tr>
+    <tr>
+      <td>Comment</td>
+      <td>{{this.comment}}</td>
+    </tr>
+  </table>
+  </li>
+  {{/each}}
+</ol>
+
+<br><br>
+
+<h2>Listings Uploaded By User:</h2>
+{{#if noListings}}
+<p>User has no listings!</p>
+{{/if}}
+<ul>
+  {{#each listings}}
+    <li>
+      <h3><a href="/listing/{{this._id}}">{{this.title}}</a></h3>
+      <p>{{this.description}}</p>
+    </li>
+  {{/each}}
+</ul>
+<br><br>
+
+

@@ -13,7 +13,7 @@ router
     try {
         if (currentUserListings.length == 0){
             let noListings = 'You have no listings!'
-            return res.render('profile', {user:currentUser, listings: noListings})
+            return res.render('profile', {user:currentUser, reviews:[], noListings: noListings})
         }
         
         let allListings = []

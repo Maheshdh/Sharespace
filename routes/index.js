@@ -9,14 +9,16 @@ import profileRoutes from './profile.js'
 
 const constructMethod = (app) => {
     app.use('/', authRoutes)
+    app.use('/landing', landingRoutes)
     app.use('/homepage', homePageRoutes)
     app.use('/profile', profileRoutes)
     app.use('/bookings', bookingRoutes)
     console.log("Index");
     app.use('/listing',listingRoutes)
+    app.use('/users', userRoutes)
 
     app.use('*', (req, res) => {
-        res.status(404).json({error: 'Route Not found'});
+        res.render('errors', {error:'404: That Page Does not Exist'});
       });
 } 
 
