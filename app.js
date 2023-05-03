@@ -57,7 +57,7 @@ app.use('/register', async (req, res, next) => {
 
 app.use('/profile', async (req, res, next) => {
   if (!req.session.user) {
-    res.redirect('/login')
+    return res.render('login', {error: 'Log in to access your profile page!'})
   } else {
     next()
   }
@@ -69,7 +69,7 @@ app.use('/landing', async (req, res, next) => {
 
 app.use('/listing/add', async (req, res, next) => {
   if (!req.session.user) {
-    return res.render('login', {error: 'You need to be logged in to add a new listing!'})
+    return res.render('login', {error: 'Log in to add a new listing!'})
   } else {
     next()
   }
@@ -77,7 +77,7 @@ app.use('/listing/add', async (req, res, next) => {
 
 app.use('/bookings', async (req, res, next) => {
   if (!req.session.user) {
-    res.redirect('/login')
+    return res.render('login', {error: 'Log in to see your booking information!'})
   } else {
     next()
   }

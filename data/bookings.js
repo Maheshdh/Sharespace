@@ -2,6 +2,7 @@ import { ObjectId } from "mongodb"
 import { bookingRequests } from '../config/mongoCollections.js'
 import { myBookings } from "../config/mongoCollections.js"
 import { listings } from "../config/mongoCollections.js"
+import { users } from "../config/mongoCollections.js"
 import helpers from '../helpers.js'
 
 export const createBookingRequest = async (
@@ -21,6 +22,13 @@ export const createBookingRequest = async (
 
     let bookingRequestsCollection = await bookingRequests()
     let myBookingCollection = await myBookings()
+    let userCollection = await users()
+
+    let userRequestingBookingInfo = await userCollection.findOne({_id: new ObjectId(userRequestingBookingID)})
+    let listingsOfUserRequestingBooking = userRequestingBookingInfo.listings
+    if (listingsOfUserRequestingBooking.includes(listingID)) {
+        throw 'Error: You cannot create a booking for your own listing!'
+    }
 
     let duplicateBookingRequest = await myBookingCollection.findOne(
         {$and: [

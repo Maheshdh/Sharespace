@@ -1,6 +1,8 @@
-<link rel="stylesheet" href="/public/css/style.css">
-<form action="/register" method="post" id="registration-form" enctype="multipart/form-data">
 <h1>New User Registration</h1>
+<hr>
+
+<div class="login-form">
+<form action="/register" method="post" id="registration-form" enctype="multipart/form-data">
   <label for="firstNameInput"> First Name:
     <input type="text" id="firstNameInput" name="firstNameInput"required><br><br>
   </label>
@@ -19,10 +21,10 @@
   <label for="phoneNumberInput"> Phone Number:
     <input type="text" id="phoneNumberInput" name="phoneNumberInput"required><br><br>
   </label>
-  <br><br>
-  <label for='uploadFile'> Select a file: </label>
-<br>
-<input type='file' name="uploadFile" id='uploadFile' accept="image/*">
+  <label for='uploadFile'> Upload your photo: 
+    <input type='file' name="uploadFile" id='uploadFile' accept="image/*">
+  </label>
+
 <br><br>
   {{!-- {{#if error}}
     <div id="error-container">{{error}}</div>
@@ -41,3 +43,4 @@
       <a href="/login">Already have an account? Click here to log-in</a>
   </div>
 </form> 
+</div>

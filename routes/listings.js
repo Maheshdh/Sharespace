@@ -127,7 +127,8 @@ router
           if (creatingBooking.insertedBookingRequestAndMyBooking == true) {
             let bookingsRequested = await getBookingRequestsSent(user.userID)
             let bookingsReceived = await getBookingRequestsReceived(user.userID)
-            return res.render('bookings', {bookingsRequested: bookingsRequested, bookingsReceived: bookingsReceived})
+            // return res.render('bookings', {bookingsRequested: bookingsRequested, bookingsReceived: bookingsReceived})
+            res.redirect('/bookings')
           } else throw 'Could not make booking'
         } catch (e) {
           return res.status(400).render('errors',{"error":e})
@@ -135,7 +136,7 @@ router
       }
 
     } else {
-      res.render('login', {error: 'You need to be logged in to request booking!'})
+      res.redirect('/login', {error: 'You need to be logged in to request booking!'})
     }
   })
 
