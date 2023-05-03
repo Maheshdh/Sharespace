@@ -90,6 +90,12 @@ export const getUser = async (id) => {
     return user;
   };
 
+export const getAllUsers = async() => {
+  const userCollection = await users();
+  const allUsers = await userCollection.find({role: 'user'}).toArray()
+  return allUsers;
+};
+
 
 export const updateUserRatingAndComments = async (id) => {
     id = helpers.checkId(id, "User ID");
@@ -141,4 +147,10 @@ export const updateUserRatingAndComments = async (id) => {
     console.log('Updated user collection')
 
     return true
+}
+
+
+export const countUsers = async() => {
+  let userCollection = await users()
+  return userCollection.countDocuments()
 }

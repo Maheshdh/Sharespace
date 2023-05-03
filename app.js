@@ -35,53 +35,59 @@ app.use(
 // ---------------- Middlewares --------------------------
 
 app.get('/', async (req, res) => {
- res.redirect('/landing')
-})
-
-
-app.use('/login', async (req, res, next) => {
+  res.redirect('/landing')
+ })
+ 
+ app.use('/login', async (req, res, next) => {
+   if (!req.session.user) {
+     next()
+   } else {
+       return res.render('errors', {authenticated:'You are already logged in!'})
+     }
+ })
+ 
+ app.use('/register', async (req, res, next) => {
+   if (!req.session.user) {
+     next()
+   } else {
+     return res.render('errors', {authenticated:'You are already registered!'})
+   }
+ })
+ 
+ app.use('/profile', async (req, res, next) => {
+   if (!req.session.user) {
+     return res.render('login', {error: 'Log in to access your profile page!'})
+   } else {
+     next()
+   }
+ })
+ 
+app.use('/users', async (req, res, next) => {
   if (!req.session.user) {
-    next()
+    return res.render('login', {error: 'Log in to view registered Users!'})
   } else {
-      return res.render('errors', {authenticated:'You are already logged in!'})
+      next()
     }
 })
 
-app.use('/register', async (req, res, next) => {
-  if (!req.session.user) {
-    next()
-  } else {
-    return res.render('errors', {authenticated:'You are already registered!'})
-  }
-})
+ app.use('/listing/add', async (req, res, next) => {
+   if (!req.session.user) {
+     return res.render('login', {error: 'Log in to add a new listing!'})
+   } else {
+     next()
+   }
+ })
+ 
+ app.use('/bookings', async (req, res, next) => {
+   if (!req.session.user) {
+     return res.render('login', {error: 'Log in to see your booking information!'})
+   } else {
+     next()
+   }
+ })
 
-app.use('/profile', async (req, res, next) => {
-  if (!req.session.user) {
-    return res.render('login', {error: 'Log in to access your profile page!'})
-  } else {
-    next()
-  }
-})
+ // ------------------------------------------------------------------------------------
 
-app.use('/landing', async (req, res, next) => {
-  return res.render('landing')
-})
-
-app.use('/listing/add', async (req, res, next) => {
-  if (!req.session.user) {
-    return res.render('login', {error: 'Log in to add a new listing!'})
-  } else {
-    next()
-  }
-})
-
-app.use('/bookings', async (req, res, next) => {
-  if (!req.session.user) {
-    return res.render('login', {error: 'Log in to see your booking information!'})
-  } else {
-    next()
-  }
-})
 
 app.use(async (req, res, next) => {
   let currentTimestamp = new Date().toUTCString()

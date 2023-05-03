@@ -1,0 +1,34 @@
+<h1>View all our registered Users!</h1>
+<hr>
+
+<label for="searchListing">Search Listing:</label>
+<input type="text" placeholder="Search Users..." onkeyup="searchListingPage()" name="searchLisitng" id="searchListing">
+<br><br>
+{{!-- <label for="filterSelect">Filter</label>
+<select name="filterSelect" id="filterSelect">
+  <option value="price">Price</option>
+  <option value="volume">Volume</option>
+  <option value="availability">Avalability</option>
+</select>
+<label for="filterFrom">From</label>
+<input type="text" id="filterFrom" placeholder="Filter from">
+<label for="filterTo">To</label>
+<input type="text" id="filterTo" placeholder="Filter to">
+<button id="filterButton" onclick="filter()">Filter</button>
+<button onclick="resetFilter()">Reset filters</button>
+<div>
+  <p id="filterError"></p>
+</div> --}}
+
+<ul>
+  {{#each users}}
+    <li class="homepageListings">
+      <h2><a href="/users/{{this._id}}">{{this.firstName}} {{this.lastName}}</a></h2>
+      {{#if this.image}}
+      <img src="http://localhost:3000/data/uploads/{{this.image}}" alt="Profile Page">
+      {{/if}}
+      <p>Rating:{{this.rating}}</p>
+      <p>Number of listings uploaded:{{this.listings.length}}</p>
+    </li>
+  {{/each}}
+</ul>

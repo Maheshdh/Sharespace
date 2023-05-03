@@ -5,6 +5,11 @@
         <p>{{authenticated}}</p>
     {{/if}}
 </div>
+<div>
+    {{#if authenticated}}
+    <a href="/logout">Click here</a><p> to logout in order to login as a new user or to register a new account</p>
+    {{/if}}
+</div>
 
 <div class="error-div hidden">
     {{#if error}}
