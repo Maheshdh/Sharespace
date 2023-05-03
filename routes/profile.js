@@ -28,4 +28,11 @@ router
 
 })
 
+router
+.route('/update')
+.get(async (req, res) => {
+    console.log(req.session.user);
+    res.render('profileUpdate');
+})
+
 export default router

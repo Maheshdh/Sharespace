@@ -52,6 +52,37 @@ router
     }
 })
 
+router
+    .route('/addReview')
+    .post(async (req,res)=>{
+        let userInput = req.body
+        let userID;
+        let listingID;
+        let rating;
+        let comment;
+        try {
+            if (!userInput.listingID) throw 'Error: listingID not provided'
+            if (userInput.rating === undefined) throw 'Error: Rating not provided'
+            if (!userInput.comment) throw 'Error: Comment not provided'
+    
+            userID = helpers.checkId(req.session.user.userID.toString())
+            listingID = helpers.checkId(userInput.listingID)
+            rating = helpers.checkRating(userInput.rating, 'Rating')
+            comment = helpers.checkString(userInput.comment, 'Comment////')   
+        } catch (e) {
+            console.log(e);
+            return res.json(e);
+        }
+
+        try {
+            let myReview = await addReview(listingID, userID, rating, comment);
+            if (!myReview) throw 'Error: Unable to create review'
+            return res.json({success: true});
+        } catch (e) {
+            console.log(e);
+            return res.json(e);
+        }
+    })
 
 // TODO: FIX THIS -> make appropiate errors
 router
@@ -99,8 +130,8 @@ router
     if (req.session.user) {
       let user = req.session.user
       let userInput = req.body
-      
       var listingID;
+      console.log("requesting booking")
       try {
         listingID = helpers.checkId(req.params.id);
       } catch (e) {
@@ -139,36 +170,5 @@ router
     }
   })
 
-router
-    .route('/addReview')
-    .post(async(req,res)=>{
-        let userInput = req.body
-        let userID;
-        let listingID;
-        let rating;
-        let comment;
-        try {
-            if (!userInput.listingID) throw 'Error: listingID not provided'
-            if (userInput.rating === undefined) throw 'Error: Rating not provided'
-            if (!userInput.comment) throw 'Error: Comment not provided'
-    
-            userID = helpers.checkId(req.session.user.userID.toString())
-            listingID = helpers.checkId(userInput.listingID)
-            rating = helpers.checkRating(userInput.rating, 'Rating')
-            comment = helpers.checkString(userInput.comment, 'Comment////')   
-        } catch (e) {
-            console.log(e);
-            return res.json(e);
-        }
-
-        try {
-            let myReview = await addReview(listingID, userID, rating, comment);
-            if (!myReview) throw 'Error: Unable to create review'
-            return res.json({success: true});
-        } catch (e) {
-            console.log(e);
-            return res.json(e);
-        }
-    })
 
 export default router;
