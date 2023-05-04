@@ -36,7 +36,11 @@ export const createBookingRequest = async (
             {userRequestingBookingID: userRequestingBookingID}
         ]}
     )
-    if (duplicateBookingRequest) throw 'Error: You have already requested a booking for this listing! Please wait for the listing uploader to respond!'
+    if (duplicateBookingRequest) {
+        if (duplicateBookingRequest.requestStatus == 'Request Denied') throw 'Error: Sorry, but the listing uploader has denied your request. Please request a booking for a different listing!'
+        if (duplicateBookingRequest.requestStatus == 'Request Accepted') throw 'The owner of this listing has already accpeted your request! Head on over to the "Bookings" tab to view their contact information!'
+        throw 'Error: You have already requested a booking for this listing! Please wait for the listing uploader to respond!'
+    } 
 
     let newBookingRequest = {
         listingID: listingID,
@@ -110,4 +114,13 @@ export const respondToBookingRequestReceived = async (bookingID, response) => {
     )
     
     return {responseUpdated: true}
+}
+
+
+export const getContactInfoWhenBookingAccepted = async (listingUploadedByID) => {
+    listingUploadedByID = helpers.checkId(listingUploadedByID)
+    let userCollection = await users()
+    let listingUploadedByInfo = await userCollection.findOne({_id: new ObjectId(listingUploadedByID)})
+    let contactInfo = {phone: listingUploadedByInfo.phoneNumber, email: listingUploadedByInfo.emailAddress}
+    return contactInfo
 }

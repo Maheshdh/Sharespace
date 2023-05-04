@@ -35,7 +35,13 @@
   <button style="font-size:24px" onclick="window.location.href='/profile/update';">Edit Profile <i class="fa fa-edit"></i></button>
 </div>
 <div>
-<ol>
+  <ol>
+  {{#each reviews}}
+    <li>Rating: {{this.rating}}<br>Comment: {{this.comment}}<br>Reviewed By: <a href = "/users/{{this.userID}}">Link to user</a></p>
+    </li>
+  {{/each}}
+</ol>
+{{!-- <ol>
   {{#each reviews}}
   <li>
   <table id="userInformationTable">
@@ -54,7 +60,7 @@
   </table>
   </li>
   {{/each}}
-</ol>
+</ol> --}}
 </div>
 <br><br>
 

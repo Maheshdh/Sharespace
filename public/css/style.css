@@ -124,6 +124,25 @@ a {
 #userInformationTable td:nth-child(odd){font-weight: bold;}
 #userInformationTable tr:hover {background-color: #dae3f3;}
 
+#bookingTable {
+    table-layout: fixed;
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+} 
+#bookingTable td{
+    table-layout: fixed;
+    width: 200px;
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+#bookingTable th{
+    background-color: #aacfff;
+}
+#bookingTable tr:nth-child(even){background-color: #f1f1f1;}
+/* #bookingTable td:nth-child(odd){font-weight: bold;} */
+#bookingTable tr:hover {background-color: #dae3f3;}
+
+
 
 ul {
     display: flex;
@@ -181,4 +200,24 @@ ul {
 
 .login-form{
     text-align: center;
+}
+
+.reviewAdded-fail {
+    display:inline;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: left;
+    font-size: 20px;
+    font-weight: bold;
+    border: 2px red;
+    background-color: rgb(226, 186, 186);
+}
+
+.reviewAdded-success {
+    display:inline;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: left;
+    font-size: 20px;
+    font-weight: bold;
+    border: 2px green;
+    background-color: rgb(186, 226, 198);
 }

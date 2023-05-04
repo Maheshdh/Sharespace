@@ -95,6 +95,16 @@ app.use('/users', async (req, res, next) => {
    }
  })
 
+
+// Problem with AJAX, when uncommented, this page renders directly BELOW the submit button in addReview
+//  app.use('/listing/addReview', async (req, res, next) => {
+//   if (!req.session.user) {
+//     return res.render('login', {error: 'Log in to see your booking information!'})
+//   } else {
+//     next()
+//   }
+//  })
+
  // ------------------------------------------------------------------------------------
 
 
