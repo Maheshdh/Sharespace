@@ -57,7 +57,7 @@ router
             let passwordInput = helpers.checkPassword(userInput.passwordInput, 'Password')
             if (userInput.confirmPasswordInput != passwordInput) throw 'Error: Passwords do not match'
             let phoneNumberInput = helpers.checkPhoneNumber(userInput.phoneNumberInput, 'Phone Number')
-            let imageInput = null;
+            let imageInput = "default_image";
             if(req.file){
             imageInput = req.file.filename; }
 

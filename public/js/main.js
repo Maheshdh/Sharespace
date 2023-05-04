@@ -97,6 +97,8 @@ if(review_form) {
             document.getElementById("review_added").innerHTML += `<p class="reviewAdded-success"> Review succesfully added! </p>`
             document.getElementById("current_added_reviews").innerHTML += `<li>Rating: ${rating}<br>Comment: ${comment}</li>`;
         }
+        else if(responseMessage.success === false){
+        document.getElementById("review_added").innerHTML = `<p> ${responseMessage.error} </p>` }
         else{
             console.log(responseMessage);
         document.getElementById("review_added").innerHTML = `<p class="reviewAdded-fail"> ${responseMessage} </p>` }
@@ -111,6 +113,28 @@ add_file_button.addEventListener("click",(event)=>{
     event.preventDefault();
     $("#uploadFile").after(`<br><br><input type='file' id='uploadFile' name='uploadFile' accept="image/*">`)
 }) }
+
+const update_user = document.getElementById('profile_update_form');
+if (update_user) {
+  update_user.addEventListener('submit',(event) => {
+      event.preventDefault();
+
+      const firstNameUpdate = document.getElementById('firstname_update').value;
+      const lastNameUpdate = document.getElementById('lastname_update').value;
+      const phoneNoUpdate = document.getElementById('phoneno_update').value;
+
+      try {
+        if(firstNameUpdate === undefined || lastNameUpdate === undefined || phoneNoUpdate === undefined){ throw "One or more argument is missing"; }
+        checkString(firstNameUpdate,"First Name");
+        checkString(lastNameUpdate,"Last name");
+        checkPhoneNumber(phoneNoUpdate,"Phone number")
+        update_user.submit();
+      } catch (error) {
+          document.getElementById("error_js").innerHTML = error;
+      }
+})
+}
+
 
 const whatsappBtn = document.querySelector(".whatsapp-btn");
 if(whatsappBtn){

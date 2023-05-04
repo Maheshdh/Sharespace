@@ -73,7 +73,7 @@ router
             comment = helpers.checkString(userInput.comment, 'Comment////')   
         } catch (e) {
             console.log(e);
-            return res.json(e);
+            return res.json({success: false, error: e});
         }
 
         try {
@@ -82,7 +82,7 @@ router
             return res.json({success: true});
         } catch (e) {
             console.log(e);
-            return res.json(e);
+            return res.json({success: false, error: e});
         }
     })
 

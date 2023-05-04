@@ -154,3 +154,56 @@ export const countUsers = async() => {
   let userCollection = await users()
   return userCollection.countDocuments()
 }
+
+export const updateUser = async (
+  firstName,
+  lastName,
+  phoneNumber,
+  imageInput,
+  emailAddress
+) => {
+  if (!firstName || !lastName || !phoneNumber) throw 'Error: Invalid number of parameters entered (Expected 5)'
+  if (!firstName) throw 'Error: "firstName" parameter not entered'
+  if (!lastName) throw 'Error: "lastName" parameter not entered'
+  if (!phoneNumber) throw 'Error: "phoneNumber" parameter not entered'
+  if (!emailAddress) throw 'Error: "emailAddress" parameter not entered'
+ 
+  let userCollection = await users()
+
+  firstName = helpers.checkString(firstName, 'First Name')
+  lastName = helpers.checkString(lastName, 'Last Name')
+  phoneNumber = helpers.checkPhoneNumber(phoneNumber, 'Phone Number')
+  emailAddress = helpers.checkEmail(emailAddress,"update email address");
+  let existingUser = await userCollection.findOne({emailAddress: emailAddress})
+  if (existingUser){
+    if(imageInput==null){
+      imageInput = existingUser.image;
+    }
+    let newUser = {
+      firstName: firstName,
+      lastName: lastName,
+      emailAddress: existingUser.emailAddress,
+      password: existingUser.password,
+      phoneNumber: phoneNumber,
+      listings: existingUser.listings,
+      rating: existingUser.rating,
+      reviews: existingUser.reviews,
+      role: existingUser.role,
+      image: imageInput
+    }
+    console.log(newUser);
+    let updateInfo = await userCollection.findOneAndUpdate(
+      {_id: existingUser._id},
+      {$set: newUser},
+      {returnDocument: 'after'}
+    )
+    console.log(updateInfo)
+    if(updateInfo.lastErrorObject.n === 0){
+      throw "update Failed";
+    }
+    return updateInfo.value;
+  }
+  else{
+    throw "No user with this email to update";
+  }
+}
