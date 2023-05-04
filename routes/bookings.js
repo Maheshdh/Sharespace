@@ -5,7 +5,8 @@ import {
     createBookingRequest, 
     getBookingRequestsReceived, 
     getBookingRequestsSent, 
-    respondToBookingRequestReceived } from '../data/bookings.js';
+    respondToBookingRequestReceived,
+    getContactInfoWhenBookingAccepted } from '../data/bookings.js';
 
 router
 .route('/')
@@ -17,6 +18,11 @@ router
         for (let booking of bookingsReceived) {
             if (booking.requestStatus == 'Requested') {
                 booking.respondRequired = 'Yes'
+            }
+        }
+        for (let booking of bookingsRequested) {
+            if (booking.requestStatus == 'Request Accepted') {
+                booking.listingOwnerContact = await getContactInfoWhenBookingAccepted(booking.listingUploadedByID)
             }
         }
         return res.render('bookings', {bookingsRequested: bookingsRequested, bookingsReceived: bookingsReceived})

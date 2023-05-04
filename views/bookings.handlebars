@@ -2,8 +2,9 @@
 <hr>
 <br><br>
 
-<div id="OutgoingRequests">
+{{!-- <div id="OutgoingRequests">
     <h2>Outgoing Requests</h2>
+    <p>You will Receive Listing Uploader's Contact Information once they accept your booking request!</p>
     <ol>
         {{#each bookingsRequested}}
         <li>
@@ -16,11 +17,86 @@
                     <td>Status</td>
                     <td>{{this.requestStatus}}</td>
                 </tr>
+                {{#if this.listingOwnerContact}}   
+                <tr>
+                    <td>Listing Uploader's Contact Information</td>
+                    <td>
+                        <ul>
+                            <li>Phone Number: {{this.listingOwnerContact.phone}}</li>
+                            <li>Email: {{this.listingOwnerContact.email}}</li>
+                        </ul>
+                    </td>
+                </tr>
+                {{/if}}
             </table>
         </li>
         {{/each}}
     </ol>
+</div> --}}
+
+<div id="OutgoingRequests">
+    <h2>Outgoing Requests</h2>
+    <p>You will Receive Listing Uploader's Contact Information once they accept your booking request!</p>
+    <table id="bookingTable">
+        <tr>
+            <th>Listing</th>
+            <th>Status</th>
+            <th>Listing Owner's Contact Information</th>
+        </tr>
+        {{#each bookingsRequested}}
+            <tr>
+                <td> <a href="/listing/{{this.listingID}}">Link to Listing</a></td>
+                <td>{{this.requestStatus}}
+                    <td>
+                    {{#if this.listingOwnerContact}}
+                        <p>Phone: {{this.listingOwnerContact.phone}}<br>
+                        Email: {{this.listingOwnerContact.email}}</p>
+                    {{/if}}
+                    </td>
+                </td>
+            </tr>    
+        {{/each}}
+    </table>
 </div>
+
+<br><br>
+
+<div id="IncomingRequests">
+    <h2>Incoming Requests</h2>
+    <table id="bookingTable">
+        <tr>
+            <th>Listing</th>
+            <th>Requested From User</th>
+            <th>Status</th>
+        </tr>
+        {{#each bookingsReceived}}
+            <tr>
+                <td> <a href="/listing/{{this.listingID}}">Link to Listing</a></td>
+                <td> <a href="/users/{{this.userRequestingBookingID}}">Link to User</a></td>
+                <td>{{this.requestStatus}} </td>
+                {{#if this.respondRequired}}
+                <td >
+                <div id="userResponseForm" class="userResponseForm hidden">
+                     {{!-- {{#if this.respondRequired}} --}}
+                    <form action="/bookings" method="POST" id="bookingRequestResponse">
+                        <input type="radio" id="bookingStatusResponse" name="bookingStatusResponse" value="Accept" required>
+                        <label for="bookingStatusResponse">Accept</label>
+                        <input type="radio" id="bookingStatusResponse" name="bookingStatusResponse" value="Deny" required>
+                        <label for="bookingStatusResponse">Deny</label>
+                        <input type = "hidden" id="bookingID" name="bookingID" value={{this.bookingRequestID}} />
+                        <br><br>
+                        <input type="submit">
+                    </form>
+                    {{!-- {{/if}} --}}
+                </div>
+                </td>
+                {{/if}}
+            </tr>    
+        {{/each}}
+    </table>
+</div>
+
+
 
 <div id="IncomingRequests">
     <h2>Incoming Requests</h2>
@@ -53,7 +129,6 @@
                         <input type="submit">
                     </form>
                 {{/if}}
-
             </div>
         </li>
         {{/each}}
