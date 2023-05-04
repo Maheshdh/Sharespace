@@ -13,7 +13,7 @@ export const createListing = async (
     width,
     height,
     latitude,
-    longitute,
+    longitude,
     listing_AvailableStartInput,
     listing_AvailableEndInput,
     imageInput
@@ -31,7 +31,7 @@ export const createListing = async (
     if (!width) throw 'Error: "width" parameter not entered'
     if (!height) throw 'Error: "height" parameter not entered'
     if (!latitude) throw 'Error: "latitude" parameter not entered'
-    if (!longitute) throw 'Error: "longitute" parameter not entered'
+    if (!longitude) throw 'Error: "longitute" parameter not entered'
     if (!listing_AvailableStartInput) throw 'Error: "listing_AvailableStartInput" parameter not entered'
     if (!listing_AvailableEndInput) throw 'Error: "listing_AvailableEndInput" parameter not entered'
    
@@ -62,7 +62,7 @@ export const createListing = async (
         height : height,
         volume : volume,
         latitude : latitude,
-        longitute : longitute,
+        longitude : longitude,
         listing_AvailableStartInput : listing_AvailableStartInput,
         listing_AvailableEndInput : listing_AvailableEndInput,
         reviews: [],
