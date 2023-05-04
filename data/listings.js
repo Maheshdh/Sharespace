@@ -20,7 +20,7 @@ export const createListing = async (
 ) => {
 
 
-    if (!userID || !title || !address || !description || !price || !length || !width || !height || !latitude|| !longitute|| !listing_AvailableStartInput || !listing_AvailableEndInput) throw 'Error: Invalid number of parameters entered (Expected 10)'
+    if (!userID || !title || !address || !description || !price || !length || !width || !height || !latitude|| !longitude|| !listing_AvailableStartInput || !listing_AvailableEndInput) throw 'Error: Invalid number of parameters entered (Expected 10)'
     
     if (!userID) throw 'Error: "userID" parameter not entered'
     if (!title) throw 'Error: "title" parameter not entered'
@@ -31,7 +31,7 @@ export const createListing = async (
     if (!width) throw 'Error: "width" parameter not entered'
     if (!height) throw 'Error: "height" parameter not entered'
     if (!latitude) throw 'Error: "latitude" parameter not entered'
-    if (!longitude) throw 'Error: "longitute" parameter not entered'
+    if (!longitude) throw 'Error: "longitude" parameter not entered'
     if (!listing_AvailableStartInput) throw 'Error: "listing_AvailableStartInput" parameter not entered'
     if (!listing_AvailableEndInput) throw 'Error: "listing_AvailableEndInput" parameter not entered'
    
@@ -66,6 +66,7 @@ export const createListing = async (
         listing_AvailableStartInput : listing_AvailableStartInput,
         listing_AvailableEndInput : listing_AvailableEndInput,
         reviews: [],
+        // image: imageInput
         image: imageInput
     }
     
@@ -103,12 +104,12 @@ export const modifyListing = async (
     width,
     height,
     latitude,
-    longitute,
+    longitude,
     listing_AvailableStartInput,
     listing_AvailableEndInput
 ) => {
 
-    if (!address || !description || !price || !length || !width || !height|| !pictures|| !latitude|| !longitute|| !availability) throw 'Error: Invalid number of parameters entered (Expected 5)'
+    if (!address || !description || !price || !length || !width || !height|| !pictures|| !latitude|| !longitude|| !availability) throw 'Error: Invalid number of parameters entered (Expected 5)'
     if (!address) throw 'Error: "address" parameter not entered'
     if (!description) throw 'Error: "description" parameter not entered'
     if (!price) throw 'Error: "price" parameter not entered'
@@ -116,7 +117,7 @@ export const modifyListing = async (
     if (!width) throw 'Error: "width" parameter not entered'
     if (!height) throw 'Error: "height" parameter not entered'
     if (!latitude) throw 'Error: "latitude" parameter not entered'
-    if (!longitute) throw 'Error: "longitute" parameter not entered'
+    if (!longitude) throw 'Error: "longitude" parameter not entered'
     if (!listing_AvailableStartInput) throw 'Error: "listing_AvailableStartInput" parameter not entered'
     if (!listing_AvailableEndInput) throw 'Error: "listing_AvailableEndInput" parameter not entered'
    
@@ -139,7 +140,7 @@ export const modifyListing = async (
         height : height,
         volume : volume,
         latitude : latitude,
-        longitute : longitute,
+        longitude : longitude,
         listing_AvailableStartInput : listing_AvailableStartInput,
         listing_AvailableEndInput : listing_AvailableEndInput
   

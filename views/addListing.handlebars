@@ -25,9 +25,9 @@
 <br><br>
 <label for="listing_AvailableEndInput">Available End Date<br><input type="text" id="listing_AvailableEndInput" name="listing_AvailableEndInput"></label>
 <br><br>
-<label for='uploadFile'> Select a file<br><input type='file' name="uploadFile" id='uploadFile' accept="image/*"><button id="add_file_button">
-Add another file
-</button></label>
+<label for='uploadFile'>Select a file<br><input type='file' name="uploadFile" id='uploadFile' accept="image/*" multiple></label>
+{{!-- <label for="uploadFiles"></label> --}}
+
 
 <div id="error" class="error-div hidden">
           {{#if error}}

@@ -45,10 +45,10 @@
   <input type="submit" id="requestBooking" name="requestBooking" value="Request a Booking!">
 </form>
 <br>
-{{#if listing.image}}
 <h2>Pictures:</h2>
-<img src="http://localhost:3000/data/uploads/{{listing.image}}" alt="">
-{{/if}}
+{{#each listing.image}}
+<img src="http://localhost:3000/data/uploads/{{this}}" alt="">
+{{/each}}
 <br><br>
 
 <h2>Share this Listing!</h2>

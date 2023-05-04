@@ -13,7 +13,7 @@ router
 .get(async(req,res) => {
     return res.render('addListing')
 })
-.post(upload.single('uploadFile'), async(req,res,next)=>{
+.post(upload.array('uploadFile'), async(req,res,next)=>{
     try {
       let userInput = req.body
       if (!userInput.listing_TitleInput) throw 'Error: Title not provided'
@@ -38,9 +38,11 @@ router
       let latitudeInput = parseFloat(userInput.listing_LatitudeInput)
       let availableStartInput = helpers.checkDate(userInput.listing_AvailableStartInput, 'Listing Start Date')
       let availableEndInput = helpers.checkDate(userInput.listing_AvailableEndInput, 'Listing End Date')
-      let imageInput = null;
-      if(req.file){
-          imageInput = req.file.filename; 
+      let imageInput = [];
+      if(req.files){
+          for (let file of req.files) {
+            imageInput.push(file.filename)
+          }
         }
 
 
