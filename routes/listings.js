@@ -73,16 +73,15 @@ router
             comment = helpers.checkString(userInput.comment, 'Comment////')   
         } catch (e) {
             console.log(e);
-            return res.json({success: false, error: e});
+            return res.json(e);
         }
 
         try {
             let myReview = await addReview(listingID, userID, rating, comment);
             if (!myReview) throw 'Error: Unable to create review'
-            return res.json({success: true});
         } catch (e) {
             console.log(e);
-            return res.json({success: false, error: e});
+            return res.json(e);
         }
     })
 

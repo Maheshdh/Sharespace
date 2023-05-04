@@ -97,8 +97,8 @@ if(review_form) {
             document.getElementById("review_added").innerHTML += `<p class="reviewAdded-success"> Review succesfully added! </p>`
             document.getElementById("current_added_reviews").innerHTML += `<li>Rating: ${rating}<br>Comment: ${comment}</li>`;
         }
-        else if(responseMessage.success === false){
-        document.getElementById("review_added").innerHTML = `<p> ${responseMessage.error} </p>` }
+        // else if(responseMessage.success === false){
+        // document.getElementById("review_added").innerHTML = `<p class="reviewAdded-fail"> ${responseMessage.error} </p>` }
         else{
             console.log(responseMessage);
         document.getElementById("review_added").innerHTML = `<p class="reviewAdded-fail"> ${responseMessage} </p>` }
