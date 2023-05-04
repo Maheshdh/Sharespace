@@ -34,8 +34,8 @@ router
       let lenghtInput = helpers.checkDimension(userInput.listing_LengthInput, 'Listing Length')
       let widthInput = helpers.checkDimension(userInput.listing_WidthInput, 'Listing Width')
       let heightInput = helpers.checkDimension(userInput.listing_HeightInput, 'Listing Height')
-      let longitudeInput = 'LONGITUDE GOES HERE'
-      let latitudeInput = 'LATITUDE GOES HERE'
+      let longitudeInput = parseFloat(userInput.listing_LongitudeInput)
+      let latitudeInput = parseFloat(userInput.listing_LatitudeInput)
       let availableStartInput = helpers.checkDate(userInput.listing_AvailableStartInput, 'Listing Start Date')
       let availableEndInput = helpers.checkDate(userInput.listing_AvailableEndInput, 'Listing End Date')
       let imageInput = null;
@@ -44,7 +44,7 @@ router
         }
 
 
-      let creatingListing = await createListing(userID, titleInput, descriptionInput, addressInput, priceInput, lenghtInput, widthInput, heightInput, longitudeInput, latitudeInput, availableStartInput, availableEndInput, imageInput)
+      let creatingListing = await createListing(userID, titleInput, descriptionInput, addressInput, priceInput, lenghtInput, widthInput, heightInput,  latitudeInput, longitudeInput, availableStartInput, availableEndInput, imageInput)
       if (!creatingListing) throw 'Error: Unable to create Listing'
       return res.render('listingAdded', {listingID: creatingListing})
     } catch (e) {
