@@ -78,6 +78,15 @@ app.use('/users', async (req, res, next) => {
    }
  })
  
+ app.use('/listing/addReview', async (req, res, next) => {
+   console.log("Addreview middleware")
+  if (!req.session.user) {
+    return res.render('login', {error: 'Log in to add a new listing!'})
+  } else {
+    next()
+  }
+})
+
  app.use('/bookings', async (req, res, next) => {
    if (!req.session.user) {
      return res.render('login', {error: 'Log in to see your booking information!'})

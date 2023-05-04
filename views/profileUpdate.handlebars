@@ -1,38 +1,23 @@
-<h1>Add Listings Page</h1>
+<h1>Edit Profile</h1>
 <hr>
 
-<div class=" addListing-form">
-<form action="/listing/add" method="POST" id="add_listing_form" enctype="multipart/form-data">
-<label for="listing_TitleInput">Title<br><input type="text" id="listing_TitleInput" name="listing_TitleInput"></label>
+<div class=" profileUpdate-form">
+<form action="/profile/update" method="POST" id="profile_update_form" enctype="multipart/form-data">
+<label for="firstname_update">Firstname<br><input type="text" id="firstname_update" name="firstname_update" value={{user.firstName}}></label>
 <br><br>
-<label for="listing_DescriptionInput">Description<br><input type="text" id="listing_DescriptionInput" name="listing_DescriptionInput"></label>
+<label for="lastname_update">Lastname<br><input type="text" id="lastname_update" name="lastname_update" value={{user.lastName}}></label>
 <br><br>
-<label for="listing_AddressInput">Address<br><input type="address" id="listing_AddressInput" name="listing_AddressInput"></label>
+<label for="phoneno_update">Phone no:<br><input type="text" id="phoneno_update" name="phoneno_update" value={{user.phoneNumber}}></label>
 <br><br>
-<label for="listing_PriceInput">Price<br><input type="text" id="listing_PriceInput" name="listing_PriceInput"></label>
-<br><br>
-<label for="listing_LengthInput">Length<br><input type="text" id="listing_LengthInput" name="listing_LengthInput"></label>
-<br><br>
-<label for="listing_WidthInput">Width<br><input type="text" id="listing_WidthInput" name="listing_WidthInput"></label>
-<br><br>
-<label for="listing_HeightInput">Height<br><input type="text" id="listing_HeightInput" name="listing_HeightInput"></label>
-<br><br>
-<label for="listing_LongitudeInput">Longitude<br><input type="text" id="listing_LongitudeInput" name="listing_LongitudeInput"></label>
-<br><br>
-<label for="listing_LatitudeInput">Latitude<br><input type="text" id="listing_LatitudeInput" name="listing_LatitudeInput"></label>
-<br><br>
-<label for="listing_AvailableStartInput">Available Start Date<br><input type="text" id="listing_AvailableStartInput" name="listing_AvailableStartInput"></label>
-<br><br>
-<label for="listing_AvailableEndInput">Available End Date<br><input type="text" id="listing_AvailableEndInput" name="listing_AvailableEndInput"></label>
-<br><br>
-<label for='uploadFile'> Select a file: </label>
+<label for="existing_image">
+    Existing image:</label>
+{{#if user.image}}
+<img src="http://localhost:3000/data/uploads/{{user.image}}" alt="Existing image" id="existing_image">
+{{/if}}
+<label for='updateProfilePic'> Select a file: </label>
 <br>
-<input type='file' name="uploadFile" id='uploadFile' accept="image/*">
+<input type='file' name="updateProfilePic" id='updateProfilePic' accept="image/*">
 <br><br>
-<button id="add_file_button">
-Add another file
-</button>
-
 <div id="error" class="error-div hidden">
           {{#if error}}
               <p>{{error}}</p>
