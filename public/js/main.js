@@ -93,7 +93,7 @@ if(review_form) {
       //AJAX Call. Gets the returned HTML data, binds the click event to the link and appends the new todo to the page
       $.ajax(requestConfig).then(function (responseMessage) {
           console.log(responseMessage);
-          if(responseMessage.success === true){
+          if(responseMessage == 'added'){
             document.getElementById("review_added").innerHTML += `<p class="reviewAdded-success"> Review succesfully added! </p>`
             document.getElementById("current_added_reviews").innerHTML += `<li>Rating: ${rating}<br>Comment: ${comment}</li>`;
         }

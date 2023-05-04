@@ -1,7 +1,7 @@
 <h1>Profile Page</h1>
 <hr>
-<br><br>
-<a href="logout">Logout</a> 
+<br>
+
 <h2>Your Information:</h2>
 <div>
 <div id="userInformationTableDiv">
@@ -20,6 +20,7 @@
   </tr>
 </table>
 </div>
+
 <div>
 {{#if user.image}}
 <img src="http://localhost:3000/data/uploads/{{user.image}}" alt="Profile Page">
@@ -28,11 +29,10 @@
 </div>
 <br><br>
 
+<button style="font-size:24px" onclick="window.location.href='/profile/update';">Edit Profile <i class="fa fa-edit"></i></button>
+
 <h2>Reviews on your listings:</h2>
 <p>Cumulative Rating: {{user.rating}} from {{reviews.length}} reviews</p>
-</div>
-<div>
-  <button style="font-size:24px" onclick="window.location.href='/profile/update';">Edit Profile <i class="fa fa-edit"></i></button>
 </div>
 <div>
   <ol>

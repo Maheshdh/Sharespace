@@ -37,7 +37,7 @@ router
     if (userInput.bookingStatusResponse) {
         let bookingStatusResponse = userInput.bookingStatusResponse
         if (bookingStatusResponse == 'Accept' || bookingStatusResponse == 'Deny') {}
-        else {res.render('errors', {errors: 'Booking status can only be "Accep" or "Deny"'})}
+        else {res.render('errors', {errors: 'Booking status can only be "Accept" or "Deny"'})}
         try {
             if (!userInput.bookingID) throw 'Error: Missing Booking ID'
             let bookingID = helpers.checkId(userInput.bookingID)
@@ -45,8 +45,8 @@ router
             if (respondingToBookingRequest.responseUpdated != true) throw 'Could not respond to booking request'
             let bookingsRequested = await getBookingRequestsSent(currentUser.userID)
             let bookingsReceived = await getBookingRequestsReceived(currentUser.userID)
-            return res.render('bookings', {bookingsRequested: bookingsRequested, bookingsReceived: bookingsReceived})
-            // res.redirect('/bookings')
+            // return res.render('bookings', {bookingsRequested: bookingsRequested, bookingsReceived: bookingsReceived})
+            res.redirect('/bookings')
         } catch (e) {
             res.status(500).render('errors', {errors: e})
         }

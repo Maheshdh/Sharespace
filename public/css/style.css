@@ -221,3 +221,10 @@ ul {
     border: 2px green;
     background-color: rgb(186, 226, 198);
 }
+
+
+.logout {
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    color: #c61e00;
+}

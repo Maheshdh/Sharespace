@@ -81,6 +81,7 @@ router
         try {
             let myReview = await addReview(listingID, userID, rating, comment);
             if (!myReview) throw 'Error: Unable to create review'
+            return res.json('added')
         } catch (e) {
             console.log(e);
             return res.json(e);

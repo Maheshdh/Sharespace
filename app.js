@@ -61,6 +61,14 @@ app.get('/', async (req, res) => {
      next()
    }
  })
+
+ app.use('/logout', async (req, res, next) => {
+  if (!req.session.user) {
+    return res.render('landing')
+  } else {
+    next()
+  }
+})
  
 app.use('/users', async (req, res, next) => {
   if (!req.session.user) {
