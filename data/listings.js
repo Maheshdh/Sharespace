@@ -66,7 +66,7 @@ export const createListing = async (
         listing_AvailableStartInput : listing_AvailableStartInput,
         listing_AvailableEndInput : listing_AvailableEndInput,
         reviews: [],
-        // image: imageInput
+        comments: [],
         image: imageInput
     }
     

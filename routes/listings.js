@@ -5,6 +5,7 @@ import { addReview, getReview } from '../data/reviews.js';
 import helpers from '../helpers.js';
 import {getUser} from '../data/users.js';
 import { getBookingRequestsReceived, getBookingRequestsSent, createBookingRequest } from '../data/bookings.js';
+import { addListingCommentOrQuestion } from '../data/comments.js';
 import multer from 'multer';
 const upload = multer({ dest: './public/data/uploads/' });
 
@@ -88,6 +89,31 @@ router
         }
     })
 
+
+router 
+.route('/addCommentOrQuestion')
+.post(async (req, res) => {
+  try {
+    let userInput = req.body
+    if (!req.session.user) {
+      return (res.render('login', {error: 'You need to be logged in to add a comment!'}))
+    }
+    let user = req.session.user
+    let listingID = helpers.checkId(req.body.listing_id_input)
+    if (!userInput.comment_question_input) throw 'Error: Missing Comment'
+    let comment = helpers.checkString(userInput.comment_question_input, 'Comment/Question')
+    let userInfo = await getUser(user.userID)
+    let addingComment = await addListingCommentOrQuestion(listingID, comment, user.userID, `${userInfo.firstName} ${userInfo.lastName}`)
+    if (addingComment.commentAdded == true) {
+      res.redirect(`/listing/${listingID}`)
+    } else throw 'Unable to add comment'
+  } catch (e) {
+    res.render('errors', {error:e})
+  }
+})
+
+
+
 // TODO: FIX THIS -> make appropiate errors
 router
   .route('/:id')
@@ -139,7 +165,11 @@ router
           cumulativeListingReviewStats.totalRating = Math.round(cumulativeListingReviewStats.totalRating*100)/100
           cumulativeListingReviewStats.totalReviews = reviews.length
         }
-        return res.status(200).render('listing',{"listing": listing,"user": listing.userID,"reviews": reviews, "noReviewsFound":noReviewsFound, "cumulativeListingReviewStats": cumulativeListingReviewStats });
+        let noComments = false
+        if (listing.comments.length == 0 ) {
+          noComments = true 
+        }
+        return res.status(200).render('listing',{"listing": listing,"user": listing.userID,"reviews": reviews, "noReviewsFound":noReviewsFound, "cumulativeListingReviewStats": cumulativeListingReviewStats, "comments": listing.comments, "noComments": noComments});
       } catch (error) {
           return res.status(404).render('errors',{"error":error});
       }

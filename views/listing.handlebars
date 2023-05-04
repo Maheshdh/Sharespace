@@ -100,6 +100,29 @@
 
 
 
+<h2>Comments/Questions on the Listing:</h2>
+{{#if noComments}}
+<p>No Comments Yet!</p>
+{{/if}}
+
+<ol id="current_added_reviews">
+  {{#each comments}}
+    <li>Comment: {{this.comment}}<br>Made By: <a href = "/users/{{this.madeByUserID}}">{{this.madeByFullName}}</a></p>
+    </li>
+  {{/each}}
+</ol>
+<br>
+<h2>Leave a Question or a Comment:</h2>
+<div>
+    <form action="/listing/addCommentOrQuestion" method="POST" id="comment_question_input_form">
+    <label for= "listing_id_input"><input type="hidden" id="listing_id_input" name="listing_id_input" value="{{listing._id}}"></label>
+    <label for="comment_question_input">Add your thoughts here:<br> <input type="textarea" name="comment_question_input" id="comment_question_input"></label>
+    <br>
+    <input type="submit">
+    </form>
+</div>
+
+<br><br>
 
 
 
