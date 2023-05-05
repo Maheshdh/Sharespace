@@ -15,6 +15,12 @@
               zoom: 14,
               center: pos
             });
+
+            var markerCurrent = new google.maps.Marker({
+      position: pos,
+      map: map,
+      icon: pos.icon
+    });
   
   var markerPositions = []
   
@@ -27,7 +33,6 @@
 
     {{/each}}
 
-console.log("Makers = ", markerPositions)
 
   // Loop through the markerPositions array and create a marker for each set of coordinates
   for (var i = 0; i < markerPositions.length; i++) {
