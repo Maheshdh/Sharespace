@@ -219,5 +219,60 @@ router
     }
   })
 
+router
+.route('/update/:id')
+.get(async (req, res) => {
+  try{
+    let listingId =req.params.id;
+    listingId = helpers.checkId(listingId,"Listing id");
+    let listingInfo = await getListing(listingId);
+    res.render('updateListing',{listing: listingInfo});
+  }
+  catch(e){
+    return res.render('errors', {error : e} )
+  }
+
+})
+.post(upload.array('uploadFile'), async(req,res,next)=>{
+  try {
+    let userInput = req.body
+    if (!userInput.listing_TitleInput) throw 'Error: Title not provided'
+    if (!userInput.listing_DescriptionInput) throw 'Error: Description not provided'
+    if (!userInput.listing_AddressInput) throw 'Error: Address not provided'
+    if (!userInput.listing_PriceInput) throw 'Error: Price not provided'
+    if (!userInput.listing_LengthInput) throw 'Error: Length not provided'
+    if (!userInput.listing_WidthInput) throw 'Error: Width not provided'
+    if (!userInput.listing_HeightInput) throw 'Error: Height not provided'
+    if (!userInput.listing_AvailableStartInput) throw 'Error: Start Date not provided'
+    if (!userInput.listing_AvailableEndInput) throw 'Error: End Date not provided'
+
+    let userID = helpers.checkId(req.session.user.userID.toString())
+    let titleInput = helpers.checkString(userInput.listing_TitleInput, 'Listing Title')
+    let descriptionInput = helpers.checkString(userInput.listing_DescriptionInput, 'Listing Description')
+    let addressInput = helpers.checkString(userInput.listing_AddressInput, 'Listing Address')
+    let priceInput = helpers.checkPrice(userInput.listing_PriceInput, 'Listing Price')
+    let lenghtInput = helpers.checkDimension(userInput.listing_LengthInput, 'Listing Length')
+    let widthInput = helpers.checkDimension(userInput.listing_WidthInput, 'Listing Width')
+    let heightInput = helpers.checkDimension(userInput.listing_HeightInput, 'Listing Height')
+    let longitudeInput = parseFloat(userInput.listing_LongitudeInput)
+    let latitudeInput = parseFloat(userInput.listing_LatitudeInput)
+    let availableStartInput = helpers.checkDate(userInput.listing_AvailableStartInput, 'Listing Start Date')
+    let availableEndInput = helpers.checkDate(userInput.listing_AvailableEndInput, 'Listing End Date')
+    let imageInput = [];
+    if(req.files){
+        for (let file of req.files) {
+          imageInput.push(file.filename)
+        }
+      }
+
+
+    let creatingListing = await createListing(userID, titleInput, descriptionInput, addressInput, priceInput, lenghtInput, widthInput, heightInput,  latitudeInput, longitudeInput, availableStartInput, availableEndInput, imageInput)
+    if (!creatingListing) throw 'Error: Unable to create Listing'
+    res.render('listingUpdated',{listId: listId});
+  } catch (e) {
+    return res.status(400).render('addListing', {error:e})
+  }
+})
+
 
 export default router;
