@@ -41,14 +41,75 @@
     </tr>
 </table>
 <br>
+<div>
 <form action="/listing/{{listing._id}}" method="POST" id="requesting-booking">
   <input type="submit" id="requestBooking" name="requestBooking" value="Request a Booking!">
 </form>
+</div>
+<br>
+<br>
+<div id = "map_listing">
+
+
+<script type="module">
+
+            if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function(position) {
+            let lat = {{listing.latitude }}
+            let longs = {{ listing.longitude }}
+            
+            var pos = {
+              lat: lat,
+              lng: longs
+            };
+            var map = new google.maps.Map(document.getElementById('map_listing'), {
+              zoom: 14,
+              center: pos
+            });
+  
+
+  
+  var markerPositions = ({position : {lat : lat, lng: longs } });
+
+
+console.log("Marker = ", markerPositions)
+  // Loop through the markerPositions array and create a marker for each set of coordinates
+  for (var i = 0; i < markerPositions.length; i++) {
+    var marker = new google.maps.Marker({
+      position: markerPositions[i].position,
+      map: map,
+      icon: markerPositions[i].icon
+    });
+  }    
+   }, function() {
+            handleLocationError(true, infoWindow, map.getCenter());
+          });
+        } else {
+          handleLocationError(false, infoWindow, map.getCenter());
+        }
+      
+
+      function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+        var errorDiv = document.createElement('div');
+        errorDiv.innerHTML = "Error: The Geolocation service failed. Your browser doesn't support geolocation.";
+        document.body.appendChild(errorDiv);
+      }
+   
+</script>
+
+
+</div>
+
 <br>
 <h2>Pictures:</h2>
 {{#each listing.image}}
 <img src="http://localhost:3000/data/uploads/{{this}}" alt="">
 {{/each}}
+
+
+
+
+
 <br><br>
 
 <h2>Share this Listing!</h2>
@@ -59,6 +120,7 @@
     </a>
 </div>
 <br><br>
+
 <h2>Leave your Review:</h2>
 <div>
     <form id="review_input_form">
@@ -123,6 +185,12 @@
 </div>
 
 <br><br>
+
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD9w7c6s9zaAOX2G2veo-nrwNZ0zZMCkHY&callback=initMap">
+
+
+
+
 
 
 
