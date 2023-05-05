@@ -3,7 +3,7 @@ const router = Router()
 import {createListing, getListing, modifyListing} from '../data/listings.js';
 import { addReview, getReview } from '../data/reviews.js';
 import helpers from '../helpers.js';
-import {getUser} from '../data/users.js';
+import {getUser, saveListing} from '../data/users.js';
 import { getBookingRequestsReceived, getBookingRequestsSent, createBookingRequest } from '../data/bookings.js';
 import { addListingCommentOrQuestion } from '../data/comments.js';
 import { makeSponsoredListings } from '../data/sponsoredListings.js'
@@ -281,6 +281,27 @@ router
     return res.status(400).render('addListing', {error:e})
   }
 })
+
+router
+    .route('/save/:id')
+    .post(async (req,res)=>{
+        try {
+          if (!req.session.user) return res.render('login', {error: 'You must be logged in to save listings!'})
+          let userID = req.session.user.userID
+          let listingID = req.params.id
+
+          userID = helpers.checkId(userID.toString(), 'User ID')
+          listingID = helpers.checkId(listingID,"Listing ID") 
+
+          let savingListing = await saveListing(userID, listingID)
+
+          if (savingListing.saved == true) {
+            return res.render('listingSaved')
+          }
+        } catch (e) {
+            return res.render('errors', {error: e});
+        }
+    })
 
 
 export default router;

@@ -42,6 +42,7 @@ export const createUser = async (
       rating: 0,
       reviews: [],
       role: role,
+      savedListings: [],
       image: imageInput
     }
     
@@ -189,6 +190,7 @@ export const updateUser = async (
       rating: existingUser.rating,
       reviews: existingUser.reviews,
       role: existingUser.role,
+      savedListings: existingUser.savedListings,
       image: imageInput
     }
     console.log(newUser);
@@ -206,4 +208,51 @@ export const updateUser = async (
   else{
     throw "No user with this email to update";
   }
+}
+
+export const saveListing = async (userID, listingID) => {
+  if (!userID || !listingID) throw 'Error: Invalid number of parameters entered (expected 2)'
+  if (!userID) throw 'Error: User ID not provided'
+  if (!listingID) throw 'Error: Listing ID not provided'
+
+  userID = helpers.checkId(userID, 'User ID')
+  listingID = helpers.checkId(listingID, 'Listing ID')
+
+  let userCollection = await users()
+  let userInfo = await userCollection.findOne({_id: new ObjectId(userID)})
+  
+  let previouslySavedListings = userInfo.savedListings
+  if (previouslySavedListings.includes(listingID)) {throw 'You have saved this listing already!'}
+
+  let savingListing = await userCollection.findOneAndUpdate(
+    {_id: new ObjectId(userID)},
+    {$push : {savedListings: listingID}}
+    )
+  
+  return ({saved: true})
+}
+
+export const unsaveListing = async (userID, listingID) => {
+  if (!userID || !listingID) throw 'Error: Invalid number of parameters entered (expected 2)'
+  if (!userID) throw 'Error: User ID not provided'
+  if (!listingID) throw 'Error: Listing ID not provided'
+
+  userID = helpers.checkId(userID, 'User ID')
+  listingID = helpers.checkId(listingID, 'Listing ID')
+
+  let userCollection = await users()
+  let userInfo = await userCollection.findOne({_id: new ObjectId(userID)})
+  
+  let previouslySavedListings = userInfo.savedListings
+  let index = previouslySavedListings.indexOf(listingID)
+  if (index > -1) {
+    previouslySavedListings.splice(index, 1)
+  } else throw 'You did not have this listing saved'
+
+  let unsavingListing = await userCollection.findOneAndUpdate(
+    {_id: new ObjectId(userID)},
+    {$set : {savedListings: previouslySavedListings}}
+    )
+  
+  return ({unsaved: true})
 }
