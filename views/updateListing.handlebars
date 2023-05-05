@@ -2,7 +2,7 @@
 <hr>
 
 <div class=" addListing-form">
-<form action="/update/{{listing._id}}" method="POST" id="update_listing_form" enctype="multipart/form-data">
+<form action="/listing/update/{{listing._id}}" method="POST" id="update_listing_form" enctype="multipart/form-data">
 <label for="listing_Update_TitleInput">Title<br><input type="text" id="listing_Update_TitleInput" name="listing_Update_TitleInput" value={{listing.title}}></label>
 <br><br>
 <label for="listing_Update_DescriptionInput">Description<br><input type="text" id="listing_Update_DescriptionInput" name="listing_Update_DescriptionInput" value={{listing.description}}></label>
@@ -33,7 +33,7 @@
 
 <br><br>
 
-<label for='uploadFile'>Select new images<br><input type='file' name="uploadFile" id='uploadFile' accept="image/*" multiple></label>
+<label for='uploadFile'>Replace images:<br><input type='file' name="uploadFile" id='uploadFile' accept="image/*" multiple></label>
 {{!-- <label for="uploadFiles"></label> --}}
 
 
