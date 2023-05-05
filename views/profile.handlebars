@@ -73,6 +73,7 @@
     <li>
       <h3><a href="/listing/{{this._id}}">{{this.title}}</a></h3>
       <p>{{this.description}}</p>
+      <button style="font-size:16px; width:100px; height:50px;" onclick="window.location.href='/listing/update/{{this._id}}';">Edit Listing <i class="fa fa-edit-1"></i></button>
     </li>
   {{/each}}
 </ul>
