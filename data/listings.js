@@ -84,16 +84,41 @@ export const createListing = async (
 }
 
 export const deleteListing = async (
-    listingID
+    listingID,
+    userID
 ) => {
-    listingID = helpers.checkId(listingID);
+    if (!listingID || !userID) throw 'Error: Invalid number of parametes entered (Expected 2)'
+    if (!listingID) throw 'Error: Listing ID missing'
+    if (!userID) throw 'Error: User ID missing'
+
+    userID = helpers.checkId(userID, 'User ID')
+    listingID = helpers.checkId(listingID, 'User ID');
+    
     const listingsCollection = await listings();
-    const deletionInfo = await listingsCollection.findOneAndDelete({
-      _id: new ObjectId(listingID)
-    });
-    if (deletionInfo.lastErrorObject.n === 0)
-      throw [404, `Could not delete listing with id of ${listingID}`];
-    return {...deletionInfo.value, deleted: true};
+    let userCollection = await users()
+
+    let listingInfo = await getListing(listingID)
+    let userInfo = await userCollection.findOne({_id: new ObjectId(userID)})
+    let userInfoListingArray = userInfo.listings
+
+    if (userInfoListingArray.includes(listingID)) {
+      let index = userInfoListingArray.indexOf(listingID)
+      if (index > -1) {
+        userInfoListingArray.splice(index, 1)
+      }
+    }
+
+    if (userID != listingInfo.userID) throw 'Error: This listing does not belong to you. You cannot delete it'
+
+    const deletionInfo = await listingsCollection.findOneAndDelete({_id: new ObjectId(listingID)});
+    if (deletionInfo.lastErrorObject.n === 0) throw `Could not delete listing with id of ${listingID}`;
+
+    let updatingUserInfo = await userCollection.findOneAndUpdate(
+      {_id: new ObjectId(userID)},
+      {$set: {listings: userInfoListingArray}} //Updated listing
+      )
+    
+    return {deleted: true};
 }
 
 export const modifyListing = async (

@@ -20,11 +20,12 @@ router
 router
 .route('/:id')
 .get(async (req, res) => {
+    try {
     let userID = helpers.checkId(req.params.id, 'User ID');
     let userInfo = await getUser(userID)
     let currentUserListings = userInfo.listings
     let reviews = userInfo.reviews
-    try {
+    
         if (currentUserListings.length == 0){
             let noListings = 'User has no listings!'
             return res.render('user', {user:userInfo, reviews:[], noListings: noListings})

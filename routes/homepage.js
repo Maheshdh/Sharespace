@@ -7,11 +7,15 @@ router.get('/', async (req, res) => {
     try {
         const listings = await getAllListings();
         let sponsoredListings = await makeSponsoredListings()
-        let atLeastOneSponsoredListing = true
+        let noSponsoredListings = false
+        let noListings = false
         if (sponsoredListings.length == 0) {
-            atLeastOneSponsoredListing = false
+            noSponsoredListings = true
         }
-        return res.render('homepage', {listings: listings, sponsoredListings: sponsoredListings, atLeastOneSponsoredListing: atLeastOneSponsoredListing});
+        if (listings.length == 0) {
+            noListings = true
+        }
+        return res.render('homepage', {listings: listings, sponsoredListings: sponsoredListings, noListings: noListings, noSponsoredListings: noSponsoredListings});
     } catch (e) {
         res.status(500).send(e);
       }  });

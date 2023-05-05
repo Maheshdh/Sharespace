@@ -19,10 +19,19 @@
   <p id="filterError"></p>
 </div>
 
+<div>
+{{#if noListings}}
+<br><br>
+<p>We currently have no listings! <a href="/listing/add">Add a listing now</a></p>
+{{/if}}
+</div>
+
 <div class="sponsoredListings">
-{{#if atLeastOneSponsoredListing}}
 <p>Sponsored Listings:</p>
 <ul class="sponsoredListings">
+  {{#if noSponsoredListings}}
+  <p>We currently have no sponsored listings! <a href="/profile">Go to your profile page to boost your listing! </a></p>
+  {{/if}}
   {{#each sponsoredListings}}
     <li class="sponsoredListings">
       <h2><a href="/listing/{{this._id}}">{{this.title}}</a></h2>
@@ -37,7 +46,6 @@
     </li>
   {{/each}}
 </ul>
-{{/if}}
 </div>
 
 

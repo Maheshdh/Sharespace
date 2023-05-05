@@ -76,6 +76,10 @@
       <button style="font-size:16px; width:150px; height:20px;" onclick="window.location.href='/listing/update/{{this._id}}';">Edit Listing <i class="fa fa-edit-1"></i></button>
       <br><br>
       <button style="font-size:16px; width:150px; height:20px;" onclick="window.location.href='/profile/boostListing/{{this._id}}';">Boost Listing <i class="fa fa-edit-1"></i></button>
+      <br><br>
+      <form action="/listing/delete/{{this._id}}" method="POST" id="delete-button">
+        <button class="delete-listing-button" type="submit" id="delete-button">Delete Listing <i class="fa fa-edit-1"></i></button>
+      </form>
     </li>
   {{/each}}
 </ul>

@@ -1,6 +1,6 @@
 import {Router} from 'express'
 const router = Router()
-import {createListing, getListing, modifyListing} from '../data/listings.js';
+import {createListing, getListing, modifyListing, deleteListing} from '../data/listings.js';
 import { addReview, getReview } from '../data/reviews.js';
 import helpers from '../helpers.js';
 import {getUser, saveListing} from '../data/users.js';
@@ -303,5 +303,29 @@ router
         }
     })
 
+
+router
+.route('/delete/:id')
+.post(async (req,res)=>{
+    try {
+      if (!req.session.user) return res.render('login', {error: 'You must be logged in to delete a listing!'})
+      let userID = req.session.user.userID
+      let listingID = req.params.id
+
+      userID = helpers.checkId(userID.toString(), 'User ID')
+      listingID = helpers.checkId(listingID,"Listing ID") 
+
+      let listingInfo = await getListing(listingID)
+      if (userID != listingInfo.userID) throw 'Error: This listing does not belong to you. You cannot delete it'
+
+      let deletingListing = await deleteListing(listingID, userID)
+
+      if (deletingListing.deleted == true) {
+        return res.redirect('/profile')
+      }
+    } catch (e) {
+        return res.render('errors', {error: e});
+    }
+})
 
 export default router;

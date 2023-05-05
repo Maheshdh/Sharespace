@@ -109,7 +109,7 @@ router
         let listingID = helpers.checkId(req.params.id, 'Listing ID')
 
         if (!userInput.sponsorPayInput) throw 'Error: New pay not provided'
-        let sponsorPayInput = helpers.checkPrice(userInput.sponsorPayInput, 'Sponsored Payment')
+        let sponsorPayInput = helpers.checkSponsorPrice(userInput.sponsorPayInput.toString(), 'Sponsored Payment')
         
         let listingInfo = await getListing(listingID)
 

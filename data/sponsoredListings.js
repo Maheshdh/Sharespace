@@ -7,7 +7,7 @@ export const addSponsoredPrice = async (listingID, pay) => {
     if (!listingID) throw 'Error: listing ID is not provided'
 
     listingID = helpers.checkId(listingID, 'Listing ID')
-    pay = helpers.checkSponsorPrice(pay, 'Sponsored Payment')
+    pay = helpers.checkSponsorPrice(pay.toString(), 'Sponsored Payment')
 
     let listingCollection = await listings()
     let updatingListing = await listingCollection.findOneAndUpdate(
