@@ -3,6 +3,8 @@
 <br><br>
 
 <h2>Listing Description:</h2>
+<div class = "grid-container">
+<div>
 <table id="listingTable">
     <tr>
         <td>Author</td>
@@ -43,16 +45,21 @@
     </tr>
 </table>
 <br>
-<div>
-<form action="/listing/{{listing._id}}" method="POST" id="requesting-booking">
-  <input type="submit" id="requestBooking" name="requestBooking" value="Request a Booking!">
-</form> <br>
-<form action="/listing/save/{{listing._id}}" method="POST" id="save-listing">
-  <input type="submit" id="saveListing" name="saveListing" value="Save this Listing">
-</form>
+<div class = "grid-container">
+  <div>
+  <form action="/listing/{{listing._id}}" method="POST" id="requesting-booking">
+    <input class="listing-buttons" type="submit" id="requestBooking" name="requestBooking" value="Request a Booking!">
+  </form>
+  </div>
+  <div>
+  <form action="/listing/save/{{listing._id}}" method="POST" id="save-listing">
+    <input class="listing-buttons" type="submit" id="saveListing" name="saveListing" value="Save this Listing">
+  </form>
+  </div>
 </div>
-<br>
-<br>
+
+</div>
+
 <div id = "map_listing">
 
 
@@ -103,6 +110,7 @@ console.log("Marker = ", markerPositions)
 </script>
 
 
+</div>
 </div>
 
 <br>

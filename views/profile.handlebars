@@ -3,7 +3,7 @@
 <br>
 
 <h2>Your Information:</h2>
-<div>
+<div class="grid-container">
 <div id="userInformationTableDiv">
 <table id="userInformationTable">
   <tr>
@@ -18,7 +18,8 @@
     <td>Phone Number</td>
     <td>{{user.phoneNumber}}</td>
   </tr>
-</table>
+</table><br>
+<button style="font-size:24px" onclick="window.location.href='/profile/update';">Edit Profile <i class="fa fa-edit"></i></button>
 </div>
 
 <div>
@@ -27,10 +28,9 @@
 {{/if}}
 </div>
 </div>
+
+
 <br><br>
-
-<button style="font-size:24px" onclick="window.location.href='/profile/update';">Edit Profile <i class="fa fa-edit"></i></button>
-
 <h2>Reviews on your listings:</h2>
 <p>Cumulative Rating: {{user.rating}} from {{reviews.length}} reviews</p>
 </div>
@@ -74,9 +74,9 @@
       <h3><a href="/listing/{{this._id}}">{{this.title}}</a></h3>
       <p>{{this.description}}</p>
       <p><img src="http://localhost:3000/data/uploads/{{this.image.[1]}}" alt="Profile Page"></p>
-      <button style="font-size:16px; width:150px; height:20px;" onclick="window.location.href='/listing/update/{{this._id}}';">Edit Listing <i class="fa fa-edit-1"></i></button>
+      <button class="profile-buttons" onclick="window.location.href='/listing/update/{{this._id}}';">Edit Listing <i class="fa fa-edit-1"></i></button>
       <br><br>
-      <button style="font-size:16px; width:150px; height:20px;" onclick="window.location.href='/profile/boostListing/{{this._id}}';">Boost Listing <i class="fa fa-edit-1"></i></button>
+      <button class="profile-buttons" onclick="window.location.href='/profile/boostListing/{{this._id}}';">Boost Listing <i class="fa fa-edit-1"></i></button>
       <br><br>
       <form action="/listing/delete/{{this._id}}" method="POST" id="delete-button">
         <button class="delete-listing-button" type="submit" id="delete-button">Delete Listing <i class="fa fa-edit-1"></i></button>
