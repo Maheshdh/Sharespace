@@ -4,6 +4,7 @@ import helpers from '../helpers.js';
 import {users} from '../config/mongoCollections.js'
 import { getListing } from '../data/listings.js';
 import { updateUser } from '../data/users.js';
+import { addSponsoredPrice } from '../data/sponsoredListings.js'
 import multer from 'multer';
 const upload = multer({ dest: './public/data/uploads/' });
 
@@ -69,5 +70,42 @@ router
         return res.status(400).render('profileUpdate',{error: e,user: currentUser});
     }
 })
+
+router
+.route('/boostListing/:id')
+.get(async (req, res) => {
+    try {
+        let currentUser = req.session.user
+        let listingID = req.params.id
+
+        currentUser = helpers.checkId(currentUser.userID, 'User ID')
+        listingID = helpers.checkId(listingID, 'Listing ID')
+
+        let listingInfo = await getListing(listingID)
+        res.render('sponsorListing', {listing: listingInfo})
+    } catch (e) {
+        res.render('errors', {error:e})
+    }
+
+})
+.post(async (req, res) => {
+    try {
+        let userInput = req.body
+        let listingID = helpers.checkId(req.params.id, 'Listing ID')
+
+        if (!userInput.sponsorPayInput) throw 'Error: New pay not provided'
+        let sponsorPayInput = helpers.checkPrice(userInput.sponsorPayInput, 'Sponsored Payment')
+        
+        let listingInfo = await getListing(listingID)
+
+        let addingSponsorPay = await addSponsoredPrice(listingID, sponsorPayInput)
+        if (addingSponsorPay.added == true) {
+            res.render('sponsorListing', {success: true, listing: addingSponsorPay.listing})
+        }
+    } catch (e) {
+        res.render('errors', {error: e})
+    }
+})
+
 
 export default router

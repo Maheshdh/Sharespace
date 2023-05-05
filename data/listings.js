@@ -67,7 +67,8 @@ export const createListing = async (
         listing_AvailableEndInput : listing_AvailableEndInput,
         reviews: [],
         comments: [],
-        image: imageInput
+        image: imageInput,
+        sponsorPay: 0
     }
     
     let insertedListing = await listingsCollection.insertOne(listing)

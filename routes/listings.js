@@ -6,6 +6,7 @@ import helpers from '../helpers.js';
 import {getUser} from '../data/users.js';
 import { getBookingRequestsReceived, getBookingRequestsSent, createBookingRequest } from '../data/bookings.js';
 import { addListingCommentOrQuestion } from '../data/comments.js';
+import { makeSponsoredListings } from '../data/sponsoredListings.js'
 import multer from 'multer';
 const upload = multer({ dest: './public/data/uploads/' });
 
@@ -169,7 +170,8 @@ router
         if (listing.comments.length == 0 ) {
           noComments = true 
         }
-        return res.status(200).render('listing',{"listing": listing,"user": listing.userID,"reviews": reviews, "noReviewsFound":noReviewsFound, "cumulativeListingReviewStats": cumulativeListingReviewStats, "comments": listing.comments, "noComments": noComments});
+        let sponsoredListings = await makeSponsoredListings()
+        return res.status(200).render('listing',{"sponsoredListings":sponsoredListings, "listing": listing,"user": listing.userID,"reviews": reviews, "noReviewsFound":noReviewsFound, "cumulativeListingReviewStats": cumulativeListingReviewStats, "comments": listing.comments, "noComments": noComments});
       } catch (error) {
           return res.status(404).render('errors',{"error":error});
       }

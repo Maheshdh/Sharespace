@@ -18,6 +18,29 @@
 <div>
   <p id="filterError"></p>
 </div>
+
+
+<ul class="sponsoredListings">
+  {{#if atLeastOneSponsoredListing}}
+  <p>Sponsored Listings:</p>
+  {{/if}}
+  {{#each sponsoredListings}}
+    <li class="sponsoredListings">
+      <h2><a href="/listing/{{this._id}}">{{this.title}}</a></h2>
+      <p>{{this.description}}</p>
+      <p>Price: {{this.price}}</p>
+      <p class="listingPrice" hidden>{{this.price}}</p>
+      <p>Start Date: {{this.listing_AvailableStartInput}}</p>
+      <p>End Date: {{this.listing_AvailableEndInput}}</p>
+      <p class="listingVolume" hidden>{{this.volume}}</p>
+      <p class="listingAvailableStartInput" hidden>{{this.listing_AvailableStartInput}}</p>
+      <p class="listingAvailableEndInput" hidden>{{this.listing_AvailableEndInput}}</p>
+    </li>
+  {{/each}}
+</ul>
+
+
+
 <ul>
   {{#each listings}}
     <li class="homepageListings">

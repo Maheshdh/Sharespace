@@ -72,7 +72,8 @@
   {{#each listings}}
     <li>
       <h3><a href="/listing/{{this._id}}">{{this.title}}</a></h3>
-      <p>{{this.description}}</p>
+      <p>{{this.description}}</p><br>
+      <a href= "/profile/boostListing/{{this._id}}">Click here to Boost this listing!</a>
     </li>
   {{/each}}
 </ul>

@@ -96,6 +96,16 @@ const exportedMethods = {
         return price
       },
 
+      checkSponsorPrice(price, varName) {
+        if (!price) throw `Error: You must provide a ${varName}`
+        if (price.toString().trim() == '') throw `Error: You must provide a ${varName}`
+        price = Number(price)
+        if (isNaN(price) == true) throw `Error: ${varName} must be a number`
+        if (price <= 0) throw `Error: ${varName} should be greater than 0`
+        if (price > 1000000000) throw `Error: ${varName} should be lesser than 1,000,000,000`
+        return price
+      },
+
       checkDimension(dimension, varName) {
         if (!dimension) throw `Error: You must provide a ${varName}`
         if (dimension.trim() == '') throw `Error: You must provide a ${varName}`
