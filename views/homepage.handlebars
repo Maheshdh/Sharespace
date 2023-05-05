@@ -19,11 +19,10 @@
   <p id="filterError"></p>
 </div>
 
-
+<div class="sponsoredListings">
+{{#if atLeastOneSponsoredListing}}
+<p>Sponsored Listings:</p>
 <ul class="sponsoredListings">
-  {{#if atLeastOneSponsoredListing}}
-  <p>Sponsored Listings:</p>
-  {{/if}}
   {{#each sponsoredListings}}
     <li class="sponsoredListings">
       <h2><a href="/listing/{{this._id}}">{{this.title}}</a></h2>
@@ -38,6 +37,8 @@
     </li>
   {{/each}}
 </ul>
+{{/if}}
+</div>
 
 
 
