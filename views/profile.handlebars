@@ -64,7 +64,7 @@
 </div>
 <br><br>
 
-<h2>Your Listings:</h2>
+<h2>Your Uploaded Listings:</h2>
 {{#if noListings}}
 <p>You have no listings!</p>
 {{/if}}
@@ -81,4 +81,28 @@
 </ul>
 <br><br>
 
+
+<h2>Your Saved Listings:</h2>
+{{#if noSavedListings}}
+<p>You have no saved listings!</p>
+{{/if}}
+<ul>
+  {{#each savedListings}}
+    <li class="homepageListings">
+      <h2><a href="/listing/{{this._id}}">{{this.title}}</a></h2>
+      <p>{{this.description}}</p>
+      <p>Price: {{this.price}}</p>
+      <p class="listingPrice" hidden>{{this.price}}</p>
+      <p>Start Date: {{this.listing_AvailableStartInput}}</p>
+      <p>End Date: {{this.listing_AvailableEndInput}}</p>
+      <p class="listingVolume" hidden>{{this.volume}}</p>
+      <p class="listingAvailableStartInput" hidden>{{this.listing_AvailableStartInput}}</p>
+      <p class="listingAvailableEndInput" hidden>{{this.listing_AvailableEndInput}}</p>
+      
+      <form action="/profile/unsave/{{this._id}}" method="POST" id="unsave-button">
+      <button style="font-size:16px; width:150px; height:20px;" type="submit" id="unsave-button">Unsave Listing <i class="fa fa-edit-1"></i></button>
+      </form>
+    </li>
+  {{/each}}
+</ul>
 

@@ -3,7 +3,7 @@ const router = Router()
 import helpers from '../helpers.js';
 import {users} from '../config/mongoCollections.js'
 import { getListing } from '../data/listings.js';
-import { updateUser } from '../data/users.js';
+import { getUser, updateUser, unsaveListing } from '../data/users.js';
 import { addSponsoredPrice } from '../data/sponsoredListings.js'
 import multer from 'multer';
 const upload = multer({ dest: './public/data/uploads/' });
@@ -12,20 +12,35 @@ router
 .route('/')
 .get(async (req, res) => {
     let currentUser = req.session.user
-    let currentUserListings = currentUser.listings
+    let currentUserID = req.session.user.userID
+    currentUserID = helpers.checkId(currentUserID, 'User ID')
+    let currentUserInfo = await getUser(currentUserID)
+    let currentUserListings = currentUserInfo.listings
+    let currentUserSavedListings = currentUserInfo.savedListings
     let reviews = currentUser.reviews
     try {
-        if (currentUserListings.length == 0){
-            let noListings = 'You have no listings!'
-            return res.render('profile', {user:currentUser, reviews:[], noListings: noListings})
-        }
-        
         let allListings = []
+        let savedListings = []
+        let noListings = false
+        let noSavedListings = false
+
+        if (currentUserListings.length == 0) {
+            noListings = true
+        }
+        if (currentUserSavedListings.length == 0) {
+            noSavedListings = true
+        }
+
         for (let listing of currentUserListings) {
             let listingToBeAdded = await getListing(listing)
             allListings.push(listingToBeAdded)
         }
-        return res.render('profile', {user:currentUser, listings: allListings, reviews: reviews})
+        for (let listing of currentUserSavedListings) {
+            let listingToBeAdded = await getListing(listing)
+            savedListings.push(listingToBeAdded)
+        }
+
+        return res.render('profile', {user:currentUser, listings: allListings, reviews: reviews, savedListings: savedListings, noListings: noListings, noSavedListings: noSavedListings})
     } catch (e) {
         res.status(500).send(e)
     }
@@ -107,5 +122,25 @@ router
     }
 })
 
+router
+.route('/unsave/:id')
+.post(async (req, res) => {
+    try {
+        let userID = req.session.user.userID
+        let listingID = req.params.id
+
+        userID = helpers.checkId(userID.toString(), 'User ID')
+        listingID = helpers.checkId(listingID,"Listing ID") 
+
+        let unsavingListing = await unsaveListing(userID, listingID)
+
+        if (unsavingListing.unsaved == true) {
+          return res.redirect('/profile')
+        }
+      } catch (e) {
+          return res.render('errors', {error: e});
+      }
+
+})
 
 export default router

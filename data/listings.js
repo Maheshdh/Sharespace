@@ -97,22 +97,27 @@ export const deleteListing = async (
 }
 
 export const modifyListing = async (
-    listingID,
-    address,
-    description,
-    price,
-    length,
-    width,
-    height,
-    latitude,
-    longitude,
-    listing_AvailableStartInput,
-    listing_AvailableEndInput
+  listingID,
+  title,
+  description,
+  address,
+  price,
+  length,
+  width,
+  height,
+  latitude,
+  longitude,
+  listing_AvailableStartInput,
+  listing_AvailableEndInput,
+  imageInput
 ) => {
 
-    if (!address || !description || !price || !length || !width || !height|| !pictures|| !latitude|| !longitude|| !availability) throw 'Error: Invalid number of parameters entered (Expected 5)'
-    if (!address) throw 'Error: "address" parameter not entered'
+    if (!listingID || !title || !address || !description || !price || !length || !width || !height || !latitude|| !longitude|| !listing_AvailableStartInput || !listing_AvailableEndInput) throw 'Error: Invalid number of parameters entered (Expected 10)'
+      
+    if (!listingID) throw 'Error: "listingID" parameter not entered'
+    if (!title) throw 'Error: "title" parameter not entered'
     if (!description) throw 'Error: "description" parameter not entered'
+    if (!address) throw 'Error: "address" parameter not entered'
     if (!price) throw 'Error: "price" parameter not entered'
     if (!length) throw 'Error: "length" parameter not entered'
     if (!width) throw 'Error: "width" parameter not entered'
@@ -121,41 +126,48 @@ export const modifyListing = async (
     if (!longitude) throw 'Error: "longitude" parameter not entered'
     if (!listing_AvailableStartInput) throw 'Error: "listing_AvailableStartInput" parameter not entered'
     if (!listing_AvailableEndInput) throw 'Error: "listing_AvailableEndInput" parameter not entered'
-   
-    listingID = helpers.checkId(listingID, 'listingID') 
-    address = helpers.checkString(address, 'address')
+  
+    title = helpers.checkString(title, 'title')
     description = helpers.checkString(description, 'description')
-    price = helpers.checkPrice(price, 'price')
-    length = helpers.checkDimensions(length, 'length')
-    width = helpers.checkDimensions(width, 'width')
-    height = helpers.checkDimensions(height, 'height')
+    address = helpers.checkString(address, 'address')
+    price = helpers.checkPrice(price.toString(), 'price')
+    length = helpers.checkDimension(length.toString(), 'length')
+    width = helpers.checkDimension(width.toString(), 'width')
+    height = helpers.checkDimension(height.toString(), 'height')
     listing_AvailableStartInput = helpers.checkDate(listing_AvailableStartInput,"Start Date")
     listing_AvailableEndInput = helpers.checkDate(listing_AvailableEndInput,"End Date")
 
-    let updatedListing = {
-        address : address,
-        description : description,
-        price : price,
-        length : length,
-        width : width,
-        height : height,
-        volume : volume,
-        latitude : latitude,
-        longitude : longitude,
-        listing_AvailableStartInput : listing_AvailableStartInput,
-        listing_AvailableEndInput : listing_AvailableEndInput
-  
-      };
-      let listingsCollection = await listings()
-      const updateInfo = await listingsCollection.findOneAndReplace(
-        {_id: new ObjectId(listingID)},
-        updatedListing,
-        {returnDocument: 'after'}
-      );
-      if (updateInfo.lastErrorObject.n === 0)
-        throw [404, `Error: Update failed! Could not update listing with id ${listingID}`];
-      return updateInfo.value;
+    let volume = length * width * height;
 
+    let listingsCollection = await listings()
+
+    let oldListing = await getListing(listingID)
+
+    let newListing = {
+      userID: oldListing.userID,
+      title: title,
+      address : address,
+      description : description,
+      price : price,
+      length : length,
+      width : width,
+      height : height,
+      volume : volume,
+      latitude : latitude,
+      longitude : longitude,
+      listing_AvailableStartInput : listing_AvailableStartInput,
+      listing_AvailableEndInput : listing_AvailableEndInput,
+      reviews: oldListing.reviews,
+      comments: oldListing.comments,
+      image: imageInput,
+      sponsorPay: oldListing.sponsorPay
+    }
+
+    let updatingListing = await listingsCollection.findOneAndUpdate(
+      {_id: new ObjectId(listingID)},
+      {$set: newListing})
+    
+    return ({updated: true});
 }
 
 export const getAllListings = async() => {
