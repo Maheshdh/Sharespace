@@ -6,7 +6,9 @@
 <table id="listingTable">
     <tr>
         <td>Author</td>
-        <td><a href = "/users/{{user}}">Link to user</a></td>
+        <td><a href = "/users/{{userInfo._id}}">{{userInfo.firstName}} {{userInfo.lastName}} </a><br>
+            (Rated {{userInfo.rating}} from {{userInfo.reviews.length}} reviews)
+        </a></td>
     </tr>
     <tr>
         <td>Address</td>
@@ -14,7 +16,7 @@
     </tr>
     <tr>
         <td>Price</td>
-        <td>{{listing.price}}</td>
+        <td>${{listing.price}} per month</td>
     </tr>
     <tr>
         <td>Available Space</td>
@@ -23,7 +25,7 @@
                 <li>Length: {{listing.length}}</li>
                 <li>Width: {{listing.width}}</li>
                 <li>Height: {{listing.height}}</li>
-                <li>Volume: {{listing.volume}}</li>
+                <li>Volume: {{listing.volume}} cubic feet</li>
             </ul>
         </td>
     </tr>
@@ -148,10 +150,10 @@ console.log("Marker = ", markerPositions)
 
 <br><br>
 
-<h2>Rating:</h2>
-<p>{{cumulativeListingReviewStats.totalRating}} from {{cumulativeListingReviewStats.totalReviews}} Reviews</p>
+
+<h2>Listing Reviews:</h2>
+<p>Cumulative Rating: {{cumulativeListingReviewStats.totalRating}} from {{cumulativeListingReviewStats.totalReviews}} Reviews</p>
 <br>
-<h2>Reviews:</h2>
 {{#if noReviewsFound}}
 <p>No Reviews Yet!</p>
 {{/if}}

@@ -171,7 +171,8 @@ router
           noComments = true 
         }
         let sponsoredListings = await makeSponsoredListings()
-        return res.status(200).render('listing',{"sponsoredListings":sponsoredListings, "listing": listing,"user": listing.userID,"reviews": reviews, "noReviewsFound":noReviewsFound, "cumulativeListingReviewStats": cumulativeListingReviewStats, "comments": listing.comments, "noComments": noComments});
+        let userInfo = await getUser(listing.userID)
+        return res.status(200).render('listing',{"sponsoredListings":sponsoredListings, "listing": listing,"userInfo": userInfo,"reviews": reviews, "noReviewsFound":noReviewsFound, "cumulativeListingReviewStats": cumulativeListingReviewStats, "comments": listing.comments, "noComments": noComments});
       } catch (error) {
           return res.status(404).render('errors',{"error":error});
       }

@@ -36,12 +36,11 @@
     <li class="sponsoredListings">
       <h2><a href="/listing/{{this._id}}">{{this.title}}</a></h2>
       <p>{{this.description}}</p>
-      <p>Price: {{this.price}}</p>
-      <p class="listingPrice" hidden>{{this.price}}</p>
+      <p>Price: ${{this.price}} per month</p>
+      <p>Volume: {{this.volume}} cubic feet</p>
       <p>Start Date: {{this.listing_AvailableStartInput}}</p>
       <p>End Date: {{this.listing_AvailableEndInput}}</p>
       <p><img src="http://localhost:3000/data/uploads/{{this.image.[1]}}" alt="Profile Page"></p>
-      <p class="listingVolume" hidden>{{this.volume}}</p>
       <p class="listingAvailableStartInput" hidden>{{this.listing_AvailableStartInput}}</p>
       <p class="listingAvailableEndInput" hidden>{{this.listing_AvailableEndInput}}</p>
     </li>
@@ -109,7 +108,8 @@ console.log("Makers = ", markerPositions)
     <li class="homepageListings">
       <h2><a href="/listing/{{this._id}}">{{this.title}}</a></h2>
       <p>{{this.description}}</p>
-      <p>Price: {{this.price}}</p>
+      <p>Price: ${{this.price}} month</p>
+      <p>Volume: {{this.volume}} cubic feet</p>
       <p class="listingPrice" hidden>{{this.price}}</p>
       <p>Start Date: {{this.listing_AvailableStartInput}}</p>
       <p>End Date: {{this.listing_AvailableEndInput}}</p>
