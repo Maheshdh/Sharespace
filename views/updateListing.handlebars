@@ -1,0 +1,54 @@
+<h1>Edit Lisiting</h1>
+<hr>
+
+<div class=" addListing-form">
+<form action="/update/{{listing._id}}" method="POST" id="update_listing_form" enctype="multipart/form-data">
+<label for="listing_Update_TitleInput">Title<br><input type="text" id="listing_Update_TitleInput" name="listing_Update_TitleInput" value={{listing.title}}></label>
+<br><br>
+<label for="listing_Update_DescriptionInput">Description<br><input type="text" id="listing_Update_DescriptionInput" name="listing_Update_DescriptionInput" value={{listing.description}}></label>
+<br><br>
+<label for="listing_Update_AddressInput">Address<br><input type="address" id="listing_Update_AddressInput" name="listing_Update_AddressInput" value={{listing.address}}></label>
+<br><br>
+<label for="listing_Update_PriceInput">Price<br><input type="text" id="listing_Update_PriceInput" name="listing_Update_PriceInput" value={{listing.price}}></label>
+<br><br>
+<label for="listing_Update_LengthInput">Length<br><input type="text" id="listing_Update_LengthInput" name="listing_Update_LengthInput" value={{listing.length}}></label>
+<br><br>
+<label for="listing_Update_WidthInput">Width<br><input type="text" id="listing_Update_WidthInput" name="listing_Update_WidthInput" value={{listing.width}}></label>
+<br><br>
+<label for="listing_Update_HeightInput">Height<br><input type="text" id="listing_Update_HeightInput" name="listing_Update_HeightInput" value={{listing.height}}></label>
+<br><br>
+<label for="listing_Update_LongitudeInput">Longitude<br><input type="text" id="listing_Update_LongitudeInput" name="listing_Update_LongitudeInput" value={{listing.longitude}}></label>
+<br><br>
+<label for="listing_Update_LatitudeInput">Latitude<br><input type="text" id="listing_Update_LatitudeInput" name="listing_Update_LatitudeInput" value={{listing.latitude}}></label>
+<br><br>
+<label for="listing_Update_AvailableStartInput">Available Start Date<br><input type="text" id="listing_Update_AvailableStartInput" name="listing_Update_AvailableStartInput" value={{listing.listing_AvailableStartInput}}></label>
+<br><br>
+<label for="listing_Update_AvailableEndInput">Available End Date<br><input type="text" id="listing_Update_AvailableEndInput" name="listing_Update_AvailableEndInput" value={{listing.listing_AvailableEndInput}}></label>
+<br><br>
+<label for="existing_image">
+    Existing image:</label>
+{{#each listing.image}}
+<img src="http://localhost:3000/data/uploads/{{this.image}}" alt="Existing image" id="existing_image">
+{{/each}}
+
+<br>
+
+<label for='uploadFile'>Select a file<br><input type='file' name="uploadFile" id='uploadFile' accept="image/*" multiple></label>
+{{!-- <label for="uploadFiles"></label> --}}
+
+
+<div id="error" class="error-div hidden">
+          {{#if error}}
+              <p>{{error}}</p>
+          {{/if}}
+</div>
+<div class="error-div hidden">
+    <p id="error_js"></p>
+</div>
+<br><br>
+<input type="submit" class="submit-button">
+<br><br>
+
+</form>
+</div>
+<hr>
