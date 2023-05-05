@@ -26,14 +26,14 @@
 <label for="listing_Update_AvailableEndInput">Available End Date<br><input type="text" id="listing_Update_AvailableEndInput" name="listing_Update_AvailableEndInput" value={{listing.listing_AvailableEndInput}}></label>
 <br><br>
 <label for="existing_image">
-    Existing image:</label>
+    Existing images:</label>
 {{#each listing.image}}
-<img src="http://localhost:3000/data/uploads/{{this.image}}" alt="Existing image" id="existing_image">
+<br><img src="http://localhost:3000/data/uploads/{{this}}" alt="Existing image" id="existing_image">
 {{/each}}
 
-<br>
+<br><br>
 
-<label for='uploadFile'>Select a file<br><input type='file' name="uploadFile" id='uploadFile' accept="image/*" multiple></label>
+<label for='uploadFile'>Select new images<br><input type='file' name="uploadFile" id='uploadFile' accept="image/*" multiple></label>
 {{!-- <label for="uploadFiles"></label> --}}
 
 

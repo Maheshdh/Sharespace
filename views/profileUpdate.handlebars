@@ -1,20 +1,21 @@
 <h1>Edit Profile</h1>
 <hr>
 
-<div class=" profileUpdate-form">
+<div class="login-form">
 <form action="/profile/update" method="POST" id="profile_update_form" enctype="multipart/form-data">
-<label for="firstname_update">Firstname<br><input type="text" id="firstname_update" name="firstname_update" value={{user.firstName}}></label>
+<label for="firstname_update">Firstname:<br><input type="text" id="firstname_update" name="firstname_update" value={{user.firstName}}></label>
 <br><br>
-<label for="lastname_update">Lastname<br><input type="text" id="lastname_update" name="lastname_update" value={{user.lastName}}></label>
+<label for="lastname_update">Lastname:<br><input type="text" id="lastname_update" name="lastname_update" value={{user.lastName}}></label>
 <br><br>
 <label for="phoneno_update">Phone no:<br><input type="text" id="phoneno_update" name="phoneno_update" value={{user.phoneNumber}}></label>
 <br><br>
 <label for="existing_image">
-    Existing image:</label>
+    Existing image:</label><br>
 {{#if user.image}}
 <img src="http://localhost:3000/data/uploads/{{user.image}}" alt="Existing image" id="existing_image">
 {{/if}}
-<label for='updateProfilePic'> Select a file: </label>
+<br><br>
+<label for='updateProfilePic'> Select a new file: </label>
 <br>
 <input type='file' name="updateProfilePic" id='updateProfilePic' accept="image/*">
 <br><br>
@@ -32,4 +33,3 @@
 
 </form>
 </div>
-<hr>
