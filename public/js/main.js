@@ -56,10 +56,13 @@ addListing.addEventListener("submit",(event)=>{
         let lenghtInput = checkDimension(document.getElementById("listing_LengthInput").value, 'Listing Length')
         let widthInput = checkDimension(document.getElementById("listing_WidthInput").value, 'Listing Width')
         let heightInput = checkDimension(document.getElementById("listing_HeightInput").value, 'Listing Height')
-        let longitudeInput = 'LONGITUDE GOES HERE'
-        let latitudeInput = 'LATITUDE GOES HERE'
+        let longitudeInput = checkLongitude(document.getElementById("listing_LongitudeInput").value,"Listing Longitude")
+        let latitudeInput = checkLatitude(document.getElementById("listing_LatitudeInput").value,"Listing latitude")
         let availableStartInput = checkDate(document.getElementById("listing_AvailableStartInput").value, 'Listing Start Date')
         let availableEndInput = checkDate(document.getElementById("listing_AvailableEndInput").value, 'Listing End Date')   
+        let a = new Date(availableStartInput);
+        let b= new Date(availableEndInput);
+        if(a>b) throw "Available end date is before available start date";
         addListing.submit();
     } catch (error) {
         document.getElementById("error_js").innerHTML = error;
@@ -401,3 +404,21 @@ function checkRating(rating, varName) {
     if (rating > 5 || rating < 0) throw `Error: ${varName} must be between 0 and 5`
     return rating
   }
+
+  function checkLongitude(longitude, varName) {
+    if (longitude === undefined) throw `Error: You must provide a ${varName}`
+    if (longitude.toString().trim() == '') throw `Error: You must provide a ${varName}`
+    longitude = Number(longitude)
+    if (isNaN(longitude) == true) throw `Error: ${varName} must be a number`
+    if (longitude > 180 || longitude < -180) throw `Error: ${varName} must be between -180 and 180`
+    return longitude
+  }
+
+   function checkLatitude(latitude, varName) {
+    if (latitude === undefined) throw `Error: You must provide a ${varName}`
+    if (latitude.toString().trim() == '') throw `Error: You must provide a ${varName}`
+    latitude = Number(latitude)
+    if (isNaN(latitude) == true) throw `Error: ${varName} must be a number`
+    if (latitude > 90 || latitude < -90) throw `Error: ${varName} must be between -90 and 90`
+    return latitude
+   }

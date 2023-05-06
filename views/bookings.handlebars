@@ -34,7 +34,11 @@
     </ol>
 </div> --}}
 <label for="outgoingListingssearch"></label>
-<input type="text" id="outgoinglistingssearch" placeholder="Search">
+<select name="outgoinglistingssearch" id="outgoinglistingssearch">
+    <option value="accepted">Accepted</option>
+    <option value="requested">Requested</option>
+    <option value="declined">Declined</option>
+</select>
 <button id="outgoingListingsButton" onclick="outgoingListingsSearch()">Search</button>
 <button onclick="outgoingListingReset()">Reset</button>
 
@@ -66,8 +70,12 @@
 <br><br>
 
 <label for="incomingListingssearch"></label>
-<input type="text" id="incominglistingssearch" placeholder="Search">
-<button id="incomingListingsButton" onclick="incomingListingsSearch()">Search</button>
+<select name="incominglistingssearch" id="incominglistingssearch">
+    <option value="accepted">Accepted</option>
+    <option value="requested">Requested</option>
+    <option value="declined">Declined</option>
+</select>
+<button id="incomingListingsButton" onclick="incomingListingsSearch()">Filter</button>
 <button onclick="incomingListingReset()">Reset</button>
 
 <div id="IncomingRequests">
