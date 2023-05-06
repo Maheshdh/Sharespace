@@ -69,6 +69,30 @@ addListing.addEventListener("submit",(event)=>{
     }
 })}
 
+const updateListing = document.getElementById('update_listing_form');
+if(updateListing){
+updateListing.addEventListener("submit",(event)=>{
+    event.preventDefault();
+    try {
+        let titleInput = checkString(document.getElementById("listing_Update_TitleInput").value, 'Listing Title')
+        let descriptionInput = checkString(document.getElementById("listing_Update_DescriptionInput").value, 'Listing Description')
+        let addressInput = checkString(document.getElementById("listing_Update_AddressInput").value, 'Listing Address')
+        let priceInput = checkPrice(document.getElementById("listing_Update_PriceInput").value, 'Listing Price')
+        let lenghtInput = checkDimension(document.getElementById("listing_Update_LengthInput").value, 'Listing Length')
+        let widthInput = checkDimension(document.getElementById("listing_Update_WidthInput").value, 'Listing Width')
+        let heightInput = checkDimension(document.getElementById("listing_Update_HeightInput").value, 'Listing Height')
+        let longitudeInput = checkLongitude(document.getElementById("listing_Update_LongitudeInput").value,"Listing Longitude")
+        let latitudeInput = checkLatitude(document.getElementById("listing_Update_LatitudeInput").value,"Listing latitude")
+        let availableStartInput = checkDate(document.getElementById("listing_Update_AvailableStartInput").value, 'Listing Start Date')
+        let availableEndInput = checkDate(document.getElementById("listing_Update_AvailableEndInput").value, 'Listing End Date')   
+        let a = new Date(availableStartInput);
+        let b= new Date(availableEndInput);
+        if(a>b) throw "Available end date is before available start date";
+        updateListing.submit();
+    } catch (error) {
+        document.getElementById("error_js").innerHTML = error;
+    }
+})}
 
 const review_form = document.getElementById("review_input_form");
 if(review_form) {
@@ -226,7 +250,7 @@ function outgoingListingsSearch(){
     var outgoingListings = document.getElementsByClassName("outgoingRequestsClass")
     
     for (let i = 0; i < outgoingListings.length; i++) {
-        if(outgoingListings[i].includes(search)){
+        if(outgoingListings[i].innerHTML.toLowerCase().includes(search)){
             outgoingListings[i].style.display = "list-item";
         }
         else{
@@ -243,12 +267,12 @@ function outgoingListingReset(){
 }
 
 function incomingListingsSearch(){
-    var search = document.getElementById("incominglistingssearch").value;
+    var search = document.getElementById("incomingListingsSearch").value;
     search = search.toLowerCase();
     var incomingListings = document.getElementsByClassName("incomingRequestsClass")
     
     for (let i = 0; i < incomingListings.length; i++) {
-        if(incomingListings[i].includes(search)){
+        if(incomingListings[i]innerHTML.toLowerCase().includes(search)){
             incomingListings[i].style.display = "list-item";
         }
         else{
