@@ -19,7 +19,9 @@
             var markerCurrent = new google.maps.Marker({
       position: pos,
       map: map,
-      icon: pos.icon
+      animation : google.maps.Animation.DROP,
+      draggable : true,
+      icon: "public/list_icon.png"
     });
   
   var markerPositions = []
@@ -39,7 +41,7 @@
     var marker = new google.maps.Marker({
       position: markerPositions[i].position,
       map: map,
-      icon: "public/list_icon.png"
+      icon: markerPositions[i].icon
     });
   }    
    }, function() {
