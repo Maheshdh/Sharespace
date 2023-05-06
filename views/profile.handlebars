@@ -30,7 +30,7 @@
 
 <div>
 {{#if user.image}}
-<img src="http://localhost:3000/data/uploads/{{user.image}}" alt="Profile Page">
+<img src="http://localhost:3000/data/uploads/{{user.image}}" alt="Profile Picture">
 {{/if}}
 </div>
 </div>
@@ -43,7 +43,7 @@
 <div>
   <ol>
   {{#each reviews}}
-    <li>Rating: {{this.rating}}<br>Comment: {{this.comment}}<br>Reviewed By: <a href = "/users/{{this.userID}}">Link to user</a></p>
+    <li>Rating: {{this.rating}}<br>Comment: {{this.comment}}<br>Reviewed By: <a href = "/users/{{this.reviewMadeBy}}">Link to user</a></p>
     </li>
   {{/each}}
 </ol>
@@ -79,7 +79,7 @@
     <li>
       <h3><a href="/listing/{{this._id}}">{{this.title}}</a></h3>
       <p>{{this.description}}</p>
-      <p><img src="http://localhost:3000/data/uploads/{{this.image.[1]}}" alt="Profile Page"></p>
+      <p><img src="http://localhost:3000/data/uploads/{{this.image.[0]}}" alt="Listing Image"></p>
       <button class="edit-listing-button" onclick=window.location.href='/listing/update/{{this._id}}';>Edit Listing <i class="fa fa-edit-1"></i></button>
       <br><br>
       <button class="boost-listing-button" onclick="window.location.href='/profile/boostListing/{{this._id}}';">Boost Listing <i class="fa fa-edit-1"></i></button>

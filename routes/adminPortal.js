@@ -43,7 +43,6 @@ router
         let deletingListing = await deleteListing(listingToBeDeletedID, currentUserID)
 
         if (deletingListing.deleted == true) {
-            let deletingReport = await deleteReport(listingID)
             res.redirect('/adminPortal')
         } else {
             res.status(500).render('errors', {error:'Internal Server Error'})

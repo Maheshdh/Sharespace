@@ -64,7 +64,7 @@ export const makeSponsoredListings = async () => {
     // Making tierThree listings array
     if (tierThreeListings.length > 0) {
         let lengthUsedForMathRandom = tierThreeListings.length - 1 //because Math.random will never be 1
-        var tierThreeListing1 = tierThreeListings[Math.floor(Math.random()*lengthUsedForMathRandom)]
+        var tierThreeListing1 = tierThreeListings[Math.round(Math.random()*lengthUsedForMathRandom)]
         let index = tierThreeListings.indexOf(tierThreeListing1)
         if (index > -1) {
             tierThreeListings.splice(index, 1)

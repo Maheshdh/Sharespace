@@ -49,7 +49,7 @@ export const getAllReportedListings = async () => {
 
     let allReports = await reportsCollection.find({}).toArray()
     if (allReports.length > 1) {
-        allReports.sort((a, b) => a.reportCount - b.reportCount)
+        allReports.sort((a, b) => b.reportCount - a.reportCount)
     }
 
     let allReportsWithListingInfo = []
@@ -75,7 +75,6 @@ export const deleteReport = async (listingID) => {
     let reportsCollection = await reports()
 
     const deletionInfo = await reportsCollection.findOneAndDelete({listingID: listingID});
-    if (deletionInfo.lastErrorObject.n === 0) throw `Could not delete Report with listingID of ${listingID}`;
 
     return {deleted: true};
 }
