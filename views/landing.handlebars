@@ -16,10 +16,15 @@
               center: pos
             });
 
+            var icon = {
+  url: "public/list_icon.png",
+  scaledSize: new google.maps.Size(32, 32) // Set the desired scaled size
+};
+
             var markerCurrent = new google.maps.Marker({
       position: pos,
       map: map,
-      icon: "public/list_icon.png"
+      icon: icon
     });
   
   var markerPositions = []
