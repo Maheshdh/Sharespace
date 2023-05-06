@@ -36,10 +36,13 @@ router
       let lenghtInput = helpers.checkDimension(userInput.listing_LengthInput, 'Listing Length')
       let widthInput = helpers.checkDimension(userInput.listing_WidthInput, 'Listing Width')
       let heightInput = helpers.checkDimension(userInput.listing_HeightInput, 'Listing Height')
-      let longitudeInput = parseFloat(userInput.listing_LongitudeInput)
-      let latitudeInput = parseFloat(userInput.listing_LatitudeInput)
+      let longitudeInput = helpers.checkLongitude(parseFloat(userInput.listing_LongitudeInput),"Listing Longitutde")
+      let latitudeInput = helpers.checkLatitude(parseFloat(userInput.listing_LatitudeInput),"Listing Latitude")
       let availableStartInput = helpers.checkDate(userInput.listing_AvailableStartInput, 'Listing Start Date')
       let availableEndInput = helpers.checkDate(userInput.listing_AvailableEndInput, 'Listing End Date')
+      let a = new Date(availableStartInput);
+      let b= new Date(availableEndInput);
+      if(a>b) throw "Available end date is before available start date";
       let imageInput = [];
       if(req.files){
           for (let file of req.files) {
@@ -262,10 +265,13 @@ router
     let lenghtInput = helpers.checkDimension(userInput.listing_Update_LengthInput, 'Listing Length')
     let widthInput = helpers.checkDimension(userInput.listing_Update_WidthInput, 'Listing Width')
     let heightInput = helpers.checkDimension(userInput.listing_Update_HeightInput, 'Listing Height')
-    let longitudeInput = parseFloat(userInput.listing_Update_LongitudeInput)
-    let latitudeInput = parseFloat(userInput.listing_Update_LatitudeInput)
+    let longitudeInput = helpers.checkLongitude(parseFloat(userInput.listing_Update_LongitudeInput),"Listing Longitude")
+    let latitudeInput = helpers.checkLatitude(parseFloat(userInput.listing_Update_LatitudeInput),"Listing Latitude");
     let availableStartInput = helpers.checkDate(userInput.listing_Update_AvailableStartInput, 'Listing Start Date')
     let availableEndInput = helpers.checkDate(userInput.listing_Update_AvailableEndInput, 'Listing End Date')
+    let a = new Date(availableStartInput);
+    let b= new Date(availableEndInput);
+    if(a>b) throw "Available end date is before available start date";
     let imageInput = [];
     if(req.files){
         for (let file of req.files) {
