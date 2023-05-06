@@ -7,6 +7,7 @@ import {getUser, saveListing} from '../data/users.js';
 import { getBookingRequestsReceived, getBookingRequestsSent, createBookingRequest } from '../data/bookings.js';
 import { addListingCommentOrQuestion } from '../data/comments.js';
 import { makeSponsoredListings } from '../data/sponsoredListings.js'
+import { makeNewReport } from '../data/reportedListings.js'
 import multer from 'multer';
 const upload = multer({ dest: './public/data/uploads/' });
 
@@ -124,7 +125,7 @@ router
   .get(async (req,res) => {
       var id;
       try {
-          id = helpers.checkId(req.params.id);
+          id = helpers.checkId(req.params.id, 'Listing ID');
       } catch (e) {
           return res.status(400).render('errors',{"error":e});
       }
@@ -136,6 +137,7 @@ router
         }
         var user_id;
       try {
+        if (!listing) throw 'This listing does not exist or may have been deleted!'
         user_id = helpers.checkId(listing._id.toString());
       } catch (error) {
           return res.status(400).render('errors',{"error":error});
@@ -175,7 +177,19 @@ router
         }
         let sponsoredListings = await makeSponsoredListings()
         let userInfo = await getUser(listing.userID)
-        return res.status(200).render('listing',{"sponsoredListings":sponsoredListings, "listing": listing,"userInfo": userInfo,"reviews": reviews, "noReviewsFound":noReviewsFound, "cumulativeListingReviewStats": cumulativeListingReviewStats, "comments": listing.comments, "noComments": noComments});
+        
+        let userRoleIsAdmin = false
+        let userRoleIsUser = true
+        if (!req.session.user) {}
+        else {
+          let loggedInUser = req.session.user.userID
+          let loggedInUserInfo = await getUser(loggedInUser)
+          if (loggedInUserInfo.role == 'admin') {
+              userRoleIsAdmin = true
+              userRoleIsUser = false
+          }
+        } 
+        return res.status(200).render('listing',{"sponsoredListings":sponsoredListings, "listing": listing,"userInfo": userInfo,"reviews": reviews, "noReviewsFound":noReviewsFound, "cumulativeListingReviewStats": cumulativeListingReviewStats, "comments": listing.comments, "noComments": noComments, userRoleIsUser: userRoleIsUser, userRoleIsAdmin: userRoleIsAdmin});
       } catch (error) {
           return res.status(404).render('errors',{"error":error});
       }
@@ -333,6 +347,28 @@ router
     } catch (e) {
         return res.render('errors', {error: e});
     }
+})
+
+router
+.route('/report/:id')
+.post(async (req, res) => {
+  try {
+    if (!req.session.user) return res.render('login', {error: 'You must be logged in to report a listing!'})
+    let userID = req.session.user.userID
+    let listingID = req.params.id
+
+    userID = helpers.checkId(userID.toString(), 'User ID')
+    listingID = helpers.checkId(listingID,"Listing ID") 
+
+    let reporting = await makeNewReport(listingID, userID)
+    if (reporting.reported == true) {
+      return res.render('reportSubmitted')
+    } else {
+      return res.render('errors', {error:e})
+    }
+  } catch (e) {
+    return res.render('errors', {error:e})
+  }
 })
 
 export default router;

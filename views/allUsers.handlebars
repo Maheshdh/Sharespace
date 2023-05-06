@@ -25,7 +25,7 @@
     <li class="homepageListings">
       <h2><a href="/users/{{this._id}}">{{this.firstName}} {{this.lastName}}</a></h2>
       {{#if this.image}}
-      <img src="http://localhost:3000/data/uploads/{{this.image}}" alt="Profile Page">
+      <img src="http://localhost:3000/data/uploads/{{this.image}}" alt="Profile Picture">
       {{/if}}
       <p>Rating:{{this.rating}}</p>
       <p>Number of listings uploaded:{{this.listings.length}}</p>

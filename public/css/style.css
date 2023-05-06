@@ -35,7 +35,7 @@ label {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    font-family: Arial, Helvetica, sans-serif
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 /* p {
@@ -265,8 +265,33 @@ ul {
 .delete-listing-button {
     background-color: rgba(255, 139, 139, 0.623);
     font-size:16px; 
+    font-weight: bold;
     width:150px; 
-    height:20px;
+    height:30px;
+}
+
+.edit-listing-button {
+    /* background-color: rgb(255, 255, 255);
+    font-size:16px;  */
+    font-weight: bold;
+    width:150px; 
+    height:30px;   
+}
+
+.boost-listing-button {
+    /* background-color: rgba(255, 209, 139, 0.623);
+    font-size:16px;  */
+    font-weight: bold;
+    width:150px; 
+    height:30px;   
+}
+
+.ignore-listing-button {
+    background-color: rgba(185, 255, 139, 0.623);
+    font-size:16px; 
+    font-weight: bold;
+    width:150px; 
+    height:30px;
 }
 
 .grid-container {
@@ -274,8 +299,68 @@ ul {
     grid-template-columns: .75fr 1fr;
 }
 
+.landing-grid-container {
+    display: grid;
+    grid-column-gap: 50px;
+    grid-template-columns: 1fr .80fr;
+}
+
+.landing-grid-container-three-split{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.landing-tagline{
+    display: block;
+    text-align: center;
+    width: 100%;
+    font-weight: 400;
+}
+
+.how-it-works{
+    text-align: center;
+}
+
 .listing-buttons {
     height:45px;
     width:175px; 
     font-size: medium;  
+}
+
+.admin-heading{
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    color: #c61e00;
+    text-align: center;
+}
+
+.adminPortal-heading{
+    background-color: rgb(255, 151, 151);
+}
+
+.listing-button-report{
+    height:45px;
+    width:175px; 
+    font-size: medium;
+    font-weight: bolder;
+    background-color: rgb(255, 123, 123);  
+}
+
+.listing-button-delete{
+    height:45px;
+    width:175px; 
+    font-size: medium;
+    font-weight: bolder;
+    background-color: rgb(255, 123, 123);  
+}
+
+
+.report-listing{ 
+    font-weight: bold;
+    text-align: center;
+    color: #c61e00;  
+}
+
+.landing-message {
+    text-align: center;
 }

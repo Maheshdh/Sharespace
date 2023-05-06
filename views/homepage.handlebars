@@ -19,6 +19,9 @@
   <p id="filterError"></p>
 </div>
 
+<label for="searchLocation">Search Location:</label>
+<input type="text" placeholder="Search Location...press enter"  name="searchLocation" id="searchLocation">
+
 <div>
 {{#if noListings}}
 <br><br>
@@ -40,7 +43,7 @@
       <p>Volume: {{this.volume}} cubic feet</p>
       <p>Start Date: {{this.listing_AvailableStartInput}}</p>
       <p>End Date: {{this.listing_AvailableEndInput}}</p>
-      <p><img src="http://localhost:3000/data/uploads/{{this.image.[1]}}" alt="Profile Page"></p>
+      <p><img src="http://localhost:3000/data/uploads/{{this.image.[0]}}" alt="Listing Picture"></p>
       <p class="listingAvailableStartInput" hidden>{{this.listing_AvailableStartInput}}</p>
       <p class="listingAvailableEndInput" hidden>{{this.listing_AvailableEndInput}}</p>
     </li>
@@ -53,9 +56,12 @@
 {{!-- <script src="https://maps.googleapis.com/maps/api/js"></script> --}}
 
 <script type="module">
+  let query_searched  = "";
+  var textBox = document.getElementById("searchLocation");
 
     if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(function(position) {
+            
             var pos = {
               lat: position.coords.latitude,
               lng: position.coords.longitude
@@ -65,10 +71,15 @@
               center: pos
             });
 
+      var icon = {
+  url: "public/list_icon.png",
+  scaledSize: new google.maps.Size(32, 32) // Set the desired scaled size
+};
+    
       var markerCurrent = new google.maps.Marker({
       position: pos,
       map: map,
-      icon: "public/list_icon.png"
+      icon: icon
     });
   
   var markerPositions = []
@@ -106,6 +117,80 @@
         errorDiv.innerHTML = "Error: The Geolocation service failed. Your browser doesn't support geolocation.";
         document.body.appendChild(errorDiv);
       }
+
+ textBox.addEventListener("keypress", function(event) {
+  // Check if the key pressed is the "Enter" key (key code 13)
+  if (event.keyCode === 13) {
+    // Call the searchLocation() function
+    searchLocation();
+      }
+});
+function searchLocation() {
+  // Get the search query from the text box
+  var query = textBox.value;
+  query_searched = query;
+  var geocodingUrl = "https://maps.googleapis.com/maps/api/geocode/json?address=" + encodeURIComponent(query) + "&key=AIzaSyD9w7c6s9zaAOX2G2veo-nrwNZ0zZMCkHY";
+  fetch(geocodingUrl)
+  .then(function(response) {
+    return response.json();
+  })
+  .then(function(data) {
+    // Extract the latitude and longitude coordinates from the geocoding response
+    var latitude = data.results[0].geometry.location.lat;
+    var longitude = data.results[0].geometry.location.lng;
+    console.log("latitude = ",latitude)
+    var pos = {
+              lat: latitude,
+              lng: longitude
+            };
+            var map2 = new google.maps.Map(document.getElementById('map_homepage'), {
+              zoom: 14,
+              center: pos
+            });
+      
+      var icon = {
+  url: "public/list_icon.png",
+  scaledSize: new google.maps.Size(32, 32) // Set the desired scaled size
+};
+    
+      var markerCurrent = new google.maps.Marker({
+      position: pos,
+      map: map2,
+      icon: icon
+      })
+
+      var markerPositions = []
+  
+  let lat = null
+  let longs = null
+    {{#each listings}}
+         lat = {{this.latitude }}
+         longs = {{ this.longitude }}
+        markerPositions.push ({position : {lat : lat, lng: longs } });
+
+    {{/each}}
+
+
+  // Loop through the markerPositions array and create a marker for each set of coordinates
+  for (var i = 0; i < markerPositions.length; i++) {
+    var marker = new google.maps.Marker({
+      position: markerPositions[i].position,
+      map: map2,
+      icon: markerPositions[i].icon,
+      animation : google.maps.Animation.DROP
+
+    });
+  }    
+  
+
+    // Use the coordinates as needed
+  })
+  .catch(function(error) {
+    console.log("Error geocoding address: " + error);
+  });
+
+}
+     
 </script>
 
 
@@ -120,7 +205,7 @@
       <p class="listingPrice" hidden>{{this.price}}</p>
       <p>Start Date: {{this.listing_AvailableStartInput}}</p>
       <p>End Date: {{this.listing_AvailableEndInput}}</p>
-      <p><img src="http://localhost:3000/data/uploads/{{this.image.[1]}}" alt="Profile Page"></p>
+      <p><img src="http://localhost:3000/data/uploads/{{this.image.[0]}}" alt="Listing Picture"></p>
       <p class="listingVolume" hidden>{{this.volume}}</p>
       <p class="listingAvailableStartInput" hidden>{{this.listing_AvailableStartInput}}</p>
       <p class="listingAvailableEndInput" hidden>{{this.listing_AvailableEndInput}}</p>

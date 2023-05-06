@@ -2,6 +2,7 @@ import { ObjectId } from "mongodb"
 import { listings } from '../config/mongoCollections.js'
 import { users } from "../config/mongoCollections.js"
 import helpers from '../helpers.js'
+import {deleteReport} from './reportedListings.js'
 
 export const createListing = async (
     userID,
@@ -20,7 +21,7 @@ export const createListing = async (
 ) => {
 
 
-    if (!userID || !title || !address || !description || !price || !length || !width || !height || !latitude|| !longitude|| !listing_AvailableStartInput || !listing_AvailableEndInput) throw 'Error: Invalid number of parameters entered (Expected 10)'
+    if (!userID || !title || !address || !description || !price || !length || !width || !height || !latitude|| !longitude|| !listing_AvailableStartInput || !listing_AvailableEndInput) throw 'Error: Invalid parameters entered. Please ensure there are no zeroes in Price, Length, Width, Height, Longitude, Latitude!'
     
     if (!userID) throw 'Error: "userID" parameter not entered'
     if (!title) throw 'Error: "title" parameter not entered'
@@ -104,24 +105,37 @@ export const deleteListing = async (
 
     let listingInfo = await getListing(listingID)
     let userInfo = await userCollection.findOne({_id: new ObjectId(userID)})
-    let userInfoListingArray = userInfo.listings
+    if (userID != listingInfo.userID) {
+      if (userInfo.role == "admin") {
+        userInfo = await userCollection.findOne({_id: new ObjectId(listingInfo.userID)})
+      }
+      else throw 'Error: This listing does not belong to you. You cannot delete it'
+    }
 
+    let userInfoListingArray = userInfo.listings
     if (userInfoListingArray.includes(listingID)) {
       let index = userInfoListingArray.indexOf(listingID)
       if (index > -1) {
         userInfoListingArray.splice(index, 1)
       }
     }
-
-    if (userID != listingInfo.userID) throw 'Error: This listing does not belong to you. You cannot delete it'
+    let userInfoSavedListings = userInfo.savedListings
+    if (userInfoSavedListings.includes(listingID)) {
+      let index = userInfoSavedListings.indexOf(listingID)
+      if (index > -1) {
+        userInfoSavedListings.splice(index, 1)
+      }
+    }
 
     const deletionInfo = await listingsCollection.findOneAndDelete({_id: new ObjectId(listingID)});
-    if (deletionInfo.lastErrorObject.n === 0) throw `Could not delete listing with id of ${listingID}`;
+    if (deletionInfo.value === null) throw `Could not delete listing with id of ${listingID}`;
 
     let updatingUserInfo = await userCollection.findOneAndUpdate(
       {_id: new ObjectId(userID)},
-      {$set: {listings: userInfoListingArray}} //Updated listing
+      {$set: {listings: userInfoListingArray, savedListings: userInfoSavedListings}} //Updated listing
       )
+    
+    let updatingReports = await deleteReport(listingID)
     
     return {deleted: true};
 }
@@ -142,7 +156,7 @@ export const modifyListing = async (
   imageInput
 ) => {
 
-    if (!listingID || !title || !address || !description || !price || !length || !width || !height || !latitude|| !longitude|| !listing_AvailableStartInput || !listing_AvailableEndInput) throw 'Error: Invalid number of parameters entered (Expected 10)'
+    if (!listingID || !title || !address || !description || !price || !length || !width || !height || !latitude|| !longitude|| !listing_AvailableStartInput || !listing_AvailableEndInput) throw 'Error: Invalid parameters entered. Please ensure there are no zeroes in Price, Length, Width, Height, Longitude, Latitude!'
       
     if (!listingID) throw 'Error: "listingID" parameter not entered'
     if (!title) throw 'Error: "title" parameter not entered'
