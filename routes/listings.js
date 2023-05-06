@@ -115,7 +115,7 @@ router
 
 
 
-// TODO: FIX THIS -> make appropiate errors
+// TODO: FIX THIS -> make appropiate errors (FIXED)
 router
   .route('/:id')
   .get(async (req,res) => {
@@ -263,7 +263,7 @@ router
     let widthInput = helpers.checkDimension(userInput.listing_Update_WidthInput, 'Listing Width')
     let heightInput = helpers.checkDimension(userInput.listing_Update_HeightInput, 'Listing Height')
     let longitudeInput = parseFloat(userInput.listing_Update_LongitudeInput)
-    let latitudeInput = parseFloat(userInput.listing_Update_AvailableEndInput)
+    let latitudeInput = parseFloat(userInput.listing_Update_LatitudeInput)
     let availableStartInput = helpers.checkDate(userInput.listing_Update_AvailableStartInput, 'Listing Start Date')
     let availableEndInput = helpers.checkDate(userInput.listing_Update_AvailableEndInput, 'Listing End Date')
     let imageInput = [];
