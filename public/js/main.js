@@ -76,7 +76,7 @@ if(review_form) {
     const rating = checkRating(document.getElementById("rating_select").value);
     const comment = checkString(document.getElementById("listing_comment_input").value);
     
-    console.log(rating)
+    console.log(rating, comment, listingID)
     if (comment && rating !== undefined && listingID) {
       //set up AJAX request config
       let requestConfig = {
