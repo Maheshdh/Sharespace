@@ -64,6 +64,12 @@
               zoom: 14,
               center: pos
             });
+
+      var markerCurrent = new google.maps.Marker({
+      position: pos,
+      map: map,
+      icon: "public/list_icon.png"
+    });
   
   var markerPositions = []
   
@@ -82,7 +88,9 @@
     var marker = new google.maps.Marker({
       position: markerPositions[i].position,
       map: map,
-      icon: markerPositions[i].icon
+      icon: markerPositions[i].icon,
+      animation : google.maps.Animation.DROP
+
     });
   }    
    }, function() {

@@ -3,11 +3,11 @@
 
 <div class=" addListing-form">
 <form action="/listing/update/{{listing._id}}" method="POST" id="update_listing_form" enctype="multipart/form-data">
-<label for="listing_Update_TitleInput">Title<br><input type="text" id="listing_Update_TitleInput" name="listing_Update_TitleInput" value={{listing.title}}></label>
+<label for="listing_Update_TitleInput">Title<br><input type="text" id="listing_Update_TitleInput" name="listing_Update_TitleInput" value="{{listing.title}}"></label>
 <br><br>
-<label for="listing_Update_DescriptionInput">Description<br><input type="text" id="listing_Update_DescriptionInput" name="listing_Update_DescriptionInput" value={{listing.description}}></label>
+<label for="listing_Update_DescriptionInput">Description<br><input type="text" id="listing_Update_DescriptionInput" name="listing_Update_DescriptionInput" value="{{listing.description}}"></label>
 <br><br>
-<label for="listing_Update_AddressInput">Address<br><input type="address" id="listing_Update_AddressInput" name="listing_Update_AddressInput" value={{listing.address}}></label>
+<label for="listing_Update_AddressInput">Address<br><input type="address" id="listing_Update_AddressInput" name="listing_Update_AddressInput" value="{{listing.address}}"></label>
 <br><br>
 <label for="listing_Update_PriceInput">Price in $ per month<br><input type="text" id="listing_Update_PriceInput" name="listing_Update_PriceInput" value={{listing.price}}></label>
 <br><br>
@@ -17,9 +17,9 @@
 <br><br>
 <label for="listing_Update_HeightInput">Height<br><input type="text" id="listing_Update_HeightInput" name="listing_Update_HeightInput" value={{listing.height}}></label>
 <br><br>
-<label for="listing_Update_LongitudeInput">Longitude<br><input type="text" id="listing_Update_LongitudeInput" name="listing_Update_LongitudeInput" value={{listing.longitude}}></label>
-<br><br>
 <label for="listing_Update_LatitudeInput">Latitude<br><input type="text" id="listing_Update_LatitudeInput" name="listing_Update_LatitudeInput" value={{listing.latitude}}></label>
+<br><br>
+<label for="listing_Update_LongitudeInput">Longitude<br><input type="text" id="listing_Update_LongitudeInput" name="listing_Update_LongitudeInput" value={{listing.longitude}}></label>
 <br><br>
 <label for="listing_Update_AvailableStartInput">Available Start Date<br><input type="text" id="listing_Update_AvailableStartInput" name="listing_Update_AvailableStartInput" value={{listing.listing_AvailableStartInput}}></label>
 <br><br>
