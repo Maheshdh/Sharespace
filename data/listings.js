@@ -99,16 +99,20 @@ export const deleteListing = async (
 
     let listingInfo = await getListing(listingID)
     let userInfo = await userCollection.findOne({_id: new ObjectId(userID)})
-    let userInfoListingArray = userInfo.listings
+    if (userID != listingInfo.userID) {
+      if (userInfo.role == "admin") {
+        userInfo = await userCollection.findOne({_id: new ObjectId(listingInfo.userID)})
+      }
+      else throw 'Error: This listing does not belong to you. You cannot delete it'
+    }
 
+    let userInfoListingArray = userInfo.listings
     if (userInfoListingArray.includes(listingID)) {
       let index = userInfoListingArray.indexOf(listingID)
       if (index > -1) {
         userInfoListingArray.splice(index, 1)
       }
     }
-
-    if (userID != listingInfo.userID) throw 'Error: This listing does not belong to you. You cannot delete it'
 
     const deletionInfo = await listingsCollection.findOneAndDelete({_id: new ObjectId(listingID)});
     if (deletionInfo.lastErrorObject.n === 0) throw `Could not delete listing with id of ${listingID}`;

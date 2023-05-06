@@ -23,6 +23,7 @@ router
         let savedListings = []
         let noListings = false
         let noSavedListings = false
+        let isAdmin = false
 
         if (currentUserListings.length == 0) {
             noListings = true
@@ -40,7 +41,11 @@ router
             savedListings.push(listingToBeAdded)
         }
 
-        return res.render('profile', {user:currentUser, listings: allListings, reviews: reviews, savedListings: savedListings, noListings: noListings, noSavedListings: noSavedListings})
+        if (currentUserInfo.role == "admin") {
+            isAdmin = true
+        }
+
+        return res.render('profile', {user:currentUser, listings: allListings, reviews: reviews, savedListings: savedListings, noListings: noListings, noSavedListings: noSavedListings, isAdmin: isAdmin})
     } catch (e) {
         res.status(500).send(e)
     }

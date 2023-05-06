@@ -1,6 +1,6 @@
 <h1>{{listing.title}}</h1> 
 <hr>
-<br><br>
+<br>
 
 <h2>Listing Description:</h2>
 <div class = "grid-container">
@@ -122,9 +122,6 @@
 {{/each}}
 
 
-
-
-
 <br><br>
 
 <h2>Share this Listing!</h2>
@@ -202,7 +199,26 @@
 <br><br>
 
 
+<hr>
+<br>
 
+{{#if userRoleIsUser}}
+<form action="/listing/report/{{listing._id}}" method="POST" id="report-listing">
+  <p class="report-listing"><input class="listing-button-report" type="submit" id="report-listing" name="report-listing" value="Report this Listing"></p>
+</form>
+{{/if}}
+
+
+{{#if userRoleIsAdmin}}
+<div id="listing-admin-function">
+  <p class="report-listing">You are seeing this because you have Admin Rights</p>
+  <form action="/adminPortal/delete/{{listing._id}}" method="POST" id="report-listing">
+    <p class="report-listing"><input class="listing-button-delete" type="submit" id="listing-button-delete" name="listing-button-delete" value="Delete this Listing"></p>
+  </form>
+</div>
+{{/if}}
+
+<br><br>
 
 
 
