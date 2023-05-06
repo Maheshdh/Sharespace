@@ -123,7 +123,25 @@ const exportedMethods = {
         if (isNaN(rating) == true) throw `Error: ${varName} must be a number`
         if (rating > 5 || rating < 0) throw `Error: ${varName} must be between 0 and 5`
         return rating
-      }
+      },
+
+      checkLongitude(longitude, varName) {
+        if (longitude === undefined) throw `Error: You must provide a ${varName}`
+        if (longitude.toString().trim() == '') throw `Error: You must provide a ${varName}`
+        longitude = Number(longitude)
+        if (isNaN(longitude) == true) throw `Error: ${varName} must be a number`
+        if (longitude > 180 || longitude < -180) throw `Error: ${varName} must be between -180 and 180`
+        return longitude
+      },
+
+      checkLatitude(latitude, varName) {
+        if (latitude === undefined) throw `Error: You must provide a ${varName}`
+        if (latitude.toString().trim() == '') throw `Error: You must provide a ${varName}`
+        latitude = Number(latitude)
+        if (isNaN(latitude) == true) throw `Error: ${varName} must be a number`
+        if (latitude > 90 || latitude < -90) throw `Error: ${varName} must be between 0 and 5`
+        return latitude
+      },
 
 }
 

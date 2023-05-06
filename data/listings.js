@@ -46,8 +46,13 @@ export const createListing = async (
     length = helpers.checkDimension(length.toString(), 'length')
     width = helpers.checkDimension(width.toString(), 'width')
     height = helpers.checkDimension(height.toString(), 'height')
+    longitude = helpers.checkLongitude(longitude,"Longitude")
+    latitude = helpers.checkLatitude(latitude,"Latitude")
     listing_AvailableStartInput = helpers.checkDate(listing_AvailableStartInput,"Start Date")
     listing_AvailableEndInput = helpers.checkDate(listing_AvailableEndInput,"End Date")
+    let a = new Date(listing_AvailableStartInput);
+    let b= new Date(listing_AvailableEndInput);
+    if(a>b) throw "Available end date is before available start date";
 
     let volume = length * width * height;
     
@@ -163,8 +168,13 @@ export const modifyListing = async (
     length = helpers.checkDimension(length.toString(), 'length')
     width = helpers.checkDimension(width.toString(), 'width')
     height = helpers.checkDimension(height.toString(), 'height')
+    longitude = helpers.checkLongitude(longitude,"Longitude")
+    latitude = helpers.checkLatitude(latitude,"Latitude")
     listing_AvailableStartInput = helpers.checkDate(listing_AvailableStartInput,"Start Date")
     listing_AvailableEndInput = helpers.checkDate(listing_AvailableEndInput,"End Date")
+    let a = new Date(listing_AvailableStartInput);
+    let b= new Date(listing_AvailableEndInput);
+    if(a>b) throw "Available end date is before available start date";
 
     let volume = length * width * height;
 
