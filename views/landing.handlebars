@@ -1,8 +1,17 @@
-<h1>Welcome to Share Space!</h1>
+<h1>Welcome to ShareSpace!</h1>
+<div class = "landing-tagline">
+  <p>Rent budget-friendly storage nearby or turn your empty closet into cash!</p>
+</div>
+
+{{!-- <div class = "landing " --}}
+
 <br><br>
+
+<div class="landing-grid-container">
+
+<div>
 <div id ="map"></div>
 {{!-- <script src="https://maps.googleapis.com/maps/api/js"></script> --}}
-
 <script type="module">
 
     if (navigator.geolocation) {
@@ -12,14 +21,14 @@
               lng: position.coords.longitude
             };
             var map = new google.maps.Map(document.getElementById('map'), {
-              zoom: 14,
+              zoom: 12,
               center: pos
             });
-
+            
             var markerCurrent = new google.maps.Marker({
       position: pos,
       map: map,
-      icon: "public/list_icon.png"
+      icon: "public/list_icon2.png"
     });
   
   var markerPositions = []
@@ -58,16 +67,20 @@
         document.body.appendChild(errorDiv);
       }
 </script>
+</div>  
+
 <div>
-    <h2>{{message}}</h2>
-    <h2><a href="/homepage">Click here to view all Listings!</a></h2>
+    <h2 class="landing-message">{{message}}</h2>
+    <h2 class="landing-message"><a href="/homepage">Click here to view all Listings!</a></h2>
+
+<div class = "landing-container">
+  <br><br><br><br><br><br><br><br>
+<h3 class="landing-message"> Already a user? <a class ="login-signup" href="/login">Login</a></h2> 
+<h3 class="landing-message"> Here for the first time? <a class ="login-signup" href="/register">Register</a></h2>
 </div>
 
-
-<div class="landing-container">
-<p> Already a user? <a class ="login-signup" href="/login">Login</a></p> 
-<p> Here for the first time? <a class ="login-signup" href="/register">Register</a></p>
 </div>
 
+</div>
 
 {{!-- <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD9w7c6s9zaAOX2G2veo-nrwNZ0zZMCkHY&callback=initMap"> --}}

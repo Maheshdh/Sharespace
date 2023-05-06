@@ -35,7 +35,7 @@ label {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    font-family: Arial, Helvetica, sans-serif
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 /* p {
@@ -299,6 +299,28 @@ ul {
     grid-template-columns: .75fr 1fr;
 }
 
+.landing-grid-container {
+    display: grid;
+    grid-column-gap: 50px;
+    grid-template-columns: 1fr .80fr;
+}
+
+.landing-grid-container-three-split{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.landing-tagline{
+    display: block;
+    text-align: center;
+    width: 100%;
+    font-weight: 400;
+}
+
+.how-it-works{
+    text-align: center;
+}
+
 .listing-buttons {
     height:45px;
     width:175px; 
@@ -339,3 +361,6 @@ ul {
     color: #c61e00;  
 }
 
+.landing-message {
+    text-align: center;
+}
