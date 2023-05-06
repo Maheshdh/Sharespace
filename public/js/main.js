@@ -217,6 +217,50 @@ function filter(){
     }
 }
 
+function outgoingListingsSearch(){
+    var search = document.getElementById("outgoinglistingssearch").value;
+    search = search.toLowerCase();
+    var outgoingListings = document.getElementsByClassName("outgoingRequestsClass")
+    
+    for (let i = 0; i < outgoingListings.length; i++) {
+        if(outgoingListings[i].includes(search)){
+            outgoingListings[i].style.display = "list-item";
+        }
+        else{
+            outgoingListings[i].style.display = "none";
+        }
+    }
+}
+
+function outgoingListingReset(){
+    let x = document.getElementsByClassName("outgoingRequestsClass");
+    for (let i = 0; i < x.length; i++) {
+        x[i].style.display = "list-item";
+    }
+}
+
+function incomingListingsSearch(){
+    var search = document.getElementById("incominglistingssearch").value;
+    search = search.toLowerCase();
+    var incomingListings = document.getElementsByClassName("incomingRequestsClass")
+    
+    for (let i = 0; i < incomingListings.length; i++) {
+        if(incomingListings[i].includes(search)){
+            incomingListings[i].style.display = "list-item";
+        }
+        else{
+            incomingListings[i].style.display = "none";
+        }
+    }
+}
+
+function incomingListingReset(){
+    let x = document.getElementsByClassName("incomingRequestsClass");
+    for (let i = 0; i < x.length; i++) {
+        x[i].style.display = "list-item";
+    }
+}
+
 function resetFilter(){
     let x = document.getElementsByClassName("homepageListings");
     for (let i = 0; i < x.length; i++) {

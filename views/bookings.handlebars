@@ -33,6 +33,10 @@
         {{/each}}
     </ol>
 </div> --}}
+<label for="outgoingListingssearch"></label>
+<input type="text" id="outgoinglistingssearch" placeholder="Search">
+<button id="outgoingListingsButton" onclick="outgoingListingsSearch()">Search</button>
+<button onclick="outgoingListingReset()">Reset</button>
 
 <div id="OutgoingRequests">
     <h2>Outgoing Requests</h2>
@@ -44,7 +48,7 @@
             <th>Listing Owner's Contact Information</th>
         </tr>
         {{#each bookingsRequested}}
-            <tr>
+            <tr class="outgoingRequestsClass">
                 <td> <a href="/listing/{{this.listingID}}">Link to Listing</a></td>
                 <td>{{this.requestStatus}}
                     <td>
@@ -61,6 +65,11 @@
 
 <br><br>
 
+<label for="incomingListingssearch"></label>
+<input type="text" id="incominglistingssearch" placeholder="Search">
+<button id="incomingListingsButton" onclick="incomingListingsSearch()">Search</button>
+<button onclick="incomingListingReset()">Reset</button>
+
 <div id="IncomingRequests">
     <h2>Incoming Requests</h2>
     <table id="bookingTable-IncomingRequests">
@@ -70,7 +79,7 @@
             <th>Status</th>
         </tr>
         {{#each bookingsReceived}}
-            <tr>
+            <tr class="incomingRequestsClass">
                 <td> <a href="/listing/{{this.listingID}}">Link to Listing</a></td>
                 <td> <a href="/users/{{this.userRequestingBookingID}}">Link to User</a></td>
                 <td>{{this.requestStatus}} </td>
