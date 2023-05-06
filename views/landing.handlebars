@@ -28,8 +28,8 @@
   let longs = null
     {{#each listings}}
          lat = {{this.latitude }}
-         longs = {{ this.longitude }}
-        markerPositions.push ({position : {lat : lat, lng: longs } });
+         longs = {{ this.longitude }} 
+        markerPositions.push ({position : {lat : lat, lng: longs} });
 
     {{/each}}
 
@@ -39,7 +39,7 @@
     var marker = new google.maps.Marker({
       position: markerPositions[i].position,
       map: map,
-      icon: markerPositions[i].icon
+      icon: "public/list_icon.png"
     });
   }    
    }, function() {
