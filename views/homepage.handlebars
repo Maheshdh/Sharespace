@@ -81,29 +81,58 @@
       map: map,
       icon: icon
     });
+
+    const infoWindow = new google.maps.InfoWindow({
+        content: "<p> This is your current location</p>"
+      });
+      markerCurrent.addListener('click', function() {
+      infoWindow.open(map, markerCurrent);
+})    
+      google.maps.event.addListener(map, 'storageListings', function() {
+  map.setCenter(new google.maps.LatLng(position.coords.latitude, position.coords.longitude));
+      })
   
   var markerPositions = []
   
   let lat = null
   let longs = null
+  var listIds = []
+  var title = []
     {{#each listings}}
          lat = {{this.latitude }}
-         longs = {{ this.longitude }}
-        markerPositions.push ({position : {lat : lat, lng: longs } });
+         longs = {{ this.longitude }} 
+        markerPositions.push ({position : {lat : lat, lng: longs}  });
+        listIds.push("{{this._id}}".toString());
+        title.push("{{this.title}}");
 
     {{/each}}
 
 
   // Loop through the markerPositions array and create a marker for each set of coordinates
   for (var i = 0; i < markerPositions.length; i++) {
-    var marker = new google.maps.Marker({
+    let marker = new google.maps.Marker({
       position: markerPositions[i].position,
       map: map,
       icon: markerPositions[i].icon,
       animation : google.maps.Animation.DROP
 
     });
-  }    
+     let infoWindow = new google.maps.InfoWindow({
+        //content: `<p> Visit this listing :  <a href = "/listing/${listIds[i]}"> Link </a></p>`
+        content : `<p> <a href="/listing/${listIds[i]}">${title[i]}</a>`
+      });
+      //infoWindow.open(map, marker);
+      marker.addListener('click', function() {
+      infoWindow.open(map, marker);
+});
+
+     }
+
+
+     google.maps.event.addListenerOnce(map, 'tilesloaded', function() {
+  map.setCenter(new google.maps.LatLng(position.coords.latitude, position.coords.longitude));
+});
+    
    }, function() {
             handleLocationError(true, infoWindow, map.getCenter());
           });
@@ -138,7 +167,6 @@ function searchLocation() {
     // Extract the latitude and longitude coordinates from the geocoding response
     var latitude = data.results[0].geometry.location.lat;
     var longitude = data.results[0].geometry.location.lng;
-    console.log("latitude = ",latitude)
     var pos = {
               lat: latitude,
               lng: longitude
@@ -159,29 +187,61 @@ function searchLocation() {
       icon: icon
       })
 
+      const newInfoWindow = new google.maps.InfoWindow({
+        content: "<p> This is your current location</p>"
+      });
+      markerCurrent.addListener('click', function() {
+      newInfoWindow.open(map2, markerCurrent);
+});
+      google.maps.event.addListener(map2, 'storageListings', function() {
+  map.setCenter(new google.maps.LatLng(position.coords.latitude, position.coords.longitude));
+      })
+
+      
       var markerPositions = []
   
   let lat = null
   let longs = null
+  var newListIds = []
+  var newTitle = []
+
+
     {{#each listings}}
          lat = {{this.latitude }}
          longs = {{ this.longitude }}
         markerPositions.push ({position : {lat : lat, lng: longs } });
+        newListIds.push("{{this._id}}".toString());
+        newTitle.push("{{this.title}}");
+
+
 
     {{/each}}
 
 
   // Loop through the markerPositions array and create a marker for each set of coordinates
   for (var i = 0; i < markerPositions.length; i++) {
-    var marker = new google.maps.Marker({
+    let marker = new google.maps.Marker({
       position: markerPositions[i].position,
       map: map2,
       icon: markerPositions[i].icon,
       animation : google.maps.Animation.DROP
 
     });
-  }    
-  
+     let infoWindow = new google.maps.InfoWindow({
+        //content: `<p> Visit this listing :  <a href = "/listing/${listIds[i]}"> Link </a></p>`
+        content : `<p> <a href="/listing/${newListIds[i]}">${newTitle[i]}</a>`
+      });
+      //infoWindow.open(map, marker);
+      marker.addListener('click', function() {
+      infoWindow.open(map2, marker);
+});
+
+     }
+
+
+     google.maps.event.addListenerOnce(map2, 'tilesloaded', function() {
+  map2.setCenter(new google.maps.LatLng(lat, lng));
+});
 
     // Use the coordinates as needed
   })
