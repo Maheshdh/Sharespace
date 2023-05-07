@@ -16,48 +16,74 @@
 
     if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(function(position) {
-            var pos = {
+            var currentPos = {
               lat: position.coords.latitude,
               lng: position.coords.longitude
             };
             var map = new google.maps.Map(document.getElementById('map'), {
               zoom: 12,
-              center: pos
+              center: currentPos
             });
-
-            var icon = {
+var icon = {
   url: "public/list_icon.png",
   scaledSize: new google.maps.Size(32, 32) // Set the desired scaled size
 };
 
             var markerCurrent = new google.maps.Marker({
-      position: pos,
+      position: currentPos,
       map: map,
       icon: icon
-    });
-  
+      });
+      const infoWindow = new google.maps.InfoWindow({
+        content: "<p> This is your current location</p>"
+      });
+      markerCurrent.addListener('click', function() {
+      infoWindow.open(map, markerCurrent);
+})    
+              
   var markerPositions = []
   
   let lat = null
   let longs = null
+  var listIds = []
+  var title = []
     {{#each listings}}
          lat = {{this.latitude }}
          longs = {{ this.longitude }} 
-        markerPositions.push ({position : {lat : lat, lng: longs} });
+        markerPositions.push ({position : {lat : lat, lng: longs}  });
+        listIds.push("{{this._id}}".toString());
+        title.push("{{this.title}}");
 
     {{/each}}
 
 
   // Loop through the markerPositions array and create a marker for each set of coordinates
   for (var i = 0; i < markerPositions.length; i++) {
-    var marker = new google.maps.Marker({
+    let marker = new google.maps.Marker({
       position: markerPositions[i].position,
       map: map,
       icon: markerPositions[i].icon,
       animation : google.maps.Animation.DROP
 
     });
-  }    
+     let infoWindow = new google.maps.InfoWindow({
+        //content: `<p> Visit this listing :  <a href = "/listing/${listIds[i]}"> Link </a></p>`
+        content : `<p> <a href="/listing/${listIds[i]}">${title[i]}</a>`
+      });
+      //infoWindow.open(map, marker);
+      marker.addListener('click', function() {
+      infoWindow.open(map, marker);
+});
+
+     }
+
+
+     google.maps.event.addListenerOnce(map, 'tilesloaded', function() {
+  map.setCenter(new google.maps.LatLng(position.coords.latitude, position.coords.longitude));
+});
+
+         
+    
    }, function() {
             handleLocationError(true, infoWindow, map.getCenter());
           });
