@@ -272,7 +272,7 @@ function incomingListingsSearch(){
     var incomingListings = document.getElementsByClassName("incomingRequestsClass")
     
     for (let i = 0; i < incomingListings.length; i++) {
-        if(incomingListings[i]innerHTML.toLowerCase().includes(search)){
+        if(incomingListings[i].innerHTML.toLowerCase().includes(search)){
             incomingListings[i].style.display = "list-item";
         }
         else{
