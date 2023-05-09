@@ -32,7 +32,7 @@ export const makeSponsoredListings = async () => {
     // Making tierOne listings array
     if (tierOneListings.length > 0) {
         let lengthUsedForMathRandom = tierOneListings.length - 1 //because Math.random will never be 1
-        var tierOneListing1 = tierOneListings[Math.floor(Math.random()*lengthUsedForMathRandom)]
+        var tierOneListing1 = tierOneListings[Math.round(Math.random()*lengthUsedForMathRandom)]
         let index = tierOneListings.indexOf(tierOneListing1)
         if (index > -1) {
             tierOneListings.splice(index, 1)
@@ -40,7 +40,7 @@ export const makeSponsoredListings = async () => {
     }
     if (tierOneListings.length > 0) {
         let lengthUsedForMathRandom = tierOneListings.length - 1 //because Math.random will never be 1
-        var tierOneListing2 = tierOneListings[Math.floor(Math.random()*lengthUsedForMathRandom)]
+        var tierOneListing2 = tierOneListings[Math.round(Math.random()*lengthUsedForMathRandom)]
         let index = tierOneListings.indexOf(tierOneListing2)
         if (index > -1) {
             tierOneListings.splice(index, 1)
@@ -53,7 +53,7 @@ export const makeSponsoredListings = async () => {
     // Making tierTwo listings array
     if (tierTwoListings.length > 0) {
         let lengthUsedForMathRandom = tierTwoListings.length - 1 //because Math.random will never be 1
-        var tierTwoListing1 = tierTwoListings[Math.floor(Math.random()*lengthUsedForMathRandom)]
+        var tierTwoListing1 = tierTwoListings[Math.round(Math.random()*lengthUsedForMathRandom)]
         let index = tierTwoListings.indexOf(tierTwoListing1)
         if (index > -1) {
             tierTwoListings.splice(index, 1)

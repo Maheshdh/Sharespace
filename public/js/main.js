@@ -263,7 +263,7 @@ if(addSponsorPay){
         event.preventDefault();
         var boostamount = document.getElementById("sponsorPayInput").value;
         try{
-        boostamount = checkPrice(boostamount,"boost price");
+        boostamount = checkSponsorPrice(boostamount,"boost price");
         addSponsorPay.submit();
         }
         catch(e){
@@ -411,6 +411,16 @@ function checkPrice(price, varName) {
     price = Number(price)
     if (isNaN(price) == true) throw `Error: ${varName} must be a number`
     if (price <= 0) throw `Error: ${varName} should be greater than 0`
+    if (price > 1000000000) throw `Error: ${varName} should be lesser than 1,000,000,000`
+    return price
+  }
+
+function checkSponsorPrice(price, varName) {
+    if (!price) throw `Error: You must provide a ${varName}`
+    if (price.toString().trim() == '') throw `Error: You must provide a ${varName}`
+    price = Number(price)
+    if (isNaN(price) == true) throw `Error: ${varName} must be a number`
+    if (price < -1) throw `Error: ${varName} should be greater than or equal to 0`
     if (price > 1000000000) throw `Error: ${varName} should be lesser than 1,000,000,000`
     return price
   }

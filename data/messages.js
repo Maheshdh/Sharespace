@@ -27,14 +27,14 @@ export const newMessage = async (messageFromID, messageToID, message) => {
 
     let findingDuplicate1 = await messageCollection.findOne(
         {$and: [
-            {user1: {id: messageFromID, name: messageFromName}},
-            {user2: {id: messageToID, name: messageToName}}
+            {"user1.id": messageFromID},
+            {"user2.id": messageToID}
         ]}
     )
     let findingDuplicate2 = await messageCollection.findOne(
         {$and: [
-            {user2: {id: messageFromID, name: messageFromName}},
-            {user1: {id: messageToID, name: messageToName}}
+            {"user2.id": messageFromID},
+            {"user1.id": messageToID}
         ]}
     )
     if (findingDuplicate1 || findingDuplicate2) {
@@ -82,14 +82,14 @@ export const replyMessage = async (messageFromID, messageToID, message) => {
 
     let findingDuplicate1 = await messageCollection.findOne(
         {$and: [
-            {user1: {id: messageFromID, name: messageFromName}},
-            {user2: {id: messageToID, name: messageToName}}
+            {"user1.id": messageFromID},
+            {"user2.id": messageToID}
         ]}
     )
     let findingDuplicate2 = await messageCollection.findOne(
         {$and: [
-            {user2: {id: messageFromID, name: messageFromName}},
-            {user1: {id: messageToID, name: messageToName}}
+            {"user2.id": messageFromID},
+            {"user1.id": messageToID}
         ]}
     )
     if (!findingDuplicate1 && !findingDuplicate2) {
@@ -100,8 +100,8 @@ export const replyMessage = async (messageFromID, messageToID, message) => {
         let newReplyContent = {message: message, sentByID: {id: messageFromID, name: messageFromName}}
         let replying = await messageCollection.findOneAndUpdate(        
             {$and: [
-                {user1: {id: messageFromID, name: messageFromName}},
-                {user2: {id: messageToID, name: messageToName}}
+                {"user1.id": messageFromID},
+                {"user2.id": messageToID}
                 ]
             },
             {$push: {content: newReplyContent}}
@@ -111,8 +111,8 @@ export const replyMessage = async (messageFromID, messageToID, message) => {
         let newReplyContent = {message: message, sentByID: {id: messageFromID, name: messageFromName}}
         let replying = await messageCollection.findOneAndUpdate(        
             {$and: [
-                {user2: {id: messageFromID, name: messageFromName}},
-                {user1: {id: messageToID, name: messageToName}}
+                {"user2.id": messageFromID},
+                {"user1.id": messageToID}
                 ]
             },
             {$push: {content: newReplyContent}}
@@ -135,8 +135,8 @@ export const getMessages = async (userID) => {
     let userInfo = await userCollection.findOne({_id: new ObjectId(userID)})
     let userName = userInfo.firstName + ' ' + userInfo.lastName
     
-    let findMessagesWhenSenderIsUser = await messageCollection.find({user1: {id: userID, name: userName}}).toArray()
-    let findMessagesWhenReceiverIsUser = await messageCollection.find({user2: {id: userID, name: userName}}).toArray()
+    let findMessagesWhenSenderIsUser = await messageCollection.find({"user1.id" : userID}).toArray()
+    let findMessagesWhenReceiverIsUser = await messageCollection.find({"user2.id" : userID}).toArray()
 
     let displayMessagesObject = [] 
     // Array of objects containing messages where each message: 
