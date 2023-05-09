@@ -1,4 +1,5 @@
 import { ObjectId } from "mongodb";
+import xss from 'xss';
 
 const exportedMethods = {
     checkId(id, varName) {

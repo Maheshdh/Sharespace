@@ -3,6 +3,7 @@ const router = Router()
 
 import helpers from '../helpers.js'
 import { deleteListing} from '../data/listings.js'
+import xss from 'xss';
 import { getAllReportedListings, deleteReport } from '../data/reportedListings.js'
 
 router
@@ -33,6 +34,7 @@ router
         if (currentUser.role != 'admin') throw 'You are not allowed to view this page as you do not have valid permissions'
         
         let userInput = req.body
+        applyXSS(req.body);
         let listingID = req.params.id.toString()
         if (!listingID) throw 'Error: Listing ID is missing'
         let listingToBeDeletedID = helpers.checkId(listingID, 'Listing ID')
@@ -62,6 +64,7 @@ router
         if (currentUser.role != 'admin') throw 'You are not allowed to view this page as you do not have valid permissions'
         
         let userInput = req.body
+        applyXSS(req.body)
         let listingID = req.params.id.toString()
         if (!listingID) throw 'Error: Listing ID is missing'
         let reportToBeIgnoredListingID = helpers.checkId(listingID, 'Listing ID')
@@ -78,6 +81,10 @@ router
     }
 })
 
-
+const applyXSS = (req_body) => {
+    Object.keys(req_body).forEach(function (key, index) {
+      req_body[key] = xss(req_body[key]);
+    });
+  };
 
 export default router;

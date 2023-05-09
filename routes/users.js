@@ -3,6 +3,7 @@ const router = Router()
 import helpers from '../helpers.js';
 import { getAllUsers, getUser } from '../data/users.js';
 import { getListing } from '../data/listings.js';
+import xss from 'xss';
 
 
 router

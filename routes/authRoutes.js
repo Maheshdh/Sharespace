@@ -8,6 +8,7 @@ import {checkUser} from '../data/users.js'
 
 import helpers from '../helpers.js'
 import multer from 'multer';
+import xss from 'xss';
 const upload = multer({ dest: './public/data/uploads/' });
 
 
@@ -43,7 +44,9 @@ router
     })
     .post(upload.single('uploadFile'), async (req, res) => {
         try {
+            applyXSS(req.body)
             let userInput = req.body
+
             if (!userInput.firstNameInput) throw `Error: First Name not provided`
             if (!userInput.lastNameInput) throw 'Error: Last Name not provided'
             if (!userInput.emailAddressInput) throw 'Error: Email Address not provided'
@@ -81,4 +84,9 @@ router
     return res.render("logout");
     });
 
+    const applyXSS = (req_body) => {
+        Object.keys(req_body).forEach(function (key, index) {
+          req_body[key] = xss(req_body[key]);
+        });
+      };    
 export default router;

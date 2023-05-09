@@ -6,6 +6,7 @@ import { getListing } from '../data/listings.js';
 import { getUser, updateUser, unsaveListing } from '../data/users.js';
 import { addSponsoredPrice } from '../data/sponsoredListings.js'
 import multer from 'multer';
+import xss from 'xss';
 const upload = multer({ dest: './public/data/uploads/' });
 
 router
@@ -60,6 +61,7 @@ router
 })
 .post(upload.single('updateProfilePic'),async (req,res) => {
     try {
+        applyXSS(req.body)
         let userInput = req.body
         if (!userInput.firstname_update) throw `Error: First Name not provided`
         if (!userInput.lastname_update) throw 'Error: Last Name not provided'
@@ -110,6 +112,7 @@ router
 })
 .post(async (req, res) => {
     try {
+        applyXSS(req.body)
         let userInput = req.body
         let listingID = helpers.checkId(req.params.id, 'Listing ID')
 
@@ -147,5 +150,10 @@ router
       }
 
 })
+const applyXSS = (req_body) => {
+    Object.keys(req_body).forEach(function (key, index) {
+      req_body[key] = xss(req_body[key]);
+    });
+  };    
 
 export default router
