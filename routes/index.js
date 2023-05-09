@@ -15,7 +15,6 @@ const constructMethod = (app) => {
     app.use('/homepage', homePageRoutes)
     app.use('/profile', profileRoutes)
     app.use('/bookings', bookingRoutes)
-    console.log("Index");
     app.use('/listing',listingRoutes)
     app.use('/users', userRoutes)
     app.use('/adminPortal', adminPortalRoutes)
