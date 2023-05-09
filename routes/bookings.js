@@ -7,6 +7,8 @@ import {
     getBookingRequestsSent, 
     respondToBookingRequestReceived,
     getContactInfoWhenBookingAccepted } from '../data/bookings.js';
+import { getListing } from '../data/listings.js';
+import { getUser } from '../data/users.js'
 
 router
 .route('/')
@@ -14,20 +16,30 @@ router
     let currentUser = req.session.user
     try {
         let bookingsRequested = await getBookingRequestsSent(currentUser.userID)
+        if (bookingsRequested == 'No Booking Requests Sent') {bookingsRequested = []}
         let bookingsReceived = await getBookingRequestsReceived(currentUser.userID)
+        if (bookingsReceived == 'No Booking Requests Received') {bookingsReceived = []}
+
         for (let booking of bookingsReceived) {
             if (booking.requestStatus == 'Requested') {
                 booking.respondRequired = 'Yes'
             }
+            let listingInfo = await getListing(booking.listingID)
+            let userRequestingBookingInfo = await getUser(booking.userRequestingBookingID)
+            if (listingInfo) {booking.listingTitle = listingInfo.title} else {booking.listingTitle = 'Link to listing'}
+            if (userRequestingBookingInfo) {booking.userRequestingBookingName = userRequestingBookingInfo.firstName + ' ' + userRequestingBookingInfo.lastName} else {booking.userRequestingBookingName = 'Link to user'}
         }
         for (let booking of bookingsRequested) {
             if (booking.requestStatus == 'Request Accepted') {
                 booking.listingOwnerContact = await getContactInfoWhenBookingAccepted(booking.listingUploadedByID)
             }
+            let listingInfo = await getListing(booking.listingID)
+            if (listingInfo) {booking.listingTitle = listingInfo.title} else {booking.listingTitle = 'Link to listing'}
         }
+
         return res.render('bookings', {bookingsRequested: bookingsRequested, bookingsReceived: bookingsReceived})
     } catch (e) {
-        res.render('errors', {errors: e})
+        res.render('errors', {error: e})
     }
 })
 .post(async (req, res) => {

@@ -45,11 +45,11 @@
         </tr>
         {{#each bookingsRequested}}
             <tr class="outgoingRequestsClass">
-                <td> <a href="/listing/{{this.listingID}}">Link to Listing</a></td>
+                <td> <a href="/listing/{{this.listingID}}">{{this.listingTitle}}</a></td>
                 <td>{{this.requestStatus}}</td>
                 <td>
                     {{#if this.listingOwnerContact}}
-                        <p>Phone: {{this.listingOwnerContact.phone}}&nbsp;
+                        <p>Phone: {{this.listingOwnerContact.phone}}<br><br>
                         Email: {{this.listingOwnerContact.email}}</p>
                     {{/if}}
                 </td>
@@ -71,8 +71,8 @@
         </tr>
         {{#each bookingsReceived}}
             <tr class="incomingRequestsClass">
-                <td> <a href="/listing/{{this.listingID}}">Link to Listing</a></td>
-                <td> <a href="/users/{{this.userRequestingBookingID}}">Link to User</a></td>
+                <td> <a href="/listing/{{this.listingID}}">{{this.listingTitle}}</a></td>
+                <td> <a href="/users/{{this.userRequestingBookingID}}">{{this.userRequestingBookingName}}</a></td>
                 <td>{{this.requestStatus}} </td>
                 {{#if this.respondRequired}}
                 <td >
