@@ -1,0 +1,21 @@
+[{
+  "_id": {
+    "$oid": "645a6356e84a585c27127375"
+  },
+  "listingID": "645a5709e84a585c2712736a",
+  "reportedBy": [
+    "645a60b0e84a585c27127371",
+    "645a59a7e84a585c2712736d",
+    "645a57c3e84a585c2712736b"
+  ],
+  "reportCount": 3
+},{
+  "_id": {
+    "$oid": "645a636ce84a585c27127376"
+  },
+  "listingID": "645a62fbe84a585c27127374",
+  "reportedBy": [
+    "645a60b0e84a585c27127371"
+  ],
+  "reportCount": 1
+}]
