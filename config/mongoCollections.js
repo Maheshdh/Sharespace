@@ -20,5 +20,6 @@ export const reviews = getCollectionFn('reviews');
 export const bookingRequests = getCollectionFn('bookingRequests')
 export const myBookings = getCollectionFn('myBookings')
 export const reports = getCollectionFn('reports')
+export const messages = getCollectionFn('messages')
 
 

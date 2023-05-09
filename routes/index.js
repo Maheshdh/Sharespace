@@ -7,6 +7,7 @@ import landingRoutes from './landing.js'
 import authRoutes from './authRoutes.js'
 import profileRoutes from './profile.js'
 import adminPortalRoutes from './adminPortal.js'
+import messageRoutes from './messages.js'
 
 const constructMethod = (app) => {
     app.use('/', authRoutes)
@@ -18,6 +19,7 @@ const constructMethod = (app) => {
     app.use('/listing',listingRoutes)
     app.use('/users', userRoutes)
     app.use('/adminPortal', adminPortalRoutes)
+    app.use('/message', messageRoutes)
 
     app.use('*', (req, res) => {
         res.render('errors', {error:'404: That Page Does not Exist'});

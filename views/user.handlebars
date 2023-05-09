@@ -14,6 +14,11 @@
     <td>{{user.lastName}}</td>
   </tr>
 </table>
+  <div>
+    <br>
+    <button class="listing-buttons-message-owner" onclick="window.location.href='/message/newMessage/{{user._id}}';">Message this User!<i class="fa fa-edit-1"></i></button>
+    <br><br>
+  </div>
 </div>
 <div>
 {{#if user.image}}
