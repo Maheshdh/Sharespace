@@ -65,7 +65,6 @@ router
 router
     .route('/addReview')
     .post(async (req,res)=>{
-        applyXSS(req.body)
         let userInput = req.body
         let userID;
         let listingID;
@@ -79,9 +78,9 @@ router
             if (!userInput.comment) throw 'Error: Comment not provided'
     
             userID = helpers.checkId(req.session.user.userID.toString())
-            listingID = helpers.checkId(userInput.listingID)
+            listingID = xss(helpers.checkId(userInput.listingID))
             rating = helpers.checkRating(userInput.rating, 'Rating')
-            comment = helpers.checkString(userInput.comment, 'Comment////')   
+            comment = xss(helpers.checkString(userInput.comment, 'Comment////'))
         } catch (e) {
             // console.log(e);
             return res.json(e);
