@@ -108,7 +108,7 @@ if(review_form) {
         document.getElementById("review_added").innerHTML = `<p class="reviewAdded-fail"> ${error} </p>`;
     }
 
-    
+    console.log(rating);
     if (comment && rating !== undefined && listingID) {
       //set up AJAX request config
       let requestConfig = {
@@ -457,14 +457,7 @@ function checkDimension(dimension, varName) {
     return volume
   }
 
-function checkRating(rating, varName) {
-    if (!rating) throw `Error: You must provide a ${varName}`
-    if (rating.trim() == '') throw `Error: You must provide a ${varName}`
-    rating = Number(rating)
-    if (isNaN(dimension) == true) throw `Error: ${varName} must be a number`
-    if (rating > 5 || rating < 0) throw `Error: ${varName} must be between 0 and 5`
-    return rating
-  }
+
   function checkRating(rating, varName) {
     if (rating === undefined) throw `Error: You must provide a ${varName}`
     if (rating.toString().trim() == '') throw `Error: You must provide a ${varName}`

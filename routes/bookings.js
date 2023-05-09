@@ -1,6 +1,7 @@
 import {Router} from 'express'
 const router = Router()
 import helpers from '../helpers.js'
+import xss from 'xss';
 import { 
     createBookingRequest, 
     getBookingRequestsReceived, 
@@ -44,6 +45,7 @@ router
 })
 .post(async (req, res) => {
     let currentUser = req.session.user
+    applyXSS(req.body);
     let userInput = req.body
     // Add line if (form) etc etc
     if (userInput.bookingStatusResponse) {
@@ -64,5 +66,11 @@ router
         }
     }
 })
+
+const applyXSS = (req_body) => {
+    Object.keys(req_body).forEach(function (key, index) {
+      req_body[key] = xss(req_body[key]);
+    });
+  };    
 
 export default router;

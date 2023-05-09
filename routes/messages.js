@@ -2,6 +2,7 @@ import {Router} from 'express'
 const router = Router()
 import helpers from '../helpers.js';
 import {getUser} from '../data/users.js';
+import xss from 'xss';
 import { getMessages, newMessage, replyMessage } from '../data/messages.js';
 
 
@@ -27,7 +28,7 @@ router
         let userID = helpers.checkId(req.session.user.userID, 'User ID')
         let messageToID = helpers.checkId(req.params.id, 'Sending Message to User ID')
         if (userID == messageToID) throw 'Error: You cannot send a message to yourself!'
-
+        applyXSS(req.body)
         let userInput = req.body
         let userInputValue = Object.values(userInput)
         if (!userInputValue[0]) throw 'Error: Missing message content'
@@ -61,5 +62,9 @@ router
     }
 })
 
-
+const applyXSS = (req_body) => {
+    Object.keys(req_body).forEach(function (key, index) {
+      req_body[key] = xss(req_body[key]);
+    });
+  };    
 export default router;

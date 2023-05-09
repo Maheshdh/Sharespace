@@ -9,6 +9,7 @@ import { addListingCommentOrQuestion } from '../data/comments.js';
 import { makeSponsoredListings } from '../data/sponsoredListings.js'
 import { makeNewReport } from '../data/reportedListings.js'
 import multer from 'multer';
+import xss from 'xss';
 const upload = multer({ dest: './public/data/uploads/' });
 
 router
@@ -18,6 +19,7 @@ router
 })
 .post(upload.array('uploadFile'), async(req,res,next)=>{
     try {
+      applyXSS(req.body)
       let userInput = req.body
       if (!userInput.listing_TitleInput) throw 'Error: Title not provided'
       if (!userInput.listing_DescriptionInput) throw 'Error: Description not provided'
@@ -76,9 +78,9 @@ router
             if (!userInput.comment) throw 'Error: Comment not provided'
     
             userID = helpers.checkId(req.session.user.userID.toString())
-            listingID = helpers.checkId(userInput.listingID)
+            listingID = xss(helpers.checkId(userInput.listingID))
             rating = helpers.checkRating(userInput.rating, 'Rating')
-            comment = helpers.checkString(userInput.comment, 'Comment////')   
+            comment = xss(helpers.checkString(userInput.comment, 'Comment////'))
         } catch (e) {
             // console.log(e);
             return res.json(e);
@@ -99,6 +101,7 @@ router
 .route('/addCommentOrQuestion')
 .post(async (req, res) => {
   try {
+    applyXSS(req.body)
     let userInput = req.body
     if (!req.session.user) {
       return (res.render('login', {error: 'You need to be logged in to add a comment!'}))
@@ -200,6 +203,7 @@ router
   .post(async (req, res) => {
     if (req.session.user) {
       let user = req.session.user
+      applyXSS(req.body)
       let userInput = req.body
       var listingID;
       // console.log("requesting booking")
@@ -260,6 +264,7 @@ router
 })
 .post(upload.array('uploadFile'), async(req,res,next)=>{
   try {
+    applyXSS(req.body)
     let userInput = req.body
     let listingId =req.params.id;
     listingId = helpers.checkId(listingId,"Listing id");
@@ -375,5 +380,9 @@ router
     return res.render('errors', {error:e})
   }
 })
-
+const applyXSS = (req_body) => {
+    Object.keys(req_body).forEach(function (key, index) {
+      req_body[key] = xss(req_body[key]);
+    });
+  };    
 export default router;
