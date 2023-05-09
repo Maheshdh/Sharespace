@@ -21,14 +21,14 @@ router
 .route('/:id')
 .get(async (req, res) => {
     try {
-    let userID = helpers.checkId(req.params.id, 'User ID');
-    let userInfo = await getUser(userID)
-    let currentUserListings = userInfo.listings
-    let reviews = userInfo.reviews
+        let userID = helpers.checkId(req.params.id, 'User ID');
+        let userInfo = await getUser(userID)
+        let currentUserListings = userInfo.listings
+        let reviews = userInfo.reviews
     
+        let noListings = false
         if (currentUserListings.length == 0){
-            let noListings = 'User has no listings!'
-            return res.render('user', {user:userInfo, reviews:[], noListings: noListings})
+            noListings = true
         }
         
         let allListings = []
@@ -36,9 +36,23 @@ router
             let listingToBeAdded = await getListing(listing)
             allListings.push(listingToBeAdded)
         }
-        return res.render('user', {user:userInfo, listings: allListings, reviews: reviews})
+
+        let reviewsShownInProfile = []
+        let noReviewsFound = false
+        if (reviews.length == 0) {
+            noReviewsFound = true
+        } else {
+            for (let review of reviews) {
+                let reviewToBeAdded = review
+                let userWhoReviewed = await getUser(review.reviewMadeBy)
+                let userWhoReviewedName = userWhoReviewed.firstName + ' ' + userWhoReviewed.lastName
+                reviewToBeAdded.fullName = userWhoReviewedName
+                reviewsShownInProfile.push(reviewToBeAdded)
+            }
+        }
+        return res.render('user', {user:userInfo, listings: allListings, reviews: reviewsShownInProfile, noListings: noListings, noReviewsFound: noReviewsFound})
     } catch (e) {
-        res.status(500).send(e)
+        res.status(500).render('errors', {error: e})
     }
 
 })

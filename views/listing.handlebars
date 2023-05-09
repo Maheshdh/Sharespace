@@ -174,7 +174,7 @@
 {{/if}}
 <ol id="current_added_reviews">
   {{#each reviews}}
-    <li>Rating: {{this.rating}}<br>Comment: {{this.comment}}<br>Reviewed By: <a href = "/users/{{this.userID}}">Link to user</a></p>
+    <li>Rating: {{this.rating}}<br>Comment: {{this.comment}}<br>Reviewed By: <a href = "/users/{{this.userID}}">{{this.fullName}}</a></p>
     </li>
   {{/each}}
 </ol>

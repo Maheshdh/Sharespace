@@ -148,6 +148,9 @@ router
         if (listing.reviews.length == 0) throw 'No Reviews Found!'
         for (let review of listing.reviews) {
           let reviewToBeAdded = await getReview(review)
+          let userWhoReviewed = await getUser(reviewToBeAdded.userID)
+          let userWhoReviewedName = userWhoReviewed.firstName + ' ' + userWhoReviewed.lastName
+          reviewToBeAdded.fullName = userWhoReviewedName
           reviews.push(reviewToBeAdded)
         }
       } catch (e) {
