@@ -174,7 +174,7 @@
 {{/if}}
 <ol id="current_added_reviews">
   {{#each reviews}}
-    <li>Rating: {{this.rating}}<br>Comment: {{this.comment}}<br>Reviewed By: <a href = "/users/{{this.userID}}">{{this.fullName}}</a></p>
+    <li>Rating: {{this.rating}}<br>Comment: {{this.comment}}<br>Reviewed By: <a href = "/users/{{this.userID}}">{{this.fullName}}</a>
     </li>
   {{/each}}
 </ol>
@@ -189,7 +189,7 @@
 
 <ol id="current_added_comments">
   {{#each comments}}
-    <li>Comment: {{this.comment}}<br>Made By: <a href = "/users/{{this.madeByUserID}}">{{this.madeByFullName}}</a></p>
+    <li>Comment: {{this.comment}}<br>Made By: <a href = "/users/{{this.madeByUserID}}">{{this.madeByFullName}}</a>
     </li>
   {{/each}}
 </ol>
