@@ -2,6 +2,7 @@ const login_form = document.getElementById("login-form")
 if (login_form) {
     login_form.addEventListener('submit',(event) => {
       event.preventDefault();
+      console.log("Taher");
       var emailAddressInput = document.getElementById('emailAddressInput').value;
       const passwordInput = document.getElementById('passwordInput').value;
       try {
@@ -98,12 +99,16 @@ const review_form = document.getElementById("review_input_form");
 if(review_form) {
   review_form.addEventListener("submit",(event) => {
     event.preventDefault();
+    var comment,rating,listingId
+    try {
+        listingID = checkId(document.getElementById("listing_id_input").value,"Listing Id");
+        rating = checkRating(document.getElementById("rating_select").value," Rating ");
+        comment = checkString(document.getElementById("listing_comment_input").value," Comment");
+    } catch (error) {
+        document.getElementById("review_added").innerHTML = `<p class="reviewAdded-fail"> ${error} </p>`;
+    }
+
     
-    const listingID = checkId(document.getElementById("listing_id_input").value,"Listing Id");
-    const rating = checkRating(document.getElementById("rating_select").value);
-    const comment = checkString(document.getElementById("listing_comment_input").value);
-    
-    console.log(rating, comment, listingID)
     if (comment && rating !== undefined && listingID) {
       //set up AJAX request config
       let requestConfig = {
@@ -272,7 +277,7 @@ function incomingListingsSearch(){
     var incomingListings = document.getElementsByClassName("incomingRequestsClass")
     
     for (let i = 0; i < incomingListings.length; i++) {
-        if(incomingListings[i]innerHTML.toLowerCase().includes(search)){
+        if(incomingListings[i].innerHTML.toLowerCase().includes(search)){
             incomingListings[i].style.display = "list-item";
         }
         else{
@@ -294,6 +299,36 @@ function resetFilter(){
         x[i].style.display = "list-item";
     }
     filterError.innerHTML = "";
+}
+
+const addSponsorPay = document.getElementById("addSponsorPay-form");
+if(addSponsorPay){
+    addSponsorPay.addEventListener("submit",(event)=>{
+        event.preventDefault();
+        var boostamount = document.getElementById("sponsorPayInput").value;
+        try{
+        boostamount = checkPrice(boostamount,"boost price");
+        addSponsorPay.submit();
+        }
+        catch(e){
+            document.getElementById("error_js").innerHTML = e;
+        }
+    })
+}
+
+const addCommentsForm = document.getElementById("comment_question_input_form")
+if(addCommentsForm){
+    addCommentsForm.addEventListener("submit",(event)=>{
+        event.preventDefault();
+        var commentInput = document.getElementById("comment_question_input").value;
+        try{
+        commentInput = checkString(commentInput,"Comment Input");
+        addCommentsForm.submit();
+        }
+        catch(e){
+            document.getElementById("error_js").innerHTML = e;
+        }
+    })
 }
 
 // ***********************************************************
