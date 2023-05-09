@@ -39,7 +39,7 @@ router
 
         return res.render('bookings', {bookingsRequested: bookingsRequested, bookingsReceived: bookingsReceived})
     } catch (e) {
-        res.render('errors', {error: e})
+        return res.render('errors', {error: e})
     }
 })
 .post(async (req, res) => {
@@ -49,7 +49,7 @@ router
     if (userInput.bookingStatusResponse) {
         let bookingStatusResponse = userInput.bookingStatusResponse
         if (bookingStatusResponse == 'Accept' || bookingStatusResponse == 'Deny') {}
-        else {res.render('errors', {errors: 'Booking status can only be "Accept" or "Deny"'})}
+        else {return res.render('errors', {errors: 'Booking status can only be "Accept" or "Deny"'})}
         try {
             if (!userInput.bookingID) throw 'Error: Missing Booking ID'
             let bookingID = helpers.checkId(userInput.bookingID)
@@ -58,9 +58,9 @@ router
             let bookingsRequested = await getBookingRequestsSent(currentUser.userID)
             let bookingsReceived = await getBookingRequestsReceived(currentUser.userID)
             // return res.render('bookings', {bookingsRequested: bookingsRequested, bookingsReceived: bookingsReceived})
-            res.redirect('/bookings')
+            return res.redirect('/bookings')
         } catch (e) {
-            res.status(500).render('errors', {errors: e})
+            return res.status(500).render('errors', {errors: e})
         }
     }
 })

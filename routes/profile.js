@@ -62,7 +62,7 @@ router
 
         return res.render('profile', {user:currentUser, listings: allListings, reviews: reviewsShownInProfile, noReviewsFound: noReviewsFound, savedListings: savedListings, noListings: noListings, noSavedListings: noSavedListings, isAdmin: isAdmin})
     } catch (e) {
-        res.status(500).send(e)
+        return res.status(500).send(e)
     }
 
 })
@@ -71,7 +71,7 @@ router
 .route('/update')
 .get(async (req, res) => {
     let currentUser =req.session.user;
-    res.render('profileUpdate',{user: currentUser});
+    return res.render('profileUpdate',{user: currentUser});
 })
 .post(upload.single('updateProfilePic'),async (req,res) => {
     try {
@@ -117,9 +117,9 @@ router
         listingID = helpers.checkId(listingID, 'Listing ID')
 
         let listingInfo = await getListing(listingID)
-        res.render('sponsorListing', {listing: listingInfo})
+        return res.render('sponsorListing', {listing: listingInfo})
     } catch (e) {
-        res.render('errors', {error:e})
+        return res.render('errors', {error:e})
     }
 
 })
@@ -135,10 +135,10 @@ router
 
         let addingSponsorPay = await addSponsoredPrice(listingID, sponsorPayInput)
         if (addingSponsorPay.added == true) {
-            res.render('sponsorListing', {success: true, listing: addingSponsorPay.listing})
+            return res.render('sponsorListing', {success: true, listing: addingSponsorPay.listing})
         }
     } catch (e) {
-        res.render('errors', {error: e})
+        return res.render('errors', {error: e})
     }
 })
 

@@ -110,10 +110,10 @@ router
     let userInfo = await getUser(user.userID)
     let addingComment = await addListingCommentOrQuestion(listingID, comment, user.userID, `${userInfo.firstName} ${userInfo.lastName}`)
     if (addingComment.commentAdded == true) {
-      res.redirect(`/listing/${listingID}`)
+      return res.redirect(`/listing/${listingID}`)
     } else throw 'Unable to add comment'
   } catch (e) {
-    res.render('errors', {error:e})
+    return res.render('errors', {error:e})
   }
 })
 
@@ -230,7 +230,7 @@ router
             let bookingsRequested = await getBookingRequestsSent(user.userID)
             let bookingsReceived = await getBookingRequestsReceived(user.userID)
             // return res.render('bookings', {bookingsRequested: bookingsRequested, bookingsReceived: bookingsReceived})
-            res.redirect('/bookings')
+            return res.redirect('/bookings')
           } else throw 'Could not make booking'
         } catch (e) {
           return res.status(400).render('errors',{"error":e})
@@ -238,7 +238,7 @@ router
       }
 
     } else {
-      res.render('login', {error: 'You need to be logged in to request booking!'})
+      return res.render('login', {error: 'You need to be logged in to request booking!'})
     }
   })
 
@@ -251,7 +251,7 @@ router
     listingId = helpers.checkId(listingId,"Listing id");
     let listingInfo = await getListing(listingId);
     if (req.session.user.userID != listingInfo.userID) throw 'Error: You are not allowed to modify this listing because you do not own it'
-    res.render('updateListing',{listing: listingInfo});
+    return res.render('updateListing',{listing: listingInfo});
   }
   catch(e){
     return res.render('errors', {error : e} )
@@ -300,7 +300,7 @@ router
     let creatingListing = await modifyListing(listingId, titleInput, descriptionInput, addressInput, priceInput, lenghtInput, widthInput, heightInput,  latitudeInput, longitudeInput, availableStartInput, availableEndInput, imageInput)
     if (!creatingListing) throw 'Error: Unable to create Listing'
     
-    res.render('listingUpdated',{listingID: listingId});
+    return res.render('listingUpdated',{listingID: listingId});
   } catch (e) {
     return res.status(400).render('addListing', {error:e})
   }

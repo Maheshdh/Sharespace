@@ -17,7 +17,7 @@ router.get('/', async (req, res) => {
         }
         return res.render('homepage', {listings: listings, sponsoredListings: sponsoredListings, noListings: noListings, noSponsoredListings: noSponsoredListings});
     } catch (e) {
-        res.status(500).send(e);
+        return res.status(500).send(e);
       }  });
 
 export default router;

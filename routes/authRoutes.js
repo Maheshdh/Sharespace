@@ -28,7 +28,7 @@ router
     
             let userLoggingIn = await checkUser(emailAddressInput, passwordInput)
             req.session.user = userLoggingIn
-            res.redirect('homepage')            
+            return res.redirect('homepage')            
 
           } catch (e) {
             return res.status(400).render('login', {error:e})
@@ -63,9 +63,9 @@ router
 
             let insertingUserInfo = await createUser(firstNameInput, lastNameInput, emailAddressInput, passwordInput, phoneNumberInput,imageInput)
             if (insertingUserInfo.insertedUser == true) {
-                res.redirect('/login')
+                return res.redirect('/login')
             } else {
-                res.status(500).json({error: 'Internal Server Error'})
+                return res.status(500).json({error: 'Internal Server Error'})
             }
         } catch (e) {
             return res.status(400).render('register', {error:e})

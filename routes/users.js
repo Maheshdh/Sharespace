@@ -12,7 +12,7 @@ router
         let users = await getAllUsers();
         return res.render('allUsers', {users:users});
     } catch (e) {
-        res.status(500).send(e);
+        return res.status(500).send(e);
       }
 })
 
@@ -52,7 +52,7 @@ router
         }
         return res.render('user', {user:userInfo, listings: allListings, reviews: reviewsShownInProfile, noListings: noListings, noReviewsFound: noReviewsFound})
     } catch (e) {
-        res.status(500).render('errors', {error: e})
+        return res.status(500).render('errors', {error: e})
     }
 
 })
