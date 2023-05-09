@@ -1,0 +1,192 @@
+[{
+  "_id": {
+    "$oid": "645a4f76e84a585c27127366"
+  },
+  "firstName": "Admin",
+  "lastName": "Account",
+  "emailAddress": "admin@sharespace.com",
+  "password": "$2b$10$zqYUbt.v5aoBIugXcH48bORyuQbUNwII3TwTstRDH4i29Y7rcilO2",
+  "phoneNumber": "212 100 9999",
+  "listings": [
+    "645a55a5e84a585c27127368"
+  ],
+  "rating": 3.5,
+  "reviews": [
+    {
+      "reviewMadeBy": "645a59a7e84a585c2712736d",
+      "rating": 4,
+      "comment": "Great Listing"
+    },
+    {
+      "reviewMadeBy": "645a5624e84a585c27127369",
+      "rating": 3,
+      "comment": "Nothing Special"
+    }
+  ],
+  "role": "admin",
+  "savedListings": [],
+  "image": "default_image"
+},{
+  "_id": {
+    "$oid": "645a5624e84a585c27127369"
+  },
+  "firstName": "Jerry",
+  "lastName": "Seinfeld",
+  "emailAddress": "jerry@gmail.com",
+  "password": "$2b$10$yuQU7q7FZoLG1GV18rbqrODeHSjzaXn34x1CCZNH8K3zTXy3Lj6z2",
+  "phoneNumber": "212 900 1020",
+  "listings": [
+    "645a5709e84a585c2712736a"
+  ],
+  "rating": 1,
+  "reviews": [
+    {
+      "reviewMadeBy": "645a60b0e84a585c27127371",
+      "rating": 2,
+      "comment": "This is obviously a troll, rated 2 because those are some good pictures"
+    },
+    {
+      "reviewMadeBy": "645a59a7e84a585c2712736d",
+      "rating": 0,
+      "comment": "Had my hopes up :("
+    }
+  ],
+  "role": "user",
+  "savedListings": [],
+  "image": "fb5f3f17ea9e757b44e09d8c3137d441"
+},{
+  "_id": {
+    "$oid": "645a57c3e84a585c2712736b"
+  },
+  "firstName": "Robert",
+  "lastName": "De Niro",
+  "emailAddress": "goodfella@gmail.com",
+  "password": "$2b$10$5ccwg1GNhRfTZ.8Eh3ChmOxR5dmwKbfeL4xZk/TtYVZrfQsBM9SSO",
+  "phoneNumber": "212 500 8090",
+  "listings": [
+    "645a58dbe84a585c2712736c"
+  ],
+  "rating": 4.5,
+  "reviews": [
+    {
+      "reviewMadeBy": "645a5624e84a585c27127369",
+      "rating": 5,
+      "comment": "This guy is a good fella"
+    },
+    {
+      "reviewMadeBy": "645a5c98e84a585c2712736f",
+      "rating": 4,
+      "comment": "Good"
+    }
+  ],
+  "role": "user",
+  "savedListings": [],
+  "image": "b1e677c8cf804da160caa319f72dc94e"
+},{
+  "_id": {
+    "$oid": "645a59a7e84a585c2712736d"
+  },
+  "firstName": "Satoru",
+  "lastName": "Fujinuma",
+  "emailAddress": "satoru@gmail.com",
+  "password": "$2b$10$7pNUcgm0vH7knQuntG.Mee9Hn4RKbs52rWrTmOIMSd6RbmHHmqDHq",
+  "phoneNumber": "111 202 3333",
+  "listings": [
+    "645a5a97e84a585c2712736e"
+  ],
+  "rating": 5,
+  "reviews": [
+    {
+      "reviewMadeBy": "645a5c98e84a585c2712736f",
+      "rating": 5,
+      "comment": "Fair price"
+    }
+  ],
+  "role": "user",
+  "savedListings": [],
+  "image": "49b14d793d5a01987be982285ee85a23"
+},{
+  "_id": {
+    "$oid": "645a5c98e84a585c2712736f"
+  },
+  "firstName": "Roger",
+  "lastName": "Waters",
+  "emailAddress": "roger@gmail.com",
+  "password": "$2b$10$K8R240XRrVMKVLFCeWH6q.tlDWNQv6u/HPpTzetheQLWQGlXAyYQq",
+  "phoneNumber": "646 700 9090",
+  "listings": [
+    "645a5dc5e84a585c27127370",
+    "645a62fbe84a585c27127374"
+  ],
+  "rating": 5,
+  "reviews": [
+    {
+      "reviewMadeBy": "645a60b0e84a585c27127371",
+      "rating": 5,
+      "comment": "Amazing Listing, very rare to see such a big open warehouse in this area"
+    },
+    {
+      "reviewMadeBy": "645a59a7e84a585c2712736d",
+      "rating": 5,
+      "comment": "Wow so much space"
+    }
+  ],
+  "role": "user",
+  "savedListings": [],
+  "image": "ac135772aed760e61ba5f759c4b2c999"
+},{
+  "_id": {
+    "$oid": "645a60b0e84a585c27127371"
+  },
+  "firstName": "Al",
+  "lastName": "Pacino",
+  "emailAddress": "scarface@gmail.com",
+  "password": "$2b$10$sJuGxfHOxC752Mmbyx66Q.Lu4jjvdZybyJxtzr6lTh4KlIWL6aacS",
+  "phoneNumber": "212 200 4000",
+  "listings": [
+    "645a612fe84a585c27127372",
+    "645a61c5e84a585c27127373"
+  ],
+  "rating": 4,
+  "reviews": [
+    {
+      "reviewMadeBy": "645a59a7e84a585c2712736d",
+      "rating": 4,
+      "comment": "Nice Listing!"
+    }
+  ],
+  "role": "user",
+  "savedListings": [
+    "645a58dbe84a585c2712736c",
+    "645a5dc5e84a585c27127370"
+  ],
+  "image": "87e34f4374dc29a9d11e04de81471866"
+},{
+  "_id": {
+    "$oid": "645a66c6e84a585c2712737c"
+  },
+  "firstName": "Vincent",
+  "lastName": "Vega",
+  "emailAddress": "vincent@gmail.com",
+  "password": "$2b$10$DLUy5O7pITlXCROBTKG6LOuK.4zYsUfC4RMbk5euYgmOL7eBwT0xK",
+  "phoneNumber": "400 500 6000",
+  "listings": [
+    "645a671ce84a585c2712737d"
+  ],
+  "rating": 1.5,
+  "reviews": [
+    {
+      "reviewMadeBy": "645a59a7e84a585c2712736d",
+      "rating": 3,
+      "comment": "Looks very messy"
+    },
+    {
+      "reviewMadeBy": "645a5624e84a585c27127369",
+      "rating": 0,
+      "comment": "SO MESSY !"
+    }
+  ],
+  "role": "user",
+  "savedListings": [],
+  "image": "3ba34d26fc2e43bb81b5e7cbc3ffed9e"
+}]

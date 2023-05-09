@@ -1,0 +1,97 @@
+[{
+  "_id": {
+    "$oid": "645a63bae84a585c27127377"
+  },
+  "listingID": "645a5dc5e84a585c27127370",
+  "userID": "645a60b0e84a585c27127371",
+  "rating": 5,
+  "comment": "Amazing Listing, very rare to see such a big open warehouse in this area"
+},{
+  "_id": {
+    "$oid": "645a677ce84a585c27127380"
+  },
+  "listingID": "645a5709e84a585c2712736a",
+  "userID": "645a60b0e84a585c27127371",
+  "rating": 2,
+  "comment": "This is obviously a troll, rated 2 because those are some good pictures"
+},{
+  "_id": {
+    "$oid": "645a6a07e84a585c27127381"
+  },
+  "listingID": "645a612fe84a585c27127372",
+  "userID": "645a59a7e84a585c2712736d",
+  "rating": 4,
+  "comment": "Nice Listing!"
+},{
+  "_id": {
+    "$oid": "645a6a1be84a585c27127382"
+  },
+  "listingID": "645a5dc5e84a585c27127370",
+  "userID": "645a59a7e84a585c2712736d",
+  "rating": 5,
+  "comment": "Wow so much space"
+},{
+  "_id": {
+    "$oid": "645a6a3ae84a585c27127383"
+  },
+  "listingID": "645a55a5e84a585c27127368",
+  "userID": "645a59a7e84a585c2712736d",
+  "rating": 4,
+  "comment": "Great Listing"
+},{
+  "_id": {
+    "$oid": "645a6a4ce84a585c27127384"
+  },
+  "listingID": "645a5709e84a585c2712736a",
+  "userID": "645a59a7e84a585c2712736d",
+  "rating": 0,
+  "comment": "Had my hopes up :("
+},{
+  "_id": {
+    "$oid": "645a6a6ee84a585c27127385"
+  },
+  "listingID": "645a671ce84a585c2712737d",
+  "userID": "645a59a7e84a585c2712736d",
+  "rating": 3,
+  "comment": "Looks very messy"
+},{
+  "_id": {
+    "$oid": "645a6aa6e84a585c27127386"
+  },
+  "listingID": "645a671ce84a585c2712737d",
+  "userID": "645a5624e84a585c27127369",
+  "rating": 0,
+  "comment": "SO MESSY !"
+},{
+  "_id": {
+    "$oid": "645a6ad6e84a585c27127387"
+  },
+  "listingID": "645a58dbe84a585c2712736c",
+  "userID": "645a5624e84a585c27127369",
+  "rating": 5,
+  "comment": "This guy is a good fella"
+},{
+  "_id": {
+    "$oid": "645a6ae4e84a585c27127388"
+  },
+  "listingID": "645a55a5e84a585c27127368",
+  "userID": "645a5624e84a585c27127369",
+  "rating": 3,
+  "comment": "Nothing Special"
+},{
+  "_id": {
+    "$oid": "645a6b0de84a585c27127389"
+  },
+  "listingID": "645a58dbe84a585c2712736c",
+  "userID": "645a5c98e84a585c2712736f",
+  "rating": 4,
+  "comment": "Good"
+},{
+  "_id": {
+    "$oid": "645a6b2ce84a585c2712738a"
+  },
+  "listingID": "645a5a97e84a585c2712736e",
+  "userID": "645a5c98e84a585c2712736f",
+  "rating": 5,
+  "comment": "Fair price"
+}]

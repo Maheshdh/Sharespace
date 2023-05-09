@@ -1,0 +1,28 @@
+[{
+  "_id": {
+    "$oid": "645a6453e84a585c27127379"
+  },
+  "bookingRequestID": "645a6453e84a585c27127378",
+  "listingID": "645a61c5e84a585c27127373",
+  "userRequestingBookingID": "645a57c3e84a585c2712736b",
+  "listingUploadedByID": "645a60b0e84a585c27127371",
+  "requestStatus": "Requested"
+},{
+  "_id": {
+    "$oid": "645a672ae84a585c2712737f"
+  },
+  "bookingRequestID": "645a672ae84a585c2712737e",
+  "listingID": "645a612fe84a585c27127372",
+  "userRequestingBookingID": "645a66c6e84a585c2712737c",
+  "listingUploadedByID": "645a60b0e84a585c27127371",
+  "requestStatus": "Requested"
+},{
+  "_id": {
+    "$oid": "645a6b66e84a585c2712738d"
+  },
+  "bookingRequestID": "645a6b66e84a585c2712738c",
+  "listingID": "645a5709e84a585c2712736a",
+  "userRequestingBookingID": "645a5c98e84a585c2712736f",
+  "listingUploadedByID": "645a5624e84a585c27127369",
+  "requestStatus": "Requested"
+}]

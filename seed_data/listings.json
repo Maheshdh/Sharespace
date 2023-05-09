@@ -1,0 +1,265 @@
+[{
+  "_id": {
+    "$oid": "645a55a5e84a585c27127368"
+  },
+  "userID": "645a4f76e84a585c27127366",
+  "title": "Renting out large, clean closet in Battery Park City!",
+  "address": "355 South End Avenue",
+  "description": "Very large closet with so many cabinets",
+  "price": 200,
+  "length": 10,
+  "width": 5,
+  "height": 10,
+  "volume": 500,
+  "latitude": 40.70679698537867,
+  "longitude": -74.0173948269232,
+  "listing_AvailableStartInput": "06/01/2023",
+  "listing_AvailableEndInput": "09/01/2023",
+  "reviews": [
+    "645a6a3ae84a585c27127383",
+    "645a6ae4e84a585c27127388"
+  ],
+  "comments": [],
+  "image": [
+    "838c8da3344e3c8fb7fba1ebdaf2607c",
+    "bff01265db11c99906b948ba14750869",
+    "9a8a3a8a3bebc5ffe24edb7366b50393",
+    "e56267afaada60500959a60da1737d00"
+  ],
+  "sponsorPay": 21
+},{
+  "_id": {
+    "$oid": "645a5709e84a585c2712736a"
+  },
+  "userID": "645a5624e84a585c27127369",
+  "title": "Rent the 102nd floor of the Empire State!",
+  "address": "20 W 34th St, New York,",
+  "description": "Imagine storing your stuff at the top of the empire state ... wow",
+  "price": 99999,
+  "length": 20,
+  "width": 20,
+  "height": 10,
+  "volume": 4000,
+  "latitude": 40.74859086747815,
+  "longitude": -73.98594334973284,
+  "listing_AvailableStartInput": "06/01/2023",
+  "listing_AvailableEndInput": "07/02/2023",
+  "reviews": [
+    "645a677ce84a585c27127380",
+    "645a6a4ce84a585c27127384"
+  ],
+  "comments": [],
+  "image": [
+    "7bd8c4444804e6884ad4efc4b017b573",
+    "596b8c41ef76819d8533c92294b17026",
+    "15ed5350ef9d7a016f1d616b25aa4507",
+    "8442b0511b8c34d9660fe845792b80a7"
+  ],
+  "sponsorPay": 0
+},{
+  "_id": {
+    "$oid": "645a58dbe84a585c2712736c"
+  },
+  "userID": "645a57c3e84a585c2712736b",
+  "title": "Luxurious closet in Tribeca",
+  "address": "Walker and 6th",
+  "description": "You talkin' to me? Well, I'm the only one here",
+  "price": 500,
+  "length": 20,
+  "width": 20,
+  "height": 10,
+  "volume": 4000,
+  "latitude": 40.72008905005049,
+  "longitude": -74.00500360603607,
+  "listing_AvailableStartInput": "06/01/2023",
+  "listing_AvailableEndInput": "12/02/2023",
+  "reviews": [
+    "645a6ad6e84a585c27127387",
+    "645a6b0de84a585c27127389"
+  ],
+  "comments": [],
+  "image": [
+    "e8aa0d97547eebcd6b7fdefd708d43f5",
+    "4ff0b11d77a45a4405680935b7c44cc7",
+    "0746c437571bc7e0420c0c0915f5d5e4"
+  ],
+  "sponsorPay": 150
+},{
+  "_id": {
+    "$oid": "645a5a97e84a585c2712736e"
+  },
+  "userID": "645a59a7e84a585c2712736d",
+  "title": "Rent a closet room with tatami",
+  "address": "Suginami City, Tokyo",
+  "description": "Very spacious, very clean, cheap rent!",
+  "price": 20,
+  "length": 10,
+  "width": 20,
+  "height": 10,
+  "volume": 2000,
+  "latitude": 35.6722140107892,
+  "longitude": 139.65306406508466,
+  "listing_AvailableStartInput": "05/20/2023",
+  "listing_AvailableEndInput": "07/01/2023",
+  "reviews": [
+    "645a6b2ce84a585c2712738a"
+  ],
+  "comments": [],
+  "image": [
+    "3c2d0756c7e91d32eca73ce2c8ae9cfb",
+    "042abfd1e9cb59c59c96b2ba61061baf",
+    "687c0f6dc0820a7f0120f8b8568838a9",
+    "70b919274b27e2e6f96df8a382141438"
+  ],
+  "sponsorPay": 0
+},{
+  "_id": {
+    "$oid": "645a5dc5e84a585c27127370"
+  },
+  "userID": "645a5c98e84a585c2712736f",
+  "title": "Entire Warehouse floor for rent",
+  "address": "11th and Washington",
+  "description": "Hey You, I put Another Brick In The Wall and so the floor is ready for rent, Wish You Were Here to see it, I have High Hopes this listing will be worth your Time and Money",
+  "price": 100000,
+  "length": 100,
+  "width": 100,
+  "height": 10,
+  "volume": 100000,
+  "latitude": 40.750877995082355,
+  "longitude": -74.02559290213756,
+  "listing_AvailableStartInput": "08/01/2023",
+  "listing_AvailableEndInput": "01/01/2024",
+  "reviews": [
+    "645a63bae84a585c27127377",
+    "645a6a1be84a585c27127382"
+  ],
+  "comments": [
+    {
+      "comment": "Is there any parking nearby?",
+      "madeByUserID": "645a60b0e84a585c27127371",
+      "madeByFullName": "Al Pacino"
+    }
+  ],
+  "image": [
+    "632c01401e4b154eb1b835156a853a73",
+    "dffae31c822a6712f866d6380b072f42",
+    "3252455353e423e70c13e9d7475dcde6",
+    "8a58fa4353ef588bc96e14e4323f219f"
+  ],
+  "sponsorPay": 100000
+},{
+  "_id": {
+    "$oid": "645a612fe84a585c27127372"
+  },
+  "userID": "645a60b0e84a585c27127371",
+  "title": "Full master closet lend",
+  "address": "Brooklyn",
+  "description": "Wooden finishings",
+  "price": 150,
+  "length": 10,
+  "width": 5,
+  "height": 10,
+  "volume": 500,
+  "latitude": 40.69423856638364,
+  "longitude": -73.98090652603031,
+  "listing_AvailableStartInput": "08/01/2023",
+  "listing_AvailableEndInput": "10/01/2023",
+  "reviews": [
+    "645a6a07e84a585c27127381"
+  ],
+  "comments": [],
+  "image": [
+    "0fa0924c7dbb9b93166c273acf9d25cd",
+    "9234b4ab37a399fbd1bb7e16bf8ebc80",
+    "3d5a43281102a7e1f1ecb23707acfc2a",
+    "3d3df85ef84d1ab7f13a047c9cf231e9"
+  ],
+  "sponsorPay": 75
+},{
+  "_id": {
+    "$oid": "645a61c5e84a585c27127373"
+  },
+  "userID": "645a60b0e84a585c27127371",
+  "title": "Closet with extra cabinets",
+  "address": "Upper East Side",
+  "description": "So many cabinets, bright open space",
+  "price": 400,
+  "length": 10,
+  "width": 5,
+  "height": 8,
+  "volume": 400,
+  "latitude": 40.773248640706356,
+  "longitude": -73.9642394970868,
+  "listing_AvailableStartInput": "05/15/2023",
+  "listing_AvailableEndInput": "09/01/2023",
+  "reviews": [],
+  "comments": [],
+  "image": [
+    "afc0350814acdcfb040d39c10064e603",
+    "da0202906ca66367b9035d1dcf5bf44a",
+    "1528beb9ba9230097fa034f864f5069d",
+    "8ed90fd8ec1b086e4fa6a0637ba4f5b2"
+  ],
+  "sponsorPay": 0
+},{
+  "_id": {
+    "$oid": "645a62fbe84a585c27127374"
+  },
+  "userID": "645a5c98e84a585c2712736f",
+  "title": "Renting an entire storage room",
+  "address": "Near Intrepid Museum",
+  "description": "Very Spacious, can easily fit 2 F/A-18's",
+  "price": 1000,
+  "length": 20,
+  "width": 20,
+  "height": 10,
+  "volume": 4000,
+  "latitude": 40.76402765318034,
+  "longitude": -73.99834534157321,
+  "listing_AvailableStartInput": "06/01/2023",
+  "listing_AvailableEndInput": "07/02/2023",
+  "reviews": [],
+  "comments": [],
+  "image": [
+    "f3d1a670884c0d1a1722975f4eb3b3db",
+    "10f788fc8202919f73323d87f8bac786",
+    "ec7840ea14f83cf5361336b7650f7247",
+    "fa992c707913dfcd3176c56d96bbd04d"
+  ],
+  "sponsorPay": 0
+},{
+  "_id": {
+    "$oid": "645a671ce84a585c2712737d"
+  },
+  "userID": "645a66c6e84a585c2712737c",
+  "title": "This is a medium sized closet",
+  "address": "Newport",
+  "description": "Negotiable duration, negotiable rent",
+  "price": 50,
+  "length": 5,
+  "width": 5,
+  "height": 8,
+  "volume": 200,
+  "latitude": 40.72880489470185,
+  "longitude": -74.03611749134981,
+  "listing_AvailableStartInput": "08/01/2023",
+  "listing_AvailableEndInput": "09/01/2023",
+  "reviews": [
+    "645a6a6ee84a585c27127385",
+    "645a6aa6e84a585c27127386"
+  ],
+  "comments": [
+    {
+      "comment": "Will you clean this up before renting it out???",
+      "madeByUserID": "645a5624e84a585c27127369",
+      "madeByFullName": "Jerry Seinfeld"
+    }
+  ],
+  "image": [
+    "03d016dc5c4619e9d8572650f3d69f03",
+    "9640c9f8bd557299371de97984c0244b",
+    "f539cc090bf498ebc8644d4eaa4ef673",
+    "3473b1173590afca3ed18cf870952abe"
+  ],
+  "sponsorPay": 0
+}]
