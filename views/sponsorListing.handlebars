@@ -10,7 +10,7 @@
 <br>
 <div class="addListing-form">
     <form action="/profile/boostListing/{{listing._id}}" method="POST" id="addSponsorPay-form">
-        <label for="sponsorPayInput">New monthly pay: <input type="text" id="sponsorPayInput" name="sponsorPayInput"required></label>
+        <label for="sponsorPayInput">New monthly pay: <input type="text" id="sponsorPayInput" name="sponsorPayInput" required></label>
         <div id="error" class="error-div hidden">
                 {{#if error}}
                     <p>{{error}}</p>
