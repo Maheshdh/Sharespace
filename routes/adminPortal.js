@@ -39,15 +39,18 @@ router
         if (!listingID) throw 'Error: Listing ID is missing'
         let listingToBeDeletedID = helpers.checkId(listingID, 'Listing ID')
 
+        let value = req.body.listingButtonDelete
+        if (value != "Delete this Listing") throw 'Error: You have entered an invalid value from a form where a value input is not required'
+
         let currentUserID = req.session.user.userID
         currentUserID = helpers.checkId(currentUserID, 'User ID')
         
         let deletingListing = await deleteListing(listingToBeDeletedID, currentUserID)
 
         if (deletingListing.deleted == true) {
-            res.redirect('/adminPortal')
+            return res.redirect('/adminPortal')
         } else {
-            res.status(500).render('errors', {error:'Internal Server Error'})
+            return res.status(500).render('errors', {error:'Internal Server Error'})
         }
     } catch (e) {
         return res.render('errors', {error:e})
@@ -72,9 +75,9 @@ router
         let deletingReport = await deleteReport(reportToBeIgnoredListingID)
 
         if (deletingReport.deleted == true) {
-            res.redirect('/adminPortal')
+            return res.redirect('/adminPortal')
         } else {
-            res.status(500).render('errors', {error:'Internal Server Error'})
+            return res.status(500).render('errors', {error:'Internal Server Error'})
         }
     } catch (e) {
         return res.render('errors', {error:e})

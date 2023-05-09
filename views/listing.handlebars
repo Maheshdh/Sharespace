@@ -10,7 +10,7 @@
         <td>Author</td>
         <td><a href = "/users/{{userInfo._id}}">{{userInfo.firstName}} {{userInfo.lastName}} </a><br>
             (Rated {{userInfo.rating}} from {{userInfo.reviews.length}} reviews)
-        </a></td>
+        </td>
     </tr>
     <tr>
         <td>Address</td>
@@ -174,7 +174,7 @@
 {{/if}}
 <ol id="current_added_reviews">
   {{#each reviews}}
-    <li>Rating: {{this.rating}}<br>Comment: {{this.comment}}<br>Reviewed By: <a href = "/users/{{this.userID}}">Link to user</a></p>
+    <li>Rating: {{this.rating}}<br>Comment: {{this.comment}}<br>Reviewed By: <a href = "/users/{{this.userID}}">{{this.fullName}}</a></p>
     </li>
   {{/each}}
 </ol>
@@ -197,8 +197,10 @@
 <h2>Leave a Question or a Comment:</h2>
 <div>
     <form action="/listing/addCommentOrQuestion" method="POST" id="comment_question_input_form">
-    <label for= "listing_id_input"><input type="hidden" id="listing_id_input" name="listing_id_input" value="{{listing._id}}"></label>
-    <label for="comment_question_input">Add your thoughts here:<br> <input type="textarea" name="comment_question_input" id="comment_question_input"></label>
+    <label for="comment_question_input">Add your thoughts here:</label>
+    <br>
+    <textarea id="comment_question_input" name="comment_question_input"></textarea>
+    <input type="hidden" id="listing_id_input_2" name="listing_id_input" value="{{listing._id}}">
     <br>
     <input type="submit">
     </form>
@@ -214,7 +216,7 @@
 
 {{#if userRoleIsUser}}
 <form action="/listing/report/{{listing._id}}" method="POST" id="report-listing">
-  <p class="report-listing"><input class="listing-button-report" type="submit" id="report-listing" name="report-listing" value="Report this Listing"></p>
+  <p class="report-listing"><input class="listing-button-report" type="submit" id="reportListing" name="reportListing" value="Report this Listing"></p>
 </form>
 {{/if}}
 
@@ -223,7 +225,7 @@
 <div id="listing-admin-function">
   <p class="report-listing">You are seeing this because you have Admin Rights</p>
   <form action="/adminPortal/delete/{{listing._id}}" method="POST" id="report-listing">
-    <p class="report-listing"><input class="listing-button-delete" type="submit" id="listing-button-delete" name="listing-button-delete" value="Delete this Listing"></p>
+    <p class="report-listing"><input class="listing-button-delete" type="submit" id="listingButtonDelete" name="listingButtonDelete" value="Delete this Listing"></p>
   </form>
 </div>
 {{/if}}

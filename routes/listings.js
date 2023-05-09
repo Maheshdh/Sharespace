@@ -83,7 +83,7 @@ router
             rating = helpers.checkRating(userInput.rating, 'Rating')
             comment = helpers.checkString(userInput.comment, 'Comment////')   
         } catch (e) {
-            console.log(e);
+            // console.log(e);
             return res.json(e);
         }
 
@@ -92,7 +92,7 @@ router
             if (!myReview) throw 'Error: Unable to create review'
             return res.json('added')
         } catch (e) {
-            console.log(e);
+            // console.log(e);
             return res.json(e);
         }
     })
@@ -114,10 +114,10 @@ router
     let userInfo = await getUser(user.userID)
     let addingComment = await addListingCommentOrQuestion(listingID, comment, user.userID, `${userInfo.firstName} ${userInfo.lastName}`)
     if (addingComment.commentAdded == true) {
-      res.redirect(`/listing/${listingID}`)
+      return res.redirect(`/listing/${listingID}`)
     } else throw 'Unable to add comment'
   } catch (e) {
-    res.render('errors', {error:e})
+    return res.render('errors', {error:e})
   }
 })
 
@@ -152,6 +152,9 @@ router
         if (listing.reviews.length == 0) throw 'No Reviews Found!'
         for (let review of listing.reviews) {
           let reviewToBeAdded = await getReview(review)
+          let userWhoReviewed = await getUser(reviewToBeAdded.userID)
+          let userWhoReviewedName = userWhoReviewed.firstName + ' ' + userWhoReviewed.lastName
+          reviewToBeAdded.fullName = userWhoReviewedName
           reviews.push(reviewToBeAdded)
         }
       } catch (e) {
@@ -204,7 +207,7 @@ router
       applyXSS(req.body)
       let userInput = req.body
       var listingID;
-      console.log("requesting booking")
+      // console.log("requesting booking")
       try {
         listingID = helpers.checkId(req.params.id);
       } catch (e) {
@@ -232,7 +235,7 @@ router
             let bookingsRequested = await getBookingRequestsSent(user.userID)
             let bookingsReceived = await getBookingRequestsReceived(user.userID)
             // return res.render('bookings', {bookingsRequested: bookingsRequested, bookingsReceived: bookingsReceived})
-            res.redirect('/bookings')
+            return res.redirect('/bookings')
           } else throw 'Could not make booking'
         } catch (e) {
           return res.status(400).render('errors',{"error":e})
@@ -240,7 +243,7 @@ router
       }
 
     } else {
-      res.render('login', {error: 'You need to be logged in to request booking!'})
+      return res.render('login', {error: 'You need to be logged in to request booking!'})
     }
   })
 
@@ -253,7 +256,7 @@ router
     listingId = helpers.checkId(listingId,"Listing id");
     let listingInfo = await getListing(listingId);
     if (req.session.user.userID != listingInfo.userID) throw 'Error: You are not allowed to modify this listing because you do not own it'
-    res.render('updateListing',{listing: listingInfo});
+    return res.render('updateListing',{listing: listingInfo});
   }
   catch(e){
     return res.render('errors', {error : e} )
@@ -303,7 +306,7 @@ router
     let creatingListing = await modifyListing(listingId, titleInput, descriptionInput, addressInput, priceInput, lenghtInput, widthInput, heightInput,  latitudeInput, longitudeInput, availableStartInput, availableEndInput, imageInput)
     if (!creatingListing) throw 'Error: Unable to create Listing'
     
-    res.render('listingUpdated',{listingID: listingId});
+    return res.render('listingUpdated',{listingID: listingId});
   } catch (e) {
     return res.status(400).render('addListing', {error:e})
   }
@@ -362,6 +365,8 @@ router
     if (!req.session.user) return res.render('login', {error: 'You must be logged in to report a listing!'})
     let userID = req.session.user.userID
     let listingID = req.params.id
+    let value = req.body.reportListing
+    if (value != "Report this Listing") throw 'Error: You have entered an invalid value from a form where a value input is not required'
 
     userID = helpers.checkId(userID.toString(), 'User ID')
     listingID = helpers.checkId(listingID,"Listing ID") 

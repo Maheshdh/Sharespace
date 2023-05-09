@@ -140,12 +140,12 @@ export const updateUserRatingAndComments = async (id) => {
     let userRatingRoundedUp = Math.round(userRating*100)/100
 
     let userCollection = await users()
-    console.log('Received user collection')
+    // console.log('Received user collection')
     let updateUser = await userCollection.findOneAndUpdate(
       {_id: new ObjectId(id)},
       {$set: {rating: userRatingRoundedUp, reviews:allReviews}}
     )
-    console.log('Updated user collection')
+    // console.log('Updated user collection')
 
     return true
 }
@@ -193,13 +193,13 @@ export const updateUser = async (
       savedListings: existingUser.savedListings,
       image: imageInput
     }
-    console.log(newUser);
+    // console.log(newUser);
     let updateInfo = await userCollection.findOneAndUpdate(
       {_id: existingUser._id},
       {$set: newUser},
       {returnDocument: 'after'}
     )
-    console.log(updateInfo)
+    // console.log(updateInfo)
     if(updateInfo.lastErrorObject.n === 0){
       throw "update Failed";
     }

@@ -22,7 +22,7 @@ const constructMethod = (app) => {
     app.use('/message', messageRoutes)
 
     app.use('*', (req, res) => {
-        res.render('errors', {error:'404: That Page Does not Exist'});
+      return res.render('errors', {error:'404: That Page Does not Exist'});
       });
 } 
 

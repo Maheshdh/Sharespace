@@ -2,7 +2,7 @@ const login_form = document.getElementById("login-form")
 if (login_form) {
     login_form.addEventListener('submit',(event) => {
       event.preventDefault();
-      console.log("Taher");
+      // console.log("Taher");
       var emailAddressInput = document.getElementById('emailAddressInput').value;
       const passwordInput = document.getElementById('passwordInput').value;
       try {
@@ -124,7 +124,7 @@ if(review_form) {
 
       //AJAX Call. Gets the returned HTML data, binds the click event to the link and appends the new todo to the page
       $.ajax(requestConfig).then(function (responseMessage) {
-          console.log(responseMessage);
+          // console.log(responseMessage);
           if(responseMessage == 'added'){
             document.getElementById("review_added").innerHTML += `<p class="reviewAdded-success"> Review succesfully added! </p>`
             document.getElementById("current_added_reviews").innerHTML += `<li>Rating: ${rating}<br>Comment: ${comment}</li>`;
@@ -132,7 +132,7 @@ if(review_form) {
         // else if(responseMessage.success === false){
         // document.getElementById("review_added").innerHTML = `<p class="reviewAdded-fail"> ${responseMessage.error} </p>` }
         else{
-            console.log(responseMessage);
+            // console.log(responseMessage);
         document.getElementById("review_added").innerHTML = `<p class="reviewAdded-fail"> ${responseMessage} </p>` }
         //document.getElementById("current_added_reviews").innerHTML += `<li>Rating: ${rating}<br>Comment: ${comment}</li>`;
       });
@@ -263,7 +263,7 @@ if(addSponsorPay){
         event.preventDefault();
         var boostamount = document.getElementById("sponsorPayInput").value;
         try{
-        boostamount = checkPrice(boostamount,"boost price");
+        boostamount = checkSponsorPrice(boostamount,"boost price");
         addSponsorPay.submit();
         }
         catch(e){
@@ -287,11 +287,13 @@ if(addCommentsForm){
     })
 }
 
+const message_form = document.getElementsByClassName("messageBoxForm")
+const message_input = document.getElementsByClassName("messageBox")
 const show_chat = document.getElementsByClassName("show_chat_button")
 const hide_chat = document.getElementsByClassName("hide_chat_button")
 const chat = document.getElementsByClassName("hide_chat_div")
-console.log(show_chat)
-console.log(chat)
+// console.log(show_chat)
+// console.log(chat)
 for (let i = 0; i < hide_chat.length; i++) {
         chat[i].style.display = "none";
 }
@@ -306,22 +308,32 @@ for (let i = 0; i < show_chat.length; i++) {
     })
 }
 
-const message_form = document.getElementById("new_message_form")
-if(message_form){
-    message_form.addEventListener("submit",(event)=>{
-        event.preventDefault();
-        try {
-            var messagestring = checkString(document.getElementById("new_messageInput").value,"Message string");
-            message_form.submit();
-        } catch (error) {
-            document.getElementById("error_js_message").innerHTML = error; 
-        }
+for (let i = 0; i< message_form.length; i++) {
+  if (message_form[i]) {
+    message_form[i].addEventListener("submit", (event) => {
+      event.preventDefault()
+      try {
+        let temp = checkMessage(message_input[i].value, 'Sent Message')
+        message_form[i].submit()
+      } catch (error) {
+        document.getElementsByClassName("error_js_message")[i].innerHTML = error; 
+      }
     })
+  }
 }
 
 // ***********************************************************
 // ***************  HELPER FUNCTIONS  ************************
 // ***********************************************************
+
+function checkMessage(strVal, varName) {
+  if (!strVal) throw `Error: You must supply a ${varName}!`;
+  if (typeof strVal !== 'string') throw `Error: ${varName} must be a string!`
+  strVal = strVal.trim();
+  if (strVal.length === 0)
+    throw `Error: ${varName} cannot be an empty string or string with just spaces`
+  return strVal;
+}
 
 function checkPhoneNumber (phone_no, varName) {
     // TODO: Use Google's libphonenumber library
@@ -411,6 +423,16 @@ function checkPrice(price, varName) {
     price = Number(price)
     if (isNaN(price) == true) throw `Error: ${varName} must be a number`
     if (price <= 0) throw `Error: ${varName} should be greater than 0`
+    if (price > 1000000000) throw `Error: ${varName} should be lesser than 1,000,000,000`
+    return price
+  }
+
+function checkSponsorPrice(price, varName) {
+    if (!price) throw `Error: You must provide a ${varName}`
+    if (price.toString().trim() == '') throw `Error: You must provide a ${varName}`
+    price = Number(price)
+    if (isNaN(price) == true) throw `Error: ${varName} must be a number`
+    if (price < -1) throw `Error: ${varName} should be greater than or equal to 0`
     if (price > 1000000000) throw `Error: ${varName} should be lesser than 1,000,000,000`
     return price
   }

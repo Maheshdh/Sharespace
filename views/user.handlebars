@@ -30,13 +30,16 @@
 
 <h2>Reviews on this User's Listings</h2>
 <p>Cumulative Rating: {{user.rating}} from {{reviews.length}} reviews</p>
+{{#if noReviewsFound}}
+<p>User has no Reviews yet!</p>
+{{/if}}
 <ol>
   {{#each reviews}}
   <li>
   <table id="userInformationTable">
     <tr>
       <td>Reviewed By</td>
-      <td><a href = "/users/{{this.reviewMadeBy}}">Link to user</a></td>
+      <td><a href = "/users/{{this.reviewMadeBy}}">{{this.fullName}}</a></td>
     </tr>
     <tr>
       <td>Rating Given</td>

@@ -10,7 +10,7 @@ router
 .route('/newMessage/:id')
 .get(async (req, res) => {
     try {
-        if (!req.session.user) throw 'Error: You need to be logged in send messages'
+        if (!req.session.user) {return res.render('login', {error: 'You need to be logged in send messages!'})}
         let userID = helpers.checkId(req.session.user.userID, 'User ID')
         let messageToID = helpers.checkId(req.params.id, 'Sending Message to User ID')
         if (userID == messageToID) throw 'Error: You cannot send a message to yourself!'
@@ -24,14 +24,15 @@ router
 })
 .post(async (req, res) => {
     try {
-        if (!req.session.user) throw 'Error: You need to be logged in send messages'
+        if (!req.session.user) {return res.render('login', {error: 'You need to be logged in send messages!'})}
         let userID = helpers.checkId(req.session.user.userID, 'User ID')
         let messageToID = helpers.checkId(req.params.id, 'Sending Message to User ID')
         if (userID == messageToID) throw 'Error: You cannot send a message to yourself!'
         applyXSS(req.body)
         let userInput = req.body
-        if (!userInput.new_messageInput) throw 'Error: Missing message content'
-        let message = helpers.checkString(userInput.new_messageInput, 'Message Content')
+        let userInputValue = Object.values(userInput)
+        if (!userInputValue[0]) throw 'Error: Missing message content'
+        let message = helpers.checkMessage(userInputValue[0], 'Message Content')
         
         let sendingMessage = await newMessage(userID, messageToID, message)
         if (sendingMessage.sent == true) {
@@ -50,7 +51,7 @@ router
 .get(async (req, res) => {
     try {
         if (!req.session.user) {
-            return res.render('login', {error: 'Error: You need to be logged in view your messages!'})
+            return res.render('login', {error: 'You need to be logged in view your messages!'})
         }
         let userID = helpers.checkId(req.session.user.userID, 'User ID')
 

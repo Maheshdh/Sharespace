@@ -39,11 +39,15 @@
 <br><br>
 <h2>Reviews on your listings:</h2>
 <p>Cumulative Rating: {{user.rating}} from {{reviews.length}} reviews</p>
+<p>These are all the reviews that were posted on all of your listings:</p>
 </div>
 <div>
+  {{#if noReviewsFound}}
+  <p>No Reviews Yet!</p>
+  {{/if}}
   <ol>
   {{#each reviews}}
-    <li>Rating: {{this.rating}}<br>Comment: {{this.comment}}<br>Reviewed By: <a href = "/users/{{this.reviewMadeBy}}">Link to user</a></p>
+    <li>Rating: {{this.rating}}<br>Comment: {{this.comment}}<br>Reviewed By: <a href = "/users/{{this.reviewMadeBy}}">{{this.fullName}}</a></p>
     </li>
   {{/each}}
 </ol>
@@ -85,7 +89,7 @@
       <button class="boost-listing-button" onclick="window.location.href='/profile/boostListing/{{this._id}}';">Boost Listing <i class="fa fa-edit-1"></i></button>
       <br><br>
       <form action="/listing/delete/{{this._id}}" method="POST" id="delete-button">
-        <button class="delete-listing-button" type="submit" id="delete-button">Delete Listing <i class="fa fa-edit-1"></i></button>
+        <button class="delete-listing-button" type="submit" id="delete-button-button">Delete Listing <i class="fa fa-edit-1"></i></button>
       </form>
     </li>
   {{/each}}
@@ -113,7 +117,7 @@
       <p class="listingAvailableEndInput" hidden>{{this.listing_AvailableEndInput}}</p>
       
       <form action="/profile/unsave/{{this._id}}" method="POST" id="unsave-button">
-      <button style="font-size:16px; width:150px; height:20px;" type="submit" id="unsave-button">Unsave Listing <i class="fa fa-edit-1"></i></button>
+      <button style="font-size:16px; width:150px; height:20px;" type="submit" id="unsave-button-button">Unsave Listing <i class="fa fa-edit-1"></i></button>
       </form>
     </li>
   {{/each}}

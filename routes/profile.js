@@ -12,14 +12,15 @@ const upload = multer({ dest: './public/data/uploads/' });
 router
 .route('/')
 .get(async (req, res) => {
-    let currentUser = req.session.user
-    let currentUserID = req.session.user.userID
-    currentUserID = helpers.checkId(currentUserID, 'User ID')
-    let currentUserInfo = await getUser(currentUserID)
-    let currentUserListings = currentUserInfo.listings
-    let currentUserSavedListings = currentUserInfo.savedListings
-    let reviews = currentUser.reviews
     try {
+        let currentUser = req.session.user
+        let currentUserID = req.session.user.userID
+        currentUserID = helpers.checkId(currentUserID, 'User ID')
+        let currentUserInfo = await getUser(currentUserID)
+        let currentUserListings = currentUserInfo.listings
+        let currentUserSavedListings = currentUserInfo.savedListings
+        let reviews = currentUser.reviews
+
         let allListings = []
         let savedListings = []
         let noListings = false
@@ -46,9 +47,23 @@ router
             isAdmin = true
         }
 
-        return res.render('profile', {user:currentUser, listings: allListings, reviews: reviews, savedListings: savedListings, noListings: noListings, noSavedListings: noSavedListings, isAdmin: isAdmin})
+        let reviewsShownInProfile = []
+        let noReviewsFound = false
+        if (reviews.length == 0) {
+            noReviewsFound = true
+        } else {
+            for (let review of reviews) {
+                let reviewToBeAdded = review
+                let userWhoReviewed = await getUser(review.reviewMadeBy)
+                let userWhoReviewedName = userWhoReviewed.firstName + ' ' + userWhoReviewed.lastName
+                reviewToBeAdded.fullName = userWhoReviewedName
+                reviewsShownInProfile.push(reviewToBeAdded)
+            }
+        }
+
+        return res.render('profile', {user:currentUser, listings: allListings, reviews: reviewsShownInProfile, noReviewsFound: noReviewsFound, savedListings: savedListings, noListings: noListings, noSavedListings: noSavedListings, isAdmin: isAdmin})
     } catch (e) {
-        res.status(500).send(e)
+        return res.status(500).send(e)
     }
 
 })
@@ -57,7 +72,7 @@ router
 .route('/update')
 .get(async (req, res) => {
     let currentUser =req.session.user;
-    res.render('profileUpdate',{user: currentUser});
+    return res.render('profileUpdate',{user: currentUser});
 })
 .post(upload.single('updateProfilePic'),async (req,res) => {
     try {
@@ -87,7 +102,7 @@ router
         return res.status(200).redirect('/profile')
 
     } catch (e) {
-        console.log(e);
+        // console.log(e);
         let currentUser = req.session.user;
         return res.status(400).render('profileUpdate',{error: e,user: currentUser});
     }
@@ -104,9 +119,9 @@ router
         listingID = helpers.checkId(listingID, 'Listing ID')
 
         let listingInfo = await getListing(listingID)
-        res.render('sponsorListing', {listing: listingInfo})
+        return res.render('sponsorListing', {listing: listingInfo})
     } catch (e) {
-        res.render('errors', {error:e})
+        return res.render('errors', {error:e})
     }
 
 })
@@ -123,10 +138,10 @@ router
 
         let addingSponsorPay = await addSponsoredPrice(listingID, sponsorPayInput)
         if (addingSponsorPay.added == true) {
-            res.render('sponsorListing', {success: true, listing: addingSponsorPay.listing})
+            return res.render('sponsorListing', {success: true, listing: addingSponsorPay.listing})
         }
     } catch (e) {
-        res.render('errors', {error: e})
+        return res.render('errors', {error: e})
     }
 })
 

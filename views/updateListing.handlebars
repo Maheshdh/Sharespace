@@ -7,7 +7,7 @@
 <br><br>
 <label for="listing_Update_DescriptionInput">Description<br><input type="text" id="listing_Update_DescriptionInput" name="listing_Update_DescriptionInput" value="{{listing.description}}"></label>
 <br><br>
-<label for="listing_Update_AddressInput">Address<br><input type="address" id="listing_Update_AddressInput" name="listing_Update_AddressInput" value="{{listing.address}}"></label>
+<label for="listing_Update_AddressInput">Address<br><input type="text" id="listing_Update_AddressInput" name="listing_Update_AddressInput" value="{{listing.address}}"></label>
 <br><br>
 <label for="listing_Update_PriceInput">Price in $ per month<br><input type="text" id="listing_Update_PriceInput" name="listing_Update_PriceInput" value={{listing.price}}></label>
 <br><br>
@@ -25,10 +25,9 @@
 <br><br>
 <label for="listing_Update_AvailableEndInput">Available End Date<br><input type="text" id="listing_Update_AvailableEndInput" name="listing_Update_AvailableEndInput" value={{listing.listing_AvailableEndInput}}></label>
 <br><br>
-<label for="existing_image">
-    Existing images:</label>
+<p>Existing images:</p>
 {{#each listing.image}}
-<br><img src="http://localhost:3000/data/uploads/{{this}}" alt="Existing image" id="existing_image">
+<br><img src="http://localhost:3000/data/uploads/{{this}}" alt="Existing image">
 {{/each}}
 
 <br><br>
