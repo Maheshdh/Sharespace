@@ -29,8 +29,9 @@ router
         if (userID == messageToID) throw 'Error: You cannot send a message to yourself!'
 
         let userInput = req.body
-        if (!userInput.new_messageInput) throw 'Error: Missing message content'
-        let message = helpers.checkString(userInput.new_messageInput, 'Message Content')
+        let userInputValue = Object.values(userInput)
+        if (!userInputValue[0]) throw 'Error: Missing message content'
+        let message = helpers.checkMessage(userInputValue[0], 'Message Content')
         
         let sendingMessage = await newMessage(userID, messageToID, message)
         if (sendingMessage.sent == true) {

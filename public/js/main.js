@@ -287,6 +287,8 @@ if(addCommentsForm){
     })
 }
 
+const message_form = document.getElementsByClassName("messageBoxForm")
+const message_input = document.getElementsByClassName("messageBox")
 const show_chat = document.getElementsByClassName("show_chat_button")
 const hide_chat = document.getElementsByClassName("hide_chat_button")
 const chat = document.getElementsByClassName("hide_chat_div")
@@ -306,22 +308,32 @@ for (let i = 0; i < show_chat.length; i++) {
     })
 }
 
-const message_form = document.getElementById("new_message_form")
-if(message_form){
-    message_form.addEventListener("submit",(event)=>{
-        event.preventDefault();
-        try {
-            var messagestring = checkString(document.getElementById("new_messageInput").value,"Message string");
-            message_form.submit();
-        } catch (error) {
-            document.getElementById("error_js_message").innerHTML = error; 
-        }
+for (let i = 0; i< message_form.length; i++) {
+  if (message_form[i]) {
+    message_form[i].addEventListener("submit", (event) => {
+      event.preventDefault()
+      try {
+        let temp = checkMessage(message_input[i].value, 'Sent Message')
+        message_form[i].submit()
+      } catch (error) {
+        document.getElementsByClassName("error_js_message")[i].innerHTML = error; 
+      }
     })
+  }
 }
 
 // ***********************************************************
 // ***************  HELPER FUNCTIONS  ************************
 // ***********************************************************
+
+function checkMessage(strVal, varName) {
+  if (!strVal) throw `Error: You must supply a ${varName}!`;
+  if (typeof strVal !== 'string') throw `Error: ${varName} must be a string!`
+  strVal = strVal.trim();
+  if (strVal.length === 0)
+    throw `Error: ${varName} cannot be an empty string or string with just spaces`
+  return strVal;
+}
 
 function checkPhoneNumber (phone_no, varName) {
     // TODO: Use Google's libphonenumber library

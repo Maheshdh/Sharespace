@@ -12,19 +12,18 @@
     <li>
     <h3><a href="/listing/{{this.listingInfo._id}}">{{this.listingInfo.title}}</a></h3>
     <p>Report Counts: {{this.reportCount}}</p>
-    <p>Reported By:
+    <p>Reported By:</p>
     {{#each this.reportedBy}}
     <ul>
         <li><a href="/users/{{this}}">{{this}}</a></li>
     </ul>
     {{/each}}
-     </p>
     <p><img src="http://localhost:3000/data/uploads/{{this.listingInfo.image.[0]}}" alt="Listing Picture"></p>
-    <form action="/adminPortal/ignore/{{this.listingInfo._id}}" method="POST" id="ignore-button">
-        <button class="ignore-listing-button" type="submit" id="ignore-button">Ignore Listing <i class="fa fa-edit-1"></i></button>
+    <form action="/adminPortal/ignore/{{this.listingInfo._id}}" method="POST">
+        <button class="ignore-listing-button" type="submit">Ignore Listing <i class="fa fa-edit-1"></i></button>
     </form> <br>
-    <form action="/adminPortal/delete/{{this.listingInfo._id}}" method="POST" id="delete-button">
-        <button class="delete-listing-button" type="submit" id="delete-button">Delete Listing <i class="fa fa-edit-1"></i></button>
+    <form action="/adminPortal/delete/{{this.listingInfo._id}}" method="POST">
+        <button class="delete-listing-button" type="submit">Delete Listing <i class="fa fa-edit-1"></i></button>
     </form>
     </li>
 {{/each}}

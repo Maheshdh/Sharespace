@@ -13,7 +13,7 @@ export const newMessage = async (messageFromID, messageToID, message) => {
 
     messageFromID = helpers.checkId(messageFromID, 'Message Sender ID')
     messageToID = helpers.checkId(messageToID, 'Message reciever ID')
-    message = helpers.checkString(message, 'Message Content')
+    message = helpers.checkMessage(message, 'Message Content')
 
     if (messageFromID == messageToID) throw 'Error: You cannot send a message to yourself!'
 
@@ -68,7 +68,7 @@ export const replyMessage = async (messageFromID, messageToID, message) => {
 
     messageFromID = helpers.checkId(messageFromID, 'Message Sender ID')
     messageToID = helpers.checkId(messageToID, 'Message reciever ID')
-    message = helpers.checkString(message, 'Message Content')
+    message = helpers.checkMessage(message, 'Message Content')
 
     if (messageFromID == messageToID) throw 'Error: You cannot send a message to yourself!'
 
