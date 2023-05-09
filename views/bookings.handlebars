@@ -33,14 +33,6 @@
         {{/each}}
     </ol>
 </div> --}}
-<label for="outgoingListingssearch"></label>
-<select name="outgoinglistingssearch" id="outgoinglistingssearch">
-    <option value="accepted">Accepted</option>
-    <option value="requested">Requested</option>
-    <option value="declined">Declined</option>
-</select>
-<button id="outgoingListingsButton" onclick="outgoingListingsSearch()">Search</button>
-<button onclick="outgoingListingReset()">Reset</button>
 
 <div id="OutgoingRequests">
     <h2>Outgoing Requests</h2>
@@ -54,13 +46,12 @@
         {{#each bookingsRequested}}
             <tr class="outgoingRequestsClass">
                 <td> <a href="/listing/{{this.listingID}}">Link to Listing</a></td>
-                <td>{{this.requestStatus}}
-                    <td>
+                <td>{{this.requestStatus}}</td>
+                <td>
                     {{#if this.listingOwnerContact}}
-                        <p>Phone: {{this.listingOwnerContact.phone}}<br>
+                        <p>Phone: {{this.listingOwnerContact.phone}}&nbsp;
                         Email: {{this.listingOwnerContact.email}}</p>
                     {{/if}}
-                    </td>
                 </td>
             </tr>    
         {{/each}}
@@ -69,14 +60,6 @@
 
 <br><br>
 
-<label for="incomingListingssearch"></label>
-<select name="incominglistingssearch" id="incominglistingssearch">
-    <option value="accepted">Accepted</option>
-    <option value="requested">Requested</option>
-    <option value="declined">Declined</option>
-</select>
-<button id="incomingListingsButton" onclick="incomingListingsSearch()">Filter</button>
-<button onclick="incomingListingReset()">Reset</button>
 
 <div id="IncomingRequests">
     <h2>Incoming Requests</h2>
