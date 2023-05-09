@@ -249,50 +249,6 @@ function filter(){
     }
 }
 
-function outgoingListingsSearch(){
-    var search = document.getElementById("outgoinglistingssearch").value;
-    search = search.toLowerCase();
-    var outgoingListings = document.getElementsByClassName("outgoingRequestsClass")
-    
-    for (let i = 0; i < outgoingListings.length; i++) {
-        if(outgoingListings[i].innerHTML.toLowerCase().includes(search)){
-            outgoingListings[i].style.display = "list-item";
-        }
-        else{
-            outgoingListings[i].style.display = "none";
-        }
-    }
-}
-
-function outgoingListingReset(){
-    let x = document.getElementsByClassName("outgoingRequestsClass");
-    for (let i = 0; i < x.length; i++) {
-        x[i].style.display = "list-item";
-    }
-}
-
-function incomingListingsSearch(){
-    var search = document.getElementById("incomingListingsSearch").value;
-    search = search.toLowerCase();
-    var incomingListings = document.getElementsByClassName("incomingRequestsClass")
-    
-    for (let i = 0; i < incomingListings.length; i++) {
-        if(incomingListings[i].innerHTML.toLowerCase().includes(search)){
-            incomingListings[i].style.display = "list-item";
-        }
-        else{
-            incomingListings[i].style.display = "none";
-        }
-    }
-}
-
-function incomingListingReset(){
-    let x = document.getElementsByClassName("incomingRequestsClass");
-    for (let i = 0; i < x.length; i++) {
-        x[i].style.display = "list-item";
-    }
-}
-
 function resetFilter(){
     let x = document.getElementsByClassName("homepageListings");
     for (let i = 0; i < x.length; i++) {
@@ -347,6 +303,19 @@ for (let i = 0; i < hide_chat.length; i++) {
 for (let i = 0; i < show_chat.length; i++) {
     show_chat[i].addEventListener("click",(event)=>{
         chat[i].style.display = "block";
+    })
+}
+
+const message_form = document.getElementById("new_message_form")
+if(message_form){
+    message_form.addEventListener("submit",(event)=>{
+        event.preventDefault();
+        try {
+            var messagestring = checkString(document.getElementById("new_messageInput").value,"Message string");
+            message_form.submit();
+        } catch (error) {
+            document.getElementById("error_js_message").innerHTML = error; 
+        }
     })
 }
 
