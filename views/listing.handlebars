@@ -214,7 +214,7 @@
 
 {{#if userRoleIsUser}}
 <form action="/listing/report/{{listing._id}}" method="POST" id="report-listing">
-  <p class="report-listing"><input class="listing-button-report" type="submit" id="report-listing" name="report-listing" value="Report this Listing"></p>
+  <p class="report-listing"><input class="listing-button-report" type="submit" id="reportListing" name="reportListing" value="Report this Listing"></p>
 </form>
 {{/if}}
 
@@ -223,7 +223,7 @@
 <div id="listing-admin-function">
   <p class="report-listing">You are seeing this because you have Admin Rights</p>
   <form action="/adminPortal/delete/{{listing._id}}" method="POST" id="report-listing">
-    <p class="report-listing"><input class="listing-button-delete" type="submit" id="listing-button-delete" name="listing-button-delete" value="Delete this Listing"></p>
+    <p class="report-listing"><input class="listing-button-delete" type="submit" id="listingButtonDelete" name="listingButtonDelete" value="Delete this Listing"></p>
   </form>
 </div>
 {{/if}}

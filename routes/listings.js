@@ -359,6 +359,8 @@ router
     if (!req.session.user) return res.render('login', {error: 'You must be logged in to report a listing!'})
     let userID = req.session.user.userID
     let listingID = req.params.id
+    let value = req.body.reportListing
+    if (value != "Report this Listing") throw 'Error: You have entered an invalid value from a form where a value input is not required'
 
     userID = helpers.checkId(userID.toString(), 'User ID')
     listingID = helpers.checkId(listingID,"Listing ID") 

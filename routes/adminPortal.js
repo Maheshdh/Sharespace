@@ -37,6 +37,9 @@ router
         if (!listingID) throw 'Error: Listing ID is missing'
         let listingToBeDeletedID = helpers.checkId(listingID, 'Listing ID')
 
+        let value = req.body.listingButtonDelete
+        if (value != "Delete this Listing") throw 'Error: You have entered an invalid value from a form where a value input is not required'
+
         let currentUserID = req.session.user.userID
         currentUserID = helpers.checkId(currentUserID, 'User ID')
         
