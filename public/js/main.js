@@ -331,6 +331,25 @@ if(addCommentsForm){
     })
 }
 
+const show_chat = document.getElementsByClassName("show_chat_button")
+const hide_chat = document.getElementsByClassName("hide_chat_button")
+const chat = document.getElementsByClassName("hide_chat_div")
+console.log(show_chat)
+console.log(chat)
+for (let i = 0; i < hide_chat.length; i++) {
+        chat[i].style.display = "none";
+}
+for (let i = 0; i < hide_chat.length; i++) {
+    hide_chat[i].addEventListener("click",(event)=>{
+        chat[i].style.display = "none";
+    })
+}
+for (let i = 0; i < show_chat.length; i++) {
+    show_chat[i].addEventListener("click",(event)=>{
+        chat[i].style.display = "block";
+    })
+}
+
 // ***********************************************************
 // ***************  HELPER FUNCTIONS  ************************
 // ***********************************************************

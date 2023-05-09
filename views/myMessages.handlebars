@@ -4,6 +4,10 @@
 
 {{#each allMessages}}
 <h2>Chat History With: <a href="/users/{{this.chatWith.id}}">{{this.chatWith.name}}</a></h2>
+    <button class="show_chat_button">Show Chat</button>
+    <button class="hide_chat_button">Hide Chat</button>
+
+    <div class="hide_chat_div">
     {{#each this.content}}
     <ul>
         <li><a href="/users/{{this.sentByID.id}}">{{this.sentByID.name}}: </a>{{this.message}}</li>
@@ -14,6 +18,7 @@
         <br>
         <input type="submit" class="message-submit-button">
     </form>
+    </div>
 <br>
 <hr>
 <br>
