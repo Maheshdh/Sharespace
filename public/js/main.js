@@ -2,7 +2,7 @@ const login_form = document.getElementById("login-form")
 if (login_form) {
     login_form.addEventListener('submit',(event) => {
       event.preventDefault();
-      console.log("Taher");
+      // console.log("Taher");
       var emailAddressInput = document.getElementById('emailAddressInput').value;
       const passwordInput = document.getElementById('passwordInput').value;
       try {
@@ -124,7 +124,7 @@ if(review_form) {
 
       //AJAX Call. Gets the returned HTML data, binds the click event to the link and appends the new todo to the page
       $.ajax(requestConfig).then(function (responseMessage) {
-          console.log(responseMessage);
+          // console.log(responseMessage);
           if(responseMessage == 'added'){
             document.getElementById("review_added").innerHTML += `<p class="reviewAdded-success"> Review succesfully added! </p>`
             document.getElementById("current_added_reviews").innerHTML += `<li>Rating: ${rating}<br>Comment: ${comment}</li>`;
@@ -132,7 +132,7 @@ if(review_form) {
         // else if(responseMessage.success === false){
         // document.getElementById("review_added").innerHTML = `<p class="reviewAdded-fail"> ${responseMessage.error} </p>` }
         else{
-            console.log(responseMessage);
+            // console.log(responseMessage);
         document.getElementById("review_added").innerHTML = `<p class="reviewAdded-fail"> ${responseMessage} </p>` }
         //document.getElementById("current_added_reviews").innerHTML += `<li>Rating: ${rating}<br>Comment: ${comment}</li>`;
       });
@@ -290,8 +290,8 @@ if(addCommentsForm){
 const show_chat = document.getElementsByClassName("show_chat_button")
 const hide_chat = document.getElementsByClassName("hide_chat_button")
 const chat = document.getElementsByClassName("hide_chat_div")
-console.log(show_chat)
-console.log(chat)
+// console.log(show_chat)
+// console.log(chat)
 for (let i = 0; i < hide_chat.length; i++) {
         chat[i].style.display = "none";
 }

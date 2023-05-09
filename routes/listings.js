@@ -80,7 +80,7 @@ router
             rating = helpers.checkRating(userInput.rating, 'Rating')
             comment = helpers.checkString(userInput.comment, 'Comment////')   
         } catch (e) {
-            console.log(e);
+            // console.log(e);
             return res.json(e);
         }
 
@@ -89,7 +89,7 @@ router
             if (!myReview) throw 'Error: Unable to create review'
             return res.json('added')
         } catch (e) {
-            console.log(e);
+            // console.log(e);
             return res.json(e);
         }
     })
@@ -202,7 +202,7 @@ router
       let user = req.session.user
       let userInput = req.body
       var listingID;
-      console.log("requesting booking")
+      // console.log("requesting booking")
       try {
         listingID = helpers.checkId(req.params.id);
       } catch (e) {

@@ -100,7 +100,7 @@ router
         return res.status(200).redirect('/profile')
 
     } catch (e) {
-        console.log(e);
+        // console.log(e);
         let currentUser = req.session.user;
         return res.status(400).render('profileUpdate',{error: e,user: currentUser});
     }
