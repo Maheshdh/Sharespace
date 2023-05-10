@@ -8,7 +8,6 @@ By Group 35 - Sanchit Sahdev, Taher Mundrawala, Mahesh Dhondge
 3. "npm start"
 
 ## All Accounts: 
-<
 1. 'admin@sharespace.com' (ADMIN ACCOUNT!)
 2. 'jerry@gmail.com'
 3. 'goodfella@gmail.com'
@@ -16,7 +15,7 @@ By Group 35 - Sanchit Sahdev, Taher Mundrawala, Mahesh Dhondge
 5. 'roger@gmail.com'
 6. 'scarface@gmail.com'
 7. 'vincent@gmail.com'
->
+
 (They all have the same Password which is 'Qq@12345')
 
 ## Core Features:
