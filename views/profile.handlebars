@@ -10,8 +10,8 @@
 
 <h2>Your Information:</h2>
 <div class="grid-container">
-<div id="userInformationTableDiv">
-<table id="userInformationTable">
+<div class="userInformationTableDiv">
+<table class="userInformationTable">
   <tr>
     <td>Name</td>
     <td>{{user.firstName}} {{user.lastName}}</td>
@@ -88,8 +88,8 @@
       <br><br>
       <button class="boost-listing-button" onclick="window.location.href='/profile/boostListing/{{this._id}}';">Boost Listing <i class="fa fa-edit-1"></i></button>
       <br><br>
-      <form action="/listing/delete/{{this._id}}" method="POST" id="delete-button">
-        <button class="delete-listing-button" type="submit" id="delete-button-button">Delete Listing <i class="fa fa-edit-1"></i></button>
+      <form action="/listing/delete/{{this._id}}" method="POST" class="delete-button">
+        <button class="delete-listing-button" type="submit">Delete Listing <i class="fa fa-edit-1"></i></button>
       </form>
     </li>
   {{/each}}
@@ -116,8 +116,8 @@
       <p class="listingAvailableStartInput" hidden>{{this.listing_AvailableStartInput}}</p>
       <p class="listingAvailableEndInput" hidden>{{this.listing_AvailableEndInput}}</p>
       
-      <form action="/profile/unsave/{{this._id}}" method="POST" id="unsave-button">
-      <button style="font-size:16px; width:150px; height:20px;" type="submit" id="unsave-button-button">Unsave Listing <i class="fa fa-edit-1"></i></button>
+      <form action="/profile/unsave/{{this._id}}" method="POST" class="unsave-button">
+      <button style="font-size:16px; width:150px; height:20px;" type="submit" class="unsave-button-button">Unsave Listing <i class="fa fa-edit-1"></i></button>
       </form>
     </li>
   {{/each}}
