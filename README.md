@@ -1,8 +1,8 @@
 # CS 546 Project - ShareSpace!
-## By Group 35 - Sanchit Sahdev, Taher Mundrawala, Mahesh Dhondge
+By Group 35 - Sanchit Sahdev, Taher Mundrawala, Mahesh Dhondge
 
 
-## How To Run ->
+## How To Run 
 1. "npm i"
 2. "npm run seed"
 3. "npm start"
