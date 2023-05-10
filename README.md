@@ -3,18 +3,18 @@ By Group 35 - Sanchit Sahdev, Taher Mundrawala, Mahesh Dhondge
 
 
 ## How To Run 
-1. "npm i"
-2. "npm run seed"
-3. "npm start"
+1. npm i
+2. npm run seed
+3. npm start
 
 ## All Accounts: 
-1. 'admin@sharespace.com' (ADMIN ACCOUNT!)
-2. 'jerry@gmail.com'
-3. 'goodfella@gmail.com'
-4. 'satoru@gmail.com'
-5. 'roger@gmail.com'
-6. 'scarface@gmail.com'
-7. 'vincent@gmail.com'
+1. admin@sharespace.com (ADMIN ACCOUNT!)
+2. jerry@gmail.com
+3. goodfella@gmail.com
+4. satoru@gmail.com
+5. roger@gmail.com
+6. scarface@gmail.com
+7. vincent@gmail.com
 
 (They all have the same Password which is 'Qq@12345')
 
