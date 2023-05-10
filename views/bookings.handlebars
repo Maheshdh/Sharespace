@@ -76,14 +76,14 @@
                 <td>{{this.requestStatus}} </td>
                 {{#if this.respondRequired}}
                 <td >
-                <div id="userResponseForm" class="userResponseForm hidden">
+                <div class="userResponseForm hidden">
                      {{!-- {{#if this.respondRequired}} --}}
-                    <form action="/bookings" method="POST" id="bookingRequestResponse">
-                        <input type="radio" id="bookingStatusResponse" name="bookingStatusResponse" value="Accept" required>
+                    <form action="/bookings" method="POST" class="bookingRequestResponse">
+                        <input type="radio" class="bookingStatusResponse" name="bookingStatusResponse" value="Accept" required>
                         <label for="bookingStatusResponse">Accept</label>
-                        <input type="radio" id="bookingStatusResponse" name="bookingStatusResponse" value="Deny" required>
+                        <input type="radio" class="bookingStatusResponse" name="bookingStatusResponse" value="Deny" required>
                         <label for="bookingStatusResponse">Deny</label>
-                        <input type = "hidden" id="bookingID" name="bookingID" value={{this.bookingRequestID}} />
+                        <input type = "hidden" class="bookingID" name="bookingID" value={{this.bookingRequestID}} />
                         <br><br>
                         <input type="submit">
                     </form>
